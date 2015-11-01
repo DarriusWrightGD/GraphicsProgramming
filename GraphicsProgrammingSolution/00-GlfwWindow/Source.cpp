@@ -110,9 +110,11 @@ int main()
 	int w, h;
 	glfwGetFramebufferSize(window, &w, &h);
 	glViewport(0, 0, w, h);
-	static const GLfloat color[] = { 0.6f,0.3f,0.3f,1.0f };
 	while (!glfwWindowShouldClose(window))
 	{
+		double time = glfwGetTime();
+		
+		const GLfloat color[] = { cos(time) * 0.6f,sin(time) * 0.3f,0.3f,1.0f };
 		glClearBufferfv(GL_COLOR, 0, color);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
