@@ -1,3 +1,4 @@
+#include <GL\glew.h>
 #include <GLFW\glfw3.h>
 #include <stdio.h>
 #include <unordered_map>
@@ -69,12 +70,15 @@ int main()
 	glfwSetErrorCallback(errorCallback);
 	GLFWwindow * window;
 	KeyHandler keyHandler;
-
 	if (!glfwInit())
 	{
 		return -1;
 	}
 
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	window = glfwCreateWindow(640, 480, "Hello Glfw", NULL, NULL);
 	glfwSetKeyCallback(window, KeyHandler::keyCallback);
@@ -91,11 +95,25 @@ int main()
 		glfwTerminate();
 		return -1;
 	}
-
+	
 	glfwMakeContextCurrent(window);
+	glfwSwapInterval(1);
 
+	glewExperimental = GL_TRUE;
+	glewInit();
+	const GLubyte * renderer = glGetString(GL_RENDERER);
+	const GLubyte * version = glGetString(GL_VERSION);
+
+	printf("Renderer : %s\n", renderer);
+	printf("Version : %s\n", version);
+
+	int w, h;
+	glfwGetFramebufferSize(window, &w, &h);
+	glViewport(0, 0, w, h);
+	static const GLfloat color[] = { 0.6f,0.3f,0.3f,1.0f };
 	while (!glfwWindowShouldClose(window))
 	{
+		glClearBufferfv(GL_COLOR, 0, color);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
