@@ -82,6 +82,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Middleware\glfw\lib;$(SolutionDir)Middleware\glew\lib\Release\$(Platform);$(SolutionDir)Middleware\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies);glfw3.lib</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -148,7 +149,24 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="GlfwInputHandler.cpp" />
+    <ClCompile Include="GlfwWindow.cpp" />
+    <ClCompile Include="GLWindowInterface.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="GlfwInputHandler.h" />
+    <ClInclude Include="GlfwWindow.h" />
+    <ClInclude Include="GLWindowInterface.h" />
+    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="InputInfo.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="00-GlfwWindow.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
