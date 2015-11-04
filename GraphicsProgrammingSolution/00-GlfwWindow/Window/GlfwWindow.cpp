@@ -16,35 +16,24 @@ GlfwWindow::~GlfwWindow()
 {
 }
 
-void GlfwWindow::Update()
-{
-	glfwPollEvents();
-}
-
-void GlfwWindow::Render()
-{
-	const GLfloat color[] = { static_cast<GLfloat>(cos(time)) * 0.6f,static_cast<GLfloat>(sin(time)) * 0.3f,0.3f,1.0f };
-	glClearBufferfv(GL_COLOR, 0, color);
-	glfwSwapBuffers(window);
-}
-
 int GlfwWindow::Execute()
 {
-	auto initReturn = Init();
-	
+	auto initReturn = InitGLFW();
 	if (initReturn != 0)
 	{
 		return initReturn;
 	}
-
 	int w, h;
 	glfwGetFramebufferSize(window, &w, &h);
 	glViewport(0, 0, w, h);
+	Initialize();
 	while (!glfwWindowShouldClose(window))
 	{
 		time = glfwGetTime();
 		Render();
+		SwapBuffers();
 		Update();
+		glfwPollEvents();
 	}
 
 	CleanUp();
@@ -57,15 +46,21 @@ void GlfwWindow::CleanUp()
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	delete input;
+	Shutdown();
 }
 
 void GlfwWindow::SetTitle(const char * title)
 {
 	this->title = title;
-
+	glfwSetWindowTitle(window, title);
 }
 
-int GlfwWindow::Init()
+void GlfwWindow::SwapBuffers()
+{
+	glfwSwapBuffers(window);
+}
+
+int GlfwWindow::InitGLFW()
 {
 	glfwSetErrorCallback(errorCallback);
 

@@ -18,42 +18,42 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GLWindowInterface.cpp">
+    <ClCompile Include="Input\InputHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GlfwWindow.cpp">
+    <ClCompile Include="Input\GlfwInputHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InputHandler.cpp">
+    <ClCompile Include="Window\GlfwWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Command.cpp">
+    <ClCompile Include="Window\WindowInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GlfwInputHandler.cpp">
+    <ClCompile Include="ShaderDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GLWindowInterface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GlfwWindow.h">
+    <ClInclude Include="Input\InputHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputHandler.h">
+    <ClInclude Include="Input\GlfwInputHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Command.h">
+    <ClInclude Include="Window\GlfwWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputInfo.h">
+    <ClInclude Include="Window\WindowInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GlfwInputHandler.h">
+    <ClInclude Include="Input\InputInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -61,5 +61,9 @@
     <ResourceCompile Include="00-GlfwWindow.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Shaders\Fragment\triangleShader.frag" />
+    <None Include="Assets\Shaders\Vertex\triangleShader.vert" />
   </ItemGroup>
 </Project>

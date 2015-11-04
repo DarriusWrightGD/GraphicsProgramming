@@ -76,7 +76,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Middleware\glfw\include;$(SolutionDir)Middleware\glew\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)Middleware\glfw\include;$(SolutionDir)Middleware\glew\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -149,24 +149,28 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Command.cpp" />
-    <ClCompile Include="GlfwInputHandler.cpp" />
-    <ClCompile Include="GlfwWindow.cpp" />
-    <ClCompile Include="GLWindowInterface.cpp" />
-    <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="Input\GlfwInputHandler.cpp" />
+    <ClCompile Include="ShaderDemo.cpp" />
+    <ClCompile Include="Window\GlfwWindow.cpp" />
+    <ClCompile Include="Window\WindowInterface.cpp" />
+    <ClCompile Include="Input\InputHandler.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Command.h" />
-    <ClInclude Include="GlfwInputHandler.h" />
-    <ClInclude Include="GlfwWindow.h" />
-    <ClInclude Include="GLWindowInterface.h" />
-    <ClInclude Include="InputHandler.h" />
-    <ClInclude Include="InputInfo.h" />
+    <ClInclude Include="Input\GlfwInputHandler.h" />
+    <ClInclude Include="ShaderDemo.h" />
+    <ClInclude Include="Window\GlfwWindow.h" />
+    <ClInclude Include="Window\WindowInterface.h" />
+    <ClInclude Include="Input\InputHandler.h" />
+    <ClInclude Include="Input\InputInfo.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="00-GlfwWindow.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Shaders\Fragment\triangleShader.frag" />
+    <None Include="Assets\Shaders\Vertex\triangleShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
