@@ -1,5 +1,6 @@
 #pragma once
 #include <Window\GlfwWindow.h>
+#include <OGLC\GLProgram.h>
 class ShaderDemo : public GlfwWindow
 {
 public:
@@ -18,6 +19,7 @@ private:
 	GLuint vertexShader;
 	GLuint fragmentShader;
 	GLint program;
+	GLProgram glProgram;
 	GLuint vertexArray;
 };
 

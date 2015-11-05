@@ -149,6 +149,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="OGLC\GLProgram.cpp" />
     <ClCompile Include="Input\GlfwInputHandler.cpp" />
     <ClCompile Include="ShaderDemo.cpp" />
     <ClCompile Include="Window\GlfwWindow.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="OGLC\GLProgram.h" />
     <ClInclude Include="Input\GlfwInputHandler.h" />
     <ClInclude Include="ShaderDemo.h" />
     <ClInclude Include="Window\GlfwWindow.h" />
