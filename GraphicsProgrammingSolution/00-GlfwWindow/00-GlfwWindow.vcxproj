@@ -152,6 +152,7 @@
     <ClCompile Include="OGLC\GLProgram.cpp" />
     <ClCompile Include="Input\GlfwInputHandler.cpp" />
     <ClCompile Include="ShaderDemo.cpp" />
+    <ClCompile Include="ShaderPipelineDemo.cpp" />
     <ClCompile Include="Window\GlfwWindow.cpp" />
     <ClCompile Include="Window\WindowInterface.cpp" />
     <ClCompile Include="Input\InputHandler.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="OGLC\GLProgram.h" />
     <ClInclude Include="Input\GlfwInputHandler.h" />
     <ClInclude Include="ShaderDemo.h" />
+    <ClInclude Include="ShaderPipelineDemo.h" />
     <ClInclude Include="Window\GlfwWindow.h" />
     <ClInclude Include="Window\WindowInterface.h" />
     <ClInclude Include="Input\InputHandler.h" />
@@ -171,7 +173,12 @@
     <ResourceCompile Include="00-GlfwWindow.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shaders\Fragment\pipeline.frag" />
     <None Include="Assets\Shaders\Fragment\triangleShader.frag" />
+    <None Include="Assets\Shaders\Geometry\pipeline.geo" />
+    <None Include="Assets\Shaders\Tessellation\pipeline.tc" />
+    <None Include="Assets\Shaders\Tessellation\pipeline.te" />
+    <None Include="Assets\Shaders\Vertex\pipeline.vert" />
     <None Include="Assets\Shaders\Vertex\triangleShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

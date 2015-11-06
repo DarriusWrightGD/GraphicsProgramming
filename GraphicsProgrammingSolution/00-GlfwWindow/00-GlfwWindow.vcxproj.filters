@@ -36,6 +36,9 @@
     <ClCompile Include="OGLC\GLProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ShaderPipelineDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -62,6 +65,9 @@
     <ClInclude Include="OGLC\GLProgram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderPipelineDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="00-GlfwWindow.rc">
@@ -71,5 +77,10 @@
   <ItemGroup>
     <None Include="Assets\Shaders\Fragment\triangleShader.frag" />
     <None Include="Assets\Shaders\Vertex\triangleShader.vert" />
+    <None Include="Assets\Shaders\Vertex\pipeline.vert" />
+    <None Include="Assets\Shaders\Fragment\pipeline.frag" />
+    <None Include="Assets\Shaders\Tessellation\pipeline.tc" />
+    <None Include="Assets\Shaders\Tessellation\pipeline.te" />
+    <None Include="Assets\Shaders\Geometry\pipeline.geo" />
   </ItemGroup>
 </Project>
