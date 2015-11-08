@@ -19,6 +19,11 @@ GLProgram::~GLProgram()
 
 void GLProgram::AddShaderSource(ShaderType shaderType, const char * source)
 {
+	if (!initailzed)
+	{
+		Initialize();
+	}
+
 	auto shader = glCreateShader(shaderType);
 	glShaderSource(shader, 1, &source, nullptr);
 	glCompileShader(shader);
@@ -33,7 +38,7 @@ void GLProgram::AddShaderSource(ShaderType shaderType, const char * source)
 		auto errorLog = new GLchar[maxLength];
 		glGetShaderInfoLog(shader, maxLength, &maxLength, errorLog);
 		cout << errorLog << endl;
-		glDeleteShader(shader); 
+		glDeleteShader(shader);
 		delete errorLog;
 	}
 	shaders.push_back(shader);
@@ -47,6 +52,7 @@ void GLProgram::AddShaderSource(ShaderType shaderType, std::string source)
 void GLProgram::Initialize()
 {
 	program = glCreateProgram();
+	initailzed = true;
 }
 
 void GLProgram::AddShaderFile(ShaderType shaderType, const char * file)

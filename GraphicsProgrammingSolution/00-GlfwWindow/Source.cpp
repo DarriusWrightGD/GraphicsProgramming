@@ -1,8 +1,9 @@
-#include "ShaderPipelineDemo.h"
+#include <Demos\FragCoordDemo.h>
+#include <Demos\ShaderColorDemo.h>
+#include <memory>
+using std::unique_ptr;
 int main()
 {
-	WindowInterface * window = new ShaderPipelineDemo();
-	int executeValue = window->Execute();
-	delete window;
-	return executeValue;
+	auto window = unique_ptr<WindowInterface>(new ShaderColorDemo());
+	return window->Execute();
 }

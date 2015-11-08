@@ -29,6 +29,7 @@ public:
 	
 	GLuint GetHandle()const;
 private:
+	bool initailzed = false;
 	void DeleteShaders();
 	std::vector<GLuint> shaders;
 	GLuint program;

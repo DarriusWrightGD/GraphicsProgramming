@@ -22,6 +22,7 @@
     <ProjectGuid>{8DE187FB-19B2-4EF8-A989-B38E065F111B}</ProjectGuid>
     <RootNamespace>My00GlfwWindow</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
+    <ProjectName>OpenGL-Glfw</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -76,7 +77,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)Middleware\glfw\include;$(SolutionDir)Middleware\glew\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)Middleware\glm;$(SolutionDir)Middleware\glfw\include;$(SolutionDir)Middleware\glew\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -149,20 +150,26 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Demos\BufferDemo.cpp" />
+    <ClCompile Include="Demos\FragCoordDemo.cpp" />
     <ClCompile Include="OGLC\GLProgram.cpp" />
     <ClCompile Include="Input\GlfwInputHandler.cpp" />
-    <ClCompile Include="ShaderDemo.cpp" />
-    <ClCompile Include="ShaderPipelineDemo.cpp" />
+    <ClCompile Include="Demos\ShaderDemo.cpp" />
+    <ClCompile Include="Demos\ShaderPipelineDemo.cpp" />
+    <ClCompile Include="Demos\ShaderColorDemo.cpp" />
     <ClCompile Include="Window\GlfwWindow.cpp" />
     <ClCompile Include="Window\WindowInterface.cpp" />
     <ClCompile Include="Input\InputHandler.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Demos\BufferDemo.h" />
+    <ClInclude Include="Demos\FragCoordDemo.h" />
     <ClInclude Include="OGLC\GLProgram.h" />
     <ClInclude Include="Input\GlfwInputHandler.h" />
-    <ClInclude Include="ShaderDemo.h" />
-    <ClInclude Include="ShaderPipelineDemo.h" />
+    <ClInclude Include="Demos\ShaderDemo.h" />
+    <ClInclude Include="Demos\ShaderPipelineDemo.h" />
+    <ClInclude Include="Demos\ShaderColorDemo.h" />
     <ClInclude Include="Window\GlfwWindow.h" />
     <ClInclude Include="Window\WindowInterface.h" />
     <ClInclude Include="Input\InputHandler.h" />
@@ -173,12 +180,16 @@
     <ResourceCompile Include="00-GlfwWindow.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shaders\Fragment\fragCoord.frag" />
     <None Include="Assets\Shaders\Fragment\pipeline.frag" />
+    <None Include="Assets\Shaders\Fragment\shaderColor.frag" />
     <None Include="Assets\Shaders\Fragment\triangleShader.frag" />
     <None Include="Assets\Shaders\Geometry\pipeline.geo" />
     <None Include="Assets\Shaders\Tessellation\pipeline.tc" />
     <None Include="Assets\Shaders\Tessellation\pipeline.te" />
+    <None Include="Assets\Shaders\Vertex\fragCoord.vert" />
     <None Include="Assets\Shaders\Vertex\pipeline.vert" />
+    <None Include="Assets\Shaders\Vertex\shaderColor.vert" />
     <None Include="Assets\Shaders\Vertex\triangleShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -30,13 +30,22 @@
     <ClCompile Include="Window\WindowInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderDemo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="OGLC\GLProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderPipelineDemo.cpp">
+    <ClCompile Include="Demos\ShaderPipelineDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\ShaderDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\FragCoordDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\ShaderColorDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\BufferDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,13 +68,22 @@
     <ClInclude Include="Input\InputInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderDemo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="OGLC\GLProgram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderPipelineDemo.h">
+    <ClInclude Include="Demos\ShaderPipelineDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\ShaderDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\FragCoordDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\ShaderColorDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\BufferDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -82,5 +100,9 @@
     <None Include="Assets\Shaders\Tessellation\pipeline.tc" />
     <None Include="Assets\Shaders\Tessellation\pipeline.te" />
     <None Include="Assets\Shaders\Geometry\pipeline.geo" />
+    <None Include="Assets\Shaders\Fragment\fragCoord.frag" />
+    <None Include="Assets\Shaders\Vertex\fragCoord.vert" />
+    <None Include="Assets\Shaders\Fragment\shaderColor.frag" />
+    <None Include="Assets\Shaders\Vertex\shaderColor.vert" />
   </ItemGroup>
 </Project>
