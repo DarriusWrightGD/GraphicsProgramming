@@ -2,6 +2,7 @@
 #include <GL\glew.h>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 enum ShaderType
 {
@@ -13,6 +14,23 @@ enum ShaderType
 	Geometry = GL_GEOMETRY_SHADER,
 };
 
+enum UniformType
+{
+	INTEGER,
+	BOOL,
+	VEC2,
+	VEC3,
+	VEC4,
+	MAT3,
+	MAT4,
+};
+
+struct Uniform
+{
+	UniformType type;
+	float * value;
+};
+
 class GLProgram
 {
 public:
@@ -22,6 +40,9 @@ public:
 	void AddShaderSource(ShaderType shaderType, std::string source);
 	void AddShaderFile(ShaderType shaderType, const char * file);
 	void AddShaderFile(ShaderType shaderType, std::string file);
+	void AddUniform(const char * name, float * value, UniformType type);
+	void AddUniform(std::string name, float * value, UniformType type);
+	void Update();
 	void Build();
 	void Use();
 	void Delete();
@@ -29,9 +50,11 @@ public:
 	
 	GLuint GetHandle()const;
 private:
+	GLint GetUniformLocation(const char * name);
 	bool initailzed = false;
 	void DeleteShaders();
 	std::vector<GLuint> shaders;
+	std::unordered_map<GLint, float*> uniforms;
 	GLuint program;
 };
 

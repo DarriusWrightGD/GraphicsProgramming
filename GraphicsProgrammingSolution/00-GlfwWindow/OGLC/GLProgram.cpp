@@ -15,6 +15,7 @@ GLProgram::GLProgram()
 
 GLProgram::~GLProgram()
 {
+	Delete();
 }
 
 void GLProgram::AddShaderSource(ShaderType shaderType, const char * source)
@@ -66,6 +67,14 @@ void GLProgram::AddShaderFile(ShaderType shaderType, const char * file)
 void GLProgram::AddShaderFile(ShaderType shaderType, std::string file)
 {
 	AddShaderFile(shaderType, file.c_str());
+}
+
+void GLProgram::AddUniform(const char * name, float * value)
+{
+}
+
+void GLProgram::AddUniform(std::string name, float * value)
+{
 }
 
 void GLProgram::Build()
