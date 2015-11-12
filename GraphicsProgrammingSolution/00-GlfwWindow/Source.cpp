@@ -10,9 +10,5 @@ int main()
 {
 	
 	auto window = unique_ptr<WindowInterface>(new VertexBufferDemo());
-	ServiceLocator service;
-	service.SetService<InputHandler, GlfwInputHandler>();
-	auto inputHandler = service.GetService<InputHandler>();
-	service.CleanUp();
 	return window->Execute();
 }
