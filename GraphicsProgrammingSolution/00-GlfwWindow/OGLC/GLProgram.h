@@ -18,6 +18,7 @@ enum UniformType
 {
 	INTEGER,
 	BOOL,
+	FLOAT,
 	VEC2,
 	VEC3,
 	VEC4,
@@ -50,11 +51,12 @@ public:
 	
 	GLuint GetHandle()const;
 private:
+	void UpdateUniform(GLint location, Uniform uniform);
 	GLint GetUniformLocation(const char * name);
 	bool initailzed = false;
 	void DeleteShaders();
 	std::vector<GLuint> shaders;
-	std::unordered_map<GLint, float*> uniforms;
+	std::unordered_map<GLint, Uniform> uniforms;
 	GLuint program;
 };
 

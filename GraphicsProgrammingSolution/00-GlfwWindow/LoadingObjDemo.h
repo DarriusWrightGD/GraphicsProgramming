@@ -24,9 +24,13 @@ public:
 	virtual void Shutdown() override;
 
 private:
+	void InitializeObj(string filePath);
+
+
 	GLuint vao;
 	GLuint vertexBuffer;
+	GLuint indexBuffer;
 	std::vector<FullVertex> vertices;
-	std::vector<int> indices;
+	std::vector<GLuint> indices;
 };
 

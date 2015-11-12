@@ -9,4 +9,5 @@ WindowInterface::WindowInterface()
 
 WindowInterface::~WindowInterface()
 {
+	
 }

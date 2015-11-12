@@ -28,6 +28,7 @@ void LoadingObjDemo::Render()
 
 void LoadingObjDemo::Initialize()
 {
+	//auto value = typeid(decltype(int)).name;
 	InitializeObj("Assets/Models/Obj/box.obj");
 	glClearColor(0, 0, 0, 1);
 	glEnable(GL_DEPTH_TEST);
@@ -72,9 +73,9 @@ void LoadingObjDemo::InitializeObj(string filePath)
 		for (auto i = 0; i < mesh->mNumVertices; i++)
 		{
 			auto position = mesh->mVertices[i];
-			auto normal = (mesh->HasNormals) ? mesh->mNormals[i] : aiVector3D(0, 0, 0);
-			auto uv = (mesh->HasTextureCoords) ? mesh->mTextureCoords[0][i] : aiVector3D(0, 0, 0);
-			vertices.push_back({ vec3(position.x,position.y,position.y),vec2(uv.x,uv.y),vec3(normal.x,normal.y,normal.y) });
+			auto normal = mesh->HasNormals() ? mesh->mNormals[i] : aiVector3D(0, 0, 0);
+			auto uv = mesh->HasTextureCoords(i) ? mesh->mTextureCoords[0][i] : aiVector3D(0, 0, 0);
+			vertices.push_back({vec3(position.x,position.y,position.y),vec2(uv.x,uv.y),vec3(normal.x,normal.y,normal.y) });
 		}
 		indices.resize(mesh->mNumFaces * 3);
 		for (auto i = 0; i < mesh->mNumFaces; i++)

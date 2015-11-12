@@ -69,12 +69,55 @@ void GLProgram::AddShaderFile(ShaderType shaderType, std::string file)
 	AddShaderFile(shaderType, file.c_str());
 }
 
-void GLProgram::AddUniform(const char * name, float * value)
+void GLProgram::AddUniform(const char * name, float * value, UniformType type)
 {
+	auto location = GetUniformLocation(name);
+	if (location != -1)
+	{
+		uniforms.insert({ location ,{type,value} });
+	}
 }
 
-void GLProgram::AddUniform(std::string name, float * value)
+void GLProgram::AddUniform(std::string name, float * value, UniformType type)
 {
+	AddUniform(name.c_str(), value, type);
+}
+
+void GLProgram::Update()
+{
+	for (auto uniform : uniforms)
+	{
+		UpdateUniform(uniform.first, uniform.second);
+	}
+}
+
+void GLProgram::UpdateUniform(GLint location, Uniform uniform )
+{
+	switch (uniform.type)
+	{
+	case INTEGER:
+	case BOOL:
+		glUniform1i(location,(int)(*uniform.value));
+		break;
+	case FLOAT:
+		glUniform1fv(location, 1 , uniform.value);
+		break;
+	case VEC2:
+		glUniform2fv(location, 1, uniform.value);
+		break;
+	case VEC3:
+		glUniform3fv(location, 1, uniform.value);
+		break;
+	case VEC4:
+		glUniform4fv(location, 1, uniform.value);
+		break;
+	case MAT3:
+		glUniformMatrix3fv(location, 1,GL_FALSE, uniform.value);
+		break;
+	case MAT4:
+		glUniformMatrix4fv(location, 1,GL_FALSE, uniform.value);
+		break;
+	}
 }
 
 void GLProgram::Build()
@@ -123,4 +166,9 @@ void GLProgram::Delete()
 GLuint GLProgram::GetHandle() const
 {
 	return program;
+}
+
+GLint GLProgram::GetUniformLocation(const char * name)
+{
+	return glGetUniformLocation(program,name);
 }

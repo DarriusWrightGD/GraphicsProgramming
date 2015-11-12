@@ -159,6 +159,7 @@
     <ClCompile Include="Demos\ShaderPipelineDemo.cpp" />
     <ClCompile Include="Demos\ShaderColorDemo.cpp" />
     <ClCompile Include="Demos\VertexBufferDemo.cpp" />
+    <ClCompile Include="ServiceLocator.cpp" />
     <ClCompile Include="Window\GlfwWindow.cpp" />
     <ClCompile Include="Window\WindowInterface.cpp" />
     <ClCompile Include="Input\InputHandler.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Demos\ShaderPipelineDemo.h" />
     <ClInclude Include="Demos\ShaderColorDemo.h" />
     <ClInclude Include="Demos\VertexBufferDemo.h" />
+    <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="Window\GlfwWindow.h" />
     <ClInclude Include="Window\WindowInterface.h" />
     <ClInclude Include="Input\InputHandler.h" />
@@ -189,6 +191,7 @@
     <None Include="Assets\Shaders\Fragment\pipeline.frag" />
     <None Include="Assets\Shaders\Fragment\shaderColor.frag" />
     <None Include="Assets\Shaders\Fragment\triangleShader.frag" />
+    <None Include="Assets\Shaders\Fragment\uniforms.frag" />
     <None Include="Assets\Shaders\Geometry\pipeline.geo" />
     <None Include="Assets\Shaders\Tessellation\pipeline.tc" />
     <None Include="Assets\Shaders\Tessellation\pipeline.te" />
@@ -197,6 +200,7 @@
     <None Include="Assets\Shaders\Vertex\pipeline.vert" />
     <None Include="Assets\Shaders\Vertex\shaderColor.vert" />
     <None Include="Assets\Shaders\Vertex\triangleShader.vert" />
+    <None Include="Assets\Shaders\Vertex\uniforms.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
