@@ -1,6 +1,7 @@
 #pragma once
 #include <Window\GlfwWindow.h>
 #include <OGLC\GLProgram.h>
+
 class ShaderColorDemo : public GlfwWindow
 {
 public:
@@ -15,6 +16,10 @@ public:
 private:
 	GLProgram program;
 	GLuint vertexArray;
+
+
+	// Inherited via GlfwWindow
+	virtual void OnResize(int width, int height) override;
 
 };
 

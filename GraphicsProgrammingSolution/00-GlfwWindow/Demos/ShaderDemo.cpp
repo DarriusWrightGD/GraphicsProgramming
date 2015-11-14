@@ -51,6 +51,10 @@ void ShaderDemo::Shutdown()
 	glProgram.Delete();
 }
 
+void ShaderDemo::OnResize(int width, int height)
+{
+}
+
 void ShaderDemo::Update()
 {
 }

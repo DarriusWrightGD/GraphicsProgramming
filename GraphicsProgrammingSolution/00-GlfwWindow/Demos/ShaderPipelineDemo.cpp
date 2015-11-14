@@ -48,3 +48,7 @@ void ShaderPipelineDemo::Shutdown()
 	glDeleteVertexArrays(1, &vertexArray);
 	program.Delete();
 }
+
+void ShaderPipelineDemo::OnResize(int width, int height)
+{
+}

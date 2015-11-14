@@ -26,5 +26,8 @@ private:
 	GLProgram program;
 	GLuint vao;
 	GLuint vertexBuffer;
+
+	// Inherited via GlfwWindow
+	virtual void OnResize(int width, int height) override;
 };
 

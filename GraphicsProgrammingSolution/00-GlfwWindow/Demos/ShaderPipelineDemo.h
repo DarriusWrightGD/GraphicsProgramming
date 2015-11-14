@@ -18,5 +18,8 @@ private:
 private:
 	GLProgram program;
 	GLuint vertexArray;
+
+	// Inherited via GlfwWindow
+	virtual void OnResize(int width, int height) override;
 };
 

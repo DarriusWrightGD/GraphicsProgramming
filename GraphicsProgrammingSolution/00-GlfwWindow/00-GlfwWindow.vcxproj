@@ -81,7 +81,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Middleware\glfw\lib;$(SolutionDir)Middleware\glew\lib\Release\$(Platform);$(SolutionDir)Middleware\lib;$(SolutionDir)Middleware\assimp\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Middleware\glfw\lib;$(SolutionDir)Middleware\glew\lib\Release\$(Platform);$(SolutionDir)Middleware\lib;$(SolutionDir)Middleware\assimp\lib;$(SolutionDir)Middleware\glfw\test</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>

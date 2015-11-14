@@ -92,3 +92,7 @@ void BufferDemo::Shutdown()
 	glDeleteBuffers(1, &colorBuffer);
 	glDeleteBuffers(1, &positionBuffer2);
 }
+
+void BufferDemo::OnResize(int width, int height)
+{
+}

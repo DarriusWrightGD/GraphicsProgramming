@@ -37,3 +37,7 @@ void ShaderColorDemo::Shutdown()
 	program.Delete();
 	glDeleteVertexArrays(1, &vertexArray);
 }
+
+void ShaderColorDemo::OnResize(int width, int height)
+{
+}

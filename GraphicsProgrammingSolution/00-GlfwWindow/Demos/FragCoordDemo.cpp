@@ -38,3 +38,7 @@ void FragCoordDemo::Shutdown()
 	program.Delete();
 	glDeleteVertexArrays(1,&vertexArray);
 }
+
+void FragCoordDemo::OnResize(int width, int height)
+{
+}

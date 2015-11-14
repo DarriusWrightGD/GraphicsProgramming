@@ -8,6 +8,7 @@ public:
 	virtual void Update() = 0;
 	virtual void Render() = 0;
 	virtual int Execute() = 0;
+	virtual void OnResize(int width, int height) = 0;
 protected:
 	virtual void SwapBuffers() = 0;
 };

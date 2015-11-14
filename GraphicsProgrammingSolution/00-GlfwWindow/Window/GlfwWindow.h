@@ -16,7 +16,6 @@ public:
 	virtual void Initialize() = 0;
 	virtual int Execute() final;
 	virtual void SetTitle(const char * title) final;
-	
 
 protected:
 	virtual void SwapBuffers();
@@ -25,11 +24,10 @@ protected:
 	InputHandler * input;
 	string title;
 	int width, height, glMajor, glMinor;
-
-
-
 	double time;
 private:
+	static GlfwWindow * instance;
+	static void Resize(GLFWwindow * window,int w, int h);
 	int InitGLFW();
 	void CleanUp();
 

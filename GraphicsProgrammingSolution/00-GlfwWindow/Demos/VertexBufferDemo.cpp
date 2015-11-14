@@ -55,9 +55,9 @@ void VertexBufferDemo::Initialize()
 
 	glCreateVertexArrays(1, &vao);
 	glBindVertexArray(vao);
-
 	glCreateBuffers(1, &vertexBuffer);
-	glNamedBufferData(vertexBuffer, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glNamedBufferData(vertexBuffer, sizeof(ColorVertex) * 3, vertices, GL_STATIC_DRAW);
 
 	glVertexArrayAttribBinding(vao, 0, 0);
 	glVertexArrayAttribFormat(vao, 0, 4, GL_FLOAT, GL_FALSE, 0);
@@ -78,4 +78,8 @@ void VertexBufferDemo::Shutdown()
 	program.Delete();
 	glDeleteVertexArrays(1, &vao);
 	glDeleteBuffers(1, &vertexBuffer);
+}
+
+void VertexBufferDemo::OnResize(int width, int height)
+{
 }

@@ -85,6 +85,7 @@ void GLProgram::AddUniform(std::string name, float * value, UniformType type)
 
 void GLProgram::Update()
 {
+	Use();
 	for (auto uniform : uniforms)
 	{
 		UpdateUniform(uniform.first, uniform.second);

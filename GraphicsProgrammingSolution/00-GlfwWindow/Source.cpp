@@ -9,6 +9,6 @@ using std::unique_ptr;
 int main()
 {
 	
-	auto window = unique_ptr<WindowInterface>(new VertexBufferDemo());
+	auto window = unique_ptr<WindowInterface>(new LoadingObjDemo());
 	return window->Execute();
 }

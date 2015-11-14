@@ -1,6 +1,7 @@
 #pragma once
 #include <Window\GlfwWindow.h>
 #include <OGLC\GLProgram.h>
+
 class FragCoordDemo : public GlfwWindow
 {
 public:
@@ -12,6 +13,7 @@ public:
 	virtual void Render() override;
 	virtual void Initialize() override;
 	virtual void Shutdown() override;
+	virtual void OnResize(int width, int height) override;
 
 private:
 	GLProgram program;
