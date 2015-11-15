@@ -136,7 +136,7 @@ void GlfwWindow::SwapBuffers()
 
 void GlfwWindow::Resize(GLFWwindow * window, int w, int h)
 {
-	if (instance)
+	if (instance && w != 0 && h !=0)
 	{
 		instance->width = w;
 		instance->height = h;
@@ -195,6 +195,7 @@ int GlfwWindow::InitGLFW()
 #ifdef DEBUG  || _DEBUG
 	glEnable(GL_DEBUG_OUTPUT);
 	glDebugMessageCallback(debugCallback, nullptr);
+	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE,0,nullptr,GL_TRUE);
 #endif
 
 	return 0;
