@@ -25,8 +25,8 @@ void ShaderColorDemo::Render()
 void ShaderColorDemo::Initialize()
 {
 	SetTitle("ShaderColorDemo");
-	program.AddShaderFile(Vertex, "Assets/Shaders/Vertex/shaderColor.vert");
-	program.AddShaderFile(Fragment, "Assets/Shaders/Fragment/shaderColor.frag");
+	program.AddShaderFile(ShaderType::Vertex, "Assets/Shaders/Vertex/shaderColor.vert");
+	program.AddShaderFile(ShaderType::Fragment, "Assets/Shaders/Fragment/shaderColor.frag");
 	program.Build();
 	glGenVertexArrays(1, &vertexArray);
 	glBindVertexArray(vertexArray);

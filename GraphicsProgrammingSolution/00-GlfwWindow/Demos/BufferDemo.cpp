@@ -38,8 +38,8 @@ void BufferDemo::Initialize()
 {
 	SetTitle("BufferDemo");
 	program.Initialize();
-	program.AddShaderFile(Vertex, "Assets/Shaders/Vertex/buffer.vert");
-	program.AddShaderFile(Fragment, "Assets/Shaders/Fragment/buffer.frag");
+	program.AddShaderFile(ShaderType::Vertex, "Assets/Shaders/Vertex/buffer.vert");
+	program.AddShaderFile(ShaderType::Fragment, "Assets/Shaders/Fragment/buffer.frag");
 	program.Build();
 	glGenVertexArrays(1, &vertexArray);
 	glBindVertexArray(vertexArray);

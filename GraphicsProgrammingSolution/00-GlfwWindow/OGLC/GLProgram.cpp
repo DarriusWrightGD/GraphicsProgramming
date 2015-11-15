@@ -25,7 +25,7 @@ void GLProgram::AddShaderSource(ShaderType shaderType, const char * source)
 		Initialize();
 	}
 
-	auto shader = glCreateShader(shaderType);
+	auto shader = glCreateShader(static_cast<GLenum>(shaderType));
 	glShaderSource(shader, 1, &source, nullptr);
 	glCompileShader(shader);
 	auto success = 0;
@@ -83,6 +83,67 @@ void GLProgram::AddUniform(std::string name, float * value, UniformType type)
 	AddUniform(name.c_str(), value, type);
 }
 
+void GLProgram::AddUniformBlock(UniformBufferBlock uniformBlock)
+{
+	auto uniformIndex = glGetUniformBlockIndex(GetHandle(), uniformBlock.name.c_str());
+	if (uniformIndex != MAXUINT32)
+	{
+		GLint uniformBlockSize;
+		glGetActiveUniformBlockiv(GetHandle(), uniformIndex, GL_UNIFORM_BLOCK_DATA_SIZE, &uniformBlockSize);
+		auto uniformBufferData = new GLubyte[uniformBlockSize];
+		std::vector<const GLchar*>names;
+		auto numParams = uniformBlock.parameters.size();
+		names.reserve(numParams);
+		UniformBlockValue blockValue;
+		blockValue.location = uniformIndex;
+		blockValue.blockSize = uniformBlockSize;
+		blockValue.offsets.resize(numParams);
+		blockValue.values.reserve(numParams);
+
+		for (const auto & param : uniformBlock.parameters)
+		{
+			names.push_back(param.name.c_str());
+			blockValue.values.push_back({param.size, param.value});
+		}
+		std::vector<GLuint> indices;
+		indices.resize(numParams);
+		glGetUniformIndices(GetHandle(), numParams, &names[0], &indices[0]);
+		glGetActiveUniformsiv(GetHandle(), numParams, &indices[0], GL_UNIFORM_OFFSET, &blockValue.offsets[0]);
+
+		for (auto param = 0u; param < numParams; param++)
+		{
+			memcpy(uniformBufferData + blockValue.offsets[param], blockValue.values[param].value, blockValue.values[param].size);
+		}
+
+
+		glCreateBuffers(1, &blockValue.buffer);
+		glBindBuffer(GL_UNIFORM_BUFFER, blockValue.buffer);
+		glBufferData(GL_UNIFORM_BUFFER, uniformBlockSize, uniformBufferData, GL_DYNAMIC_DRAW);
+		glBindBufferBase(GL_UNIFORM_BUFFER, 0, blockValue.buffer);
+		uniformBlocks.insert({ uniformBlock.name.c_str(),blockValue });
+		delete [] uniformBufferData;
+	}
+}
+
+void GLProgram::UpdateUniformBlock(std::string name)
+{
+	auto uniformBlockIter = uniformBlocks.find(name);
+	if (uniformBlockIter != uniformBlocks.end())
+	{
+		const auto & uniformBlockValue = uniformBlockIter->second;
+		auto uniformBufferData = new GLubyte[uniformBlockValue.blockSize];
+		for (auto param = 0u; param < uniformBlockValue.offsets.size(); param++)
+		{
+			memcpy(uniformBufferData + uniformBlockValue.offsets[param], uniformBlockValue.values[param].value, uniformBlockValue.values[param].size);
+		}
+		glBindBuffer(GL_UNIFORM_BUFFER, uniformBlockValue.buffer);
+		glBufferData(GL_UNIFORM_BUFFER, uniformBlockValue.blockSize, uniformBufferData, GL_DYNAMIC_DRAW);
+		glBindBufferBase(GL_UNIFORM_BUFFER, 0, uniformBlockValue.buffer);
+		delete[] uniformBufferData;
+	}
+}
+
+
 void GLProgram::Update()
 {
 	Use();
@@ -96,26 +157,26 @@ void GLProgram::UpdateUniform(GLint location, Uniform uniform )
 {
 	switch (uniform.type)
 	{
-	case INTEGER:
-	case BOOL:
+	case UniformType::INTEGER:
+	case UniformType::BOOL:
 		glUniform1i(location,(int)(*uniform.value));
 		break;
-	case FLOAT:
+	case UniformType::FLOAT:
 		glUniform1fv(location, 1 , uniform.value);
 		break;
-	case VEC2:
+	case UniformType::VEC2:
 		glUniform2fv(location, 1, uniform.value);
 		break;
-	case VEC3:
+	case UniformType::VEC3:
 		glUniform3fv(location, 1, uniform.value);
 		break;
-	case VEC4:
+	case UniformType::VEC4:
 		glUniform4fv(location, 1, uniform.value);
 		break;
-	case MAT3:
+	case UniformType::MAT3:
 		glUniformMatrix3fv(location, 1,GL_FALSE, uniform.value);
 		break;
-	case MAT4:
+	case UniformType::MAT4:
 		glUniformMatrix4fv(location, 1,GL_FALSE, uniform.value);
 		break;
 	}
@@ -158,11 +219,21 @@ void GLProgram::DeleteShaders()
 	}
 }
 
+void GLProgram::DeleteUniformBuffers()
+{
+	for (auto uniformBlock : uniformBlocks)
+	{
+		glDeleteBuffers(1,&uniformBlock.second.buffer);
+	}
+}
+
 void GLProgram::Delete()
 {
 	glDeleteProgram(program);
 	DeleteShaders();
+	DeleteUniformBuffers();
 }
+
 
 GLuint GLProgram::GetHandle() const
 {

@@ -1,6 +1,6 @@
 #pragma once
 #include "WindowInterface.h"
-#include <GL\glew.h>
+#include <GL\gl_core_4_5.h>
 #include <GLFW\glfw3.h>
 #include <string>
 #include <Input\GlfwInputHandler.h>

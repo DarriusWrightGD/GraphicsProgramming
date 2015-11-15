@@ -1,10 +1,10 @@
 #pragma once
-#include <GL\glew.h>
+#include <GL\gl_core_4_5.h>
 #include <string>
 #include <vector>
 #include <unordered_map>
 
-enum ShaderType
+enum class ShaderType
 {
 	Vertex = GL_VERTEX_SHADER,
 	Fragment = GL_FRAGMENT_SHADER,
@@ -14,7 +14,7 @@ enum ShaderType
 	Geometry = GL_GEOMETRY_SHADER,
 };
 
-enum UniformType
+enum class UniformType
 {
 	INTEGER,
 	BOOL,
@@ -32,6 +32,46 @@ struct Uniform
 	float * value;
 };
 
+struct UniformBufferParameter
+{
+	std::string name;
+	float * value;
+	size_t size;
+};
+
+class UniformBufferBlock
+{
+public:
+	UniformBufferBlock(std::string name, std::vector<UniformBufferParameter> parameters) :
+		name(name), parameters(parameters)
+	{
+
+	}
+	UniformBufferBlock(const char * name, std::vector<UniformBufferParameter> parameters) :
+		name(name), parameters(parameters)
+	{
+
+	}
+
+	std::string name;
+	std::vector<UniformBufferParameter> parameters;
+};
+
+struct UniformValue
+{
+	size_t size;
+	float * value;
+};
+
+struct UniformBlockValue
+{
+	std::vector<GLint> offsets;
+	std::vector<UniformValue> values;
+	GLuint buffer;
+	GLuint location;
+	GLint blockSize;
+};
+
 class GLProgram
 {
 public:
@@ -43,6 +83,8 @@ public:
 	void AddShaderFile(ShaderType shaderType, std::string file);
 	void AddUniform(const char * name, float * value, UniformType type);
 	void AddUniform(std::string name, float * value, UniformType type);
+	void AddUniformBlock(UniformBufferBlock uniformBlock);
+	void UpdateUniformBlock(std::string name);
 	void Update();
 	void Build();
 	void Use();
@@ -55,8 +97,10 @@ private:
 	GLint GetUniformLocation(const char * name);
 	bool initailzed = false;
 	void DeleteShaders();
+	void DeleteUniformBuffers();
 	std::vector<GLuint> shaders;
 	std::unordered_map<GLint, Uniform> uniforms;
+	std::unordered_map<std::string, UniformBlockValue> uniformBlocks;
 	GLuint program;
 };
 

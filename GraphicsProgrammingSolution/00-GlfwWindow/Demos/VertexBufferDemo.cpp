@@ -2,22 +2,6 @@
 
 #define printOpenGLError() printOglError(__FILE__, __LINE__)
 
-int printOglError(char *file, int line)
-{
-
-	GLenum glErr;
-	int    retCode = 0;
-
-	glErr = glGetError();
-	if (glErr != GL_NO_ERROR)
-	{
-		printf("glError in file %s @ line %d: %s\n",
-			file, line, glewGetErrorString(glErr));
-		retCode = 1;
-	}
-	return retCode;
-}
-
 VertexBufferDemo::VertexBufferDemo()
 {
 }
@@ -49,8 +33,8 @@ void VertexBufferDemo::Initialize()
 	SetTitle("VertexBufferDemo");
 	
 	program.Initialize();
-	program.AddShaderFile(Vertex, "Assets/Shaders/Vertex/buffer.vert");
-	program.AddShaderFile(Fragment, "Assets/Shaders/Fragment/buffer.frag");
+	program.AddShaderFile(ShaderType::Vertex, "Assets/Shaders/Vertex/buffer.vert");
+	program.AddShaderFile(ShaderType::Fragment, "Assets/Shaders/Fragment/buffer.frag");
 	program.Build();
 
 	glCreateVertexArrays(1, &vao);

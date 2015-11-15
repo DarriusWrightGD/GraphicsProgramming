@@ -31,8 +31,8 @@ ShaderDemo::~ShaderDemo()
 void ShaderDemo::BuildProgram()
 {
 	glProgram.Initialize();
-	glProgram.AddShaderFile(Vertex, "Assets/Shaders/Vertex/triangleShader.vert");
-	glProgram.AddShaderFile(Fragment, "Assets/Shaders/Fragment/triangleShader.frag");
+	glProgram.AddShaderFile(ShaderType::Vertex, "Assets/Shaders/Vertex/triangleShader.vert");
+	glProgram.AddShaderFile(ShaderType::Fragment, "Assets/Shaders/Fragment/triangleShader.frag");
 	glProgram.Build();
 }
 

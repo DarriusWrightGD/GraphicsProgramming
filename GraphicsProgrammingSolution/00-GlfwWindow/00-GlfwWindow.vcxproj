@@ -77,12 +77,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)Middleware\glm;$(SolutionDir)Middleware\glfw\include;$(SolutionDir)Middleware\glew\include;$(SolutionDir)Middleware\assimp\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)Middleware\glm;$(SolutionDir)Middleware\glfw\include;$(SolutionDir)Middleware\assimp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Middleware\glfw\lib;$(SolutionDir)Middleware\glew\lib\Release\$(Platform);$(SolutionDir)Middleware\lib;$(SolutionDir)Middleware\assimp\lib;$(SolutionDir)Middleware\glfw\test</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;glfw3.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
     <ProjectReference>
@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="Demos\BufferDemo.cpp" />
     <ClCompile Include="Demos\FragCoordDemo.cpp" />
+    <ClCompile Include="GL\gl_core_4_5.c" />
     <ClCompile Include="LoadingObjDemo.cpp" />
     <ClCompile Include="OGLC\GLProgram.cpp" />
     <ClCompile Include="Input\GlfwInputHandler.cpp" />
@@ -168,6 +169,7 @@
   <ItemGroup>
     <ClInclude Include="Demos\BufferDemo.h" />
     <ClInclude Include="Demos\FragCoordDemo.h" />
+    <ClInclude Include="GL\gl_core_4_5.h" />
     <ClInclude Include="LoadingObjDemo.h" />
     <ClInclude Include="OGLC\GLProgram.h" />
     <ClInclude Include="Input\GlfwInputHandler.h" />

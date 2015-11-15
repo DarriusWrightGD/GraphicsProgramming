@@ -4,9 +4,10 @@
 #include <assimp\scene.h>
 #include <assimp\postprocess.h>
 #include <gtc/constants.hpp>
-#include<gtx\transform.hpp>
 
 
+#include <gtc/matrix_transform.hpp>
+#include <gtx/transform.hpp>
 
 
 LoadingObjDemo::LoadingObjDemo()
@@ -21,16 +22,14 @@ LoadingObjDemo::~LoadingObjDemo()
 void LoadingObjDemo::Update()
 {
 	modelMatrix *= glm::rotate(0.1f, glm::vec3(0.0f, 1.0f, 0.0f));
+
 }
 
 void LoadingObjDemo::Render()
 {
-	glEnable(GL_DEPTH_TEST);
-	glDepthMask(GL_TRUE);
-	glDepthFunc(GL_LEQUAL);
-	glDepthRange(0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
 	//glClearDepth(.5f);
+	program.Use();
 	program.Update();
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
@@ -38,36 +37,22 @@ void LoadingObjDemo::Render()
 }
 void LoadingObjDemo::Initialize()
 {
+	glEnable(GL_DEPTH_TEST);
 	PrintUniformInfo();
 
 	//auto value = typeid(decltype(int)).name;
 	InitializeObj("Assets/Models/Obj/monkey.obj");
 
-	glClearColor(1, 0.6, 0.3, 1);
+	glClearColor(1.0f, 0.6f, 0.3f, 1.0f);
 	
 
 
-	//glEnable(GL_DEPTH_TEST); // enable depth-testing
-	//glDepthFunc(GL_LESS); // depth-testing interprets a smaller value as "closer"
-	//glEnable(GL_CULL_FACE); // cull face
-	//glDepthRange(0.0f, 1.0f);
-	//glCullFace(GL_BACK); // cull back face
-	//glFrontFace(GL_CCW); // set counter-clock-wise vertex order to mean the front
 	glViewport(0, 0, width, height);
-
-	//glEnable(GL_DEPTH_TEST);
-
-	//int depth;
-	//glGetIntegerv(GL_DEPTH_BITS, &depth);
-	//cout << "bits depth : " << depth << endl;
 
 	glCreateVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
 	glCreateBuffers(1, &vertexBuffer);
-	glCreateBuffers(1, &indexBuffer);
-
-	glNamedBufferData(indexBuffer, sizeof(GLuint) * indices.size(), &indices[0], GL_STATIC_DRAW);
 	glNamedBufferData(vertexBuffer, sizeof(FullVertex) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
 
 	glVertexArrayAttribBinding(vao, 0, 0);
@@ -86,23 +71,29 @@ void LoadingObjDemo::Initialize()
 	glEnableVertexArrayAttrib(vao, 0);
 	glEnableVertexArrayAttrib(vao, 1);
 	glEnableVertexArrayAttrib(vao, 2);
-	program.AddShaderFile(Vertex, "Assets/Shaders/Vertex/uniforms.vert");
-	program.AddShaderFile(Fragment, "Assets/Shaders/Fragment/uniforms.frag");
+	
+	glCreateBuffers(1, &indexBuffer);
+	glNamedBufferData(indexBuffer, sizeof(GLuint) * indices.size(), &indices[0], GL_STATIC_DRAW);
+
+
+	program.AddShaderFile(ShaderType::Vertex, "Assets/Shaders/Vertex/uniforms.vert");
+	program.AddShaderFile(ShaderType::Fragment, "Assets/Shaders/Fragment/uniforms.frag");
 	program.Build();
 
-	//GLuint transformIndex = glGetUniformBlockIndex(program.GetHandle(), "TransformBlock");
-	//glCreateBuffers(1, &transformBuffer);
-	
-	//if you put the binding in the shader then you can avoid the following line of code
-	//glBindBufferBase(GL_UNIFORM_BUFFER, 0, transformBuffer);
 
-	//auto time = static_cast<float>(glfwGetTime()) * glm::pi<float>() * 0.1f;
-	viewMatrix = mat4();
+	
+	viewMatrix = glm::lookAt(vec3(4.0f, 4.0f, 6.5f), vec3(0.0f, 0.75f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
 	modelMatrix = glm::translate(glm::vec3(0.0f, 0.0f, -4.0f));
 	OnResize(width, height);
-	program.AddUniform("model", &modelMatrix[0][0], MAT4);
-	program.AddUniform("projection", &projectionMatrix[0][0], MAT4);
-	program.AddUniform("view", &viewMatrix[0][0], MAT4);
+	program.AddUniform("model", &modelMatrix[0][0], UniformType::MAT4);
+
+	UniformBufferBlock uniformBufferBlock("TransformBlock", {
+		{ "TransformBlock.projection",&projectionMatrix[0][0],sizeof(mat4) },
+		{ "TransformBlock.view",&viewMatrix[0][0],sizeof(mat4) },
+	});
+	program.AddUniformBlock(uniformBufferBlock);
+
+
 	input->addBinding(GLFW_KEY_UP, [this](InputInfo input) {
 		modelMatrix *= glm::translate(glm::vec3(0.0f, 0.0f, 0.01f));
 	});
@@ -144,39 +135,41 @@ void LoadingObjDemo::PrintUniformInfo()
 }
 void LoadingObjDemo::OnResize(int w, int h)
 {
+	glViewport(0, 0, w, h);
 	aspectRatio = (float)w / h;
 	projectionMatrix = glm::perspectiveFov(glm::radians(60.0f),
-		static_cast<float>(w),static_cast<float>(h), 1.0f, 20.0f);
+		static_cast<float>(w),static_cast<float>(h), 0.3f, 100.0f);
+	program.UpdateUniformBlock("TransformBlock");
 }
 
 void LoadingObjDemo::InitializeObj(string filePath)
 {
 	Assimp::Importer importer;
 	auto scene = importer.ReadFile(filePath.c_str(),
-		aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
+		aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_FlipWindingOrder);
 	if (scene)
 	{
 		auto mesh = scene->mMeshes[0];
 		vertices.resize(mesh->mNumVertices);
-		for (auto i = 0; i < mesh->mNumVertices; i++)
+		for (auto i = 0u; i < mesh->mNumVertices; i++)
 		{
 			auto position = mesh->mVertices[i];
 			auto normal = mesh->HasNormals() ? mesh->mNormals[i] : aiVector3D(0, 0, 0);
 			auto uv = mesh->HasTextureCoords(i) ? mesh->mTextureCoords[0][i] : aiVector3D(0, 0, 0);
 			auto vertex = FullVertex();//{ vec3(position.x,position.y,position.y),vec2(uv.x,uv.y),vec3(normal.x,normal.y,normal.y) };
 			
-			vertex.position = vec3(position.x, position.y, position.y);
+			vertex.position = vec3(position.x, position.y, position.z);
 			vertex.uv = vec2(uv.x, uv.y);
-			vertex.normal = vec3(normal.x, normal.y, normal.y);
+			vertex.normal = vec3(normal.x, normal.y, normal.z);
 
 			vertices[i] = vertex;
 		}
 		indices.resize(mesh->mNumFaces * 3);
 		auto index = 0;
-		for (auto i = 0; i < mesh->mNumFaces; i++)
+		for (auto i = 0u; i < mesh->mNumFaces; i++)
 		{
 			auto face = mesh->mFaces[i];
-			for (auto j = 0; j < face.mNumIndices; j++)
+			for (auto j = 0u; j < face.mNumIndices; j++)
 			{
 				indices[index++] = face.mIndices[j];
 			}

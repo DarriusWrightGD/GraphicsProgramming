@@ -26,8 +26,8 @@ void FragCoordDemo::Render()
 void FragCoordDemo::Initialize()
 {
 	program.Initialize();
-	program.AddShaderFile(Vertex, "Assets/Shaders/Vertex/fragCoord.vert");
-	program.AddShaderFile(Fragment,"Assets/Shaders/Fragment/fragCoord.frag");
+	program.AddShaderFile(ShaderType::Vertex, "Assets/Shaders/Vertex/fragCoord.vert");
+	program.AddShaderFile(ShaderType::Fragment,"Assets/Shaders/Fragment/fragCoord.frag");
 	program.Build();
 	glGenVertexArrays(1, &vertexArray);
 	glBindVertexArray(vertexArray);

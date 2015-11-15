@@ -31,8 +31,8 @@ int GlfwWindow::Execute()
 	glViewport(0, 0, w, h);
 	width = w;
 	height = h;
-	OnResize(w, h);
 	Initialize();
+	OnResize(w, h);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -87,16 +87,19 @@ int GlfwWindow::InitGLFW()
 		return -1;
 	}
 
-
-	//glfwWindowHint(GLFW_DEPTH_BITS, 24);
-	window = glfwCreateWindow(640, 480, title.c_str(),NULL, NULL);
-
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	glfwWindowHint(GLFW_DEPTH_BITS, 32);
-	glfwWindowHint(GLFW_SAMPLES, 4);
+
+
+	window = glfwCreateWindow(640, 480, title.c_str(),NULL, NULL);
+
+	if (!window)
+	{
+		glfwTerminate();
+		return -1;
+	}
 
 	glfwSetKeyCallback(window, GlfwInputHandler::keyCallback);
 	glfwSetWindowSizeCallback(window, GlfwWindow::Resize);
@@ -109,18 +112,12 @@ int GlfwWindow::InitGLFW()
 		}
 	});
 	
-	if (!window)
-	{
-		glfwTerminate();
-		return -1;
-	}
+
 
 	glfwMakeContextCurrent(window);
 	//glfwSwapInterval(1);
 
-	glewExperimental = GL_TRUE;
-	GLenum err = glewInit();
-	if (err != GLEW_OK)
+	if (ogl_LoadFunctions() == ogl_LOAD_FAILED)
 	{
 		std::cout << "Glew failed" << std::endl;
 		return -1;

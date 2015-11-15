@@ -34,6 +34,8 @@ public:
 private:
 	void InitializeObj(string filePath);
 	void PrintUniformInfo();
+	void CreateUniformBuffer();
+	void UpdateUniformBuffer();
 
 	GLProgram program;
 	GLuint vao;
@@ -45,8 +47,10 @@ private:
 	glm::mat4 viewMatrix;
 	glm::mat4 modelMatrix;
 
+
 	std::vector<FullVertex> vertices;
 	std::vector<GLuint> indices;
+
 
 	// Inherited via GlfwWindow
 	virtual void OnResize(int width, int height) override;

@@ -30,11 +30,11 @@ void ShaderPipelineDemo::Render()
 void ShaderPipelineDemo::Initialize()
 {
 	program.Initialize();
-	program.AddShaderFile(Vertex, "Assets/Shaders/Vertex/pipeline.vert");
-	program.AddShaderFile(TessellationControl, "Assets/Shaders/Tessellation/pipeline.tc");
-	program.AddShaderFile(TessellationEvaluation, "Assets/Shaders/Tessellation/pipeline.te");
-	program.AddShaderFile(Geometry, "Assets/Shaders/Geometry/pipeline.geo");
-	program.AddShaderFile(Fragment,"Assets/Shaders/Fragment/pipeline.frag");
+	program.AddShaderFile(ShaderType::Vertex, "Assets/Shaders/Vertex/pipeline.vert");
+	program.AddShaderFile(ShaderType::TessellationControl, "Assets/Shaders/Tessellation/pipeline.tc");
+	program.AddShaderFile(ShaderType::TessellationEvaluation, "Assets/Shaders/Tessellation/pipeline.te");
+	program.AddShaderFile(ShaderType::Geometry, "Assets/Shaders/Geometry/pipeline.geo");
+	program.AddShaderFile(ShaderType::Fragment,"Assets/Shaders/Fragment/pipeline.frag");
 	program.Build();
 	glGenVertexArrays(1, &vertexArray);
 	glBindVertexArray(vertexArray);
