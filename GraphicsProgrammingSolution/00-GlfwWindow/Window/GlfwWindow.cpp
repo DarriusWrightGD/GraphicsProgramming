@@ -1,9 +1,75 @@
 #include "GlfwWindow.h"
 #include <iostream>
 
+using std::cout;
+using std::endl;
+
+enum ConsoleColors
+{
+	Default = 1,
+	Info = 15,
+	Warning = 14,
+	Issue = 13,
+	Error = 12
+};
+
 void errorCallback(int error, const char * description)
 {
 	fputs(description, stderr);
+}
+#include <Windows.h>
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+void APIENTRY debugCallback(GLenum source,
+GLenum type,
+GLuint id,
+GLenum severity,
+GLsizei length,
+const GLchar* message,
+const void* userParam){
+	switch (severity) {
+	case GL_DEBUG_SEVERITY_NOTIFICATION:
+		SetConsoleTextAttribute(hConsole, ConsoleColors::Info);
+		cout << "NOTIFCATION";
+		break;
+	case GL_DEBUG_SEVERITY_LOW:
+		SetConsoleTextAttribute(hConsole, ConsoleColors::Warning);
+		cout << "LOW";
+		break;
+	case GL_DEBUG_SEVERITY_MEDIUM:
+		SetConsoleTextAttribute(hConsole, ConsoleColors::Issue);
+		cout << "MEDIUM";
+		break;
+	case GL_DEBUG_SEVERITY_HIGH:
+		SetConsoleTextAttribute(hConsole, ConsoleColors::Error);
+		cout << "HIGH";
+		break;
+	}
+	cout << " : ";
+	cout << message;
+	cout << "(";
+	switch (type) {
+	case GL_DEBUG_TYPE_ERROR:
+		cout << "ERROR";
+		break;
+	case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:
+		cout << "DEPRECATED_BEHAVIOR";
+		break;
+	case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:
+		cout << "UNDEFINED_BEHAVIOR";
+		break;
+	case GL_DEBUG_TYPE_PORTABILITY:
+		cout << "PORTABILITY";
+		break;
+	case GL_DEBUG_TYPE_PERFORMANCE:
+		cout << "PERFORMANCE";
+		break;
+	case GL_DEBUG_TYPE_OTHER:
+		cout << "OTHER";
+		break;
+	}
+	cout << ")\n" << endl;
+
+	SetConsoleTextAttribute(hConsole, ConsoleColors::Default);
 }
 
 GlfwWindow * GlfwWindow::instance;
@@ -91,7 +157,10 @@ int GlfwWindow::InitGLFW()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
+	
+#ifdef DEBUG || _DEBUG
+	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+#endif
 
 	window = glfwCreateWindow(640, 480, title.c_str(),NULL, NULL);
 
@@ -122,6 +191,11 @@ int GlfwWindow::InitGLFW()
 		std::cout << "Glew failed" << std::endl;
 		return -1;
 	}
+
+#ifdef DEBUG  || _DEBUG
+	glEnable(GL_DEBUG_OUTPUT);
+	glDebugMessageCallback(debugCallback, nullptr);
+#endif
 
 	return 0;
 }
