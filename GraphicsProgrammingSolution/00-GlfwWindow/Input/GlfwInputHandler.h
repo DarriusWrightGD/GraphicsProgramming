@@ -7,7 +7,7 @@ class GlfwInputHandler : public InputHandler
 public:
 	GlfwInputHandler();
 	~GlfwInputHandler();
-	static void keyCallback(GLFWwindow * window, int key, int scancode, int action, int mods)
+	static void keyCallback(GLFWwindow * window, int key, int scancode, int action, int mods) noexcept
 	{
 		if (inputInstance)
 		{
@@ -15,6 +15,6 @@ public:
 		}
 	}
 	// Inherited via InputHandler
-	virtual void handleKeys(InputInfo input) override;
+	virtual void handleKeys(InputInfo input) noexcept override;
 };
 

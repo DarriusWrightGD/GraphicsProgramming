@@ -151,10 +151,15 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\Component.cpp" />
     <ClCompile Include="Demos\BufferDemo.cpp" />
     <ClCompile Include="Demos\FragCoordDemo.cpp" />
+    <ClCompile Include="Components\DrawableComponent.cpp" />
+    <ClCompile Include="GameObjects\GameObject.cpp" />
+    <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="GL\gl_core_4_5.c" />
-    <ClCompile Include="LoadingObjDemo.cpp" />
+    <ClCompile Include="Demos\LoadingObjDemo.cpp" />
+    <ClCompile Include="Components\MeshComponent.cpp" />
     <ClCompile Include="OGLC\GLProgram.cpp" />
     <ClCompile Include="Input\GlfwInputHandler.cpp" />
     <ClCompile Include="Demos\ShaderDemo.cpp" />
@@ -168,10 +173,15 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Demos\BufferDemo.h" />
     <ClInclude Include="Demos\FragCoordDemo.h" />
+    <ClInclude Include="Components\DrawableComponent.h" />
+    <ClInclude Include="GameObjects\GameObject.h" />
+    <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="GL\gl_core_4_5.h" />
-    <ClInclude Include="LoadingObjDemo.h" />
+    <ClInclude Include="Demos\LoadingObjDemo.h" />
+    <ClInclude Include="Components\MeshComponent.h" />
     <ClInclude Include="OGLC\GLProgram.h" />
     <ClInclude Include="Input\GlfwInputHandler.h" />
     <ClInclude Include="Demos\ShaderDemo.h" />
@@ -179,6 +189,7 @@
     <ClInclude Include="Demos\ShaderColorDemo.h" />
     <ClInclude Include="Demos\VertexBufferDemo.h" />
     <ClInclude Include="ServiceLocator.h" />
+    <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window\GlfwWindow.h" />
     <ClInclude Include="Window\WindowInterface.h" />
     <ClInclude Include="Input\InputHandler.h" />

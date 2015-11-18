@@ -2,16 +2,16 @@
 
 InputHandler * InputHandler::inputInstance;
 
-InputHandler::InputHandler()
+InputHandler::InputHandler() noexcept
 {
 	inputInstance = this;
 }
 
-InputHandler::~InputHandler()
+InputHandler::~InputHandler() noexcept
 {
 }
 
-void InputHandler::addBinding(int keyCode, function<void(InputInfo)> callback)
+void InputHandler::addBinding(int keyCode, function<void(InputInfo)> callback) noexcept
 {
 	auto keyBindingIter = keyBindings.find(keyCode);
 	if (keyBindingIter == keyBindings.end())

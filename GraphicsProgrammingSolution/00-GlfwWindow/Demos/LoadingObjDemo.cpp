@@ -52,29 +52,30 @@ void LoadingObjDemo::Initialize()
 	glCreateVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
+
+	glCreateBuffers(1, &indexBuffer);
+	glNamedBufferData(indexBuffer, sizeof(GLuint) * indices.size(), &indices[0], GL_STATIC_DRAW);
+
+
 	glCreateBuffers(1, &vertexBuffer);
 	glNamedBufferData(vertexBuffer, sizeof(FullVertex) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
 
 	glVertexArrayAttribBinding(vao, 0, 0);
 	glVertexArrayAttribFormat(vao, 0, 3, GL_FLOAT, GL_FALSE, 0);
+	glVertexArrayVertexBuffer(vao, 0, vertexBuffer, 0, sizeof(FullVertex));
+	glEnableVertexArrayAttrib(vao, 0);
 
 	glVertexArrayAttribBinding(vao, 1, 0);
 	glVertexArrayAttribFormat(vao, 1, 2, GL_FLOAT, GL_FALSE, sizeof(vec3));
+	glEnableVertexArrayAttrib(vao, 1);
+	glVertexArrayVertexBuffer(vao, 1, vertexBuffer, sizeof(vec3), sizeof(FullVertex));
+
 
 	glVertexArrayAttribBinding(vao, 2, 0);
 	glVertexArrayAttribFormat(vao, 2, 3, GL_FLOAT, GL_FALSE, sizeof(vec3) + sizeof(vec2));
-
-	glVertexArrayVertexBuffer(vao, 0, vertexBuffer, 0, sizeof(FullVertex));
-	glVertexArrayVertexBuffer(vao, 1, vertexBuffer, sizeof(vec3), sizeof(FullVertex));
 	glVertexArrayVertexBuffer(vao, 2, vertexBuffer, sizeof(vec3) + sizeof(vec2), sizeof(FullVertex));
-
-	glEnableVertexArrayAttrib(vao, 0);
-	glEnableVertexArrayAttrib(vao, 1);
 	glEnableVertexArrayAttrib(vao, 2);
 	
-	glCreateBuffers(1, &indexBuffer);
-	glNamedBufferData(indexBuffer, sizeof(GLuint) * indices.size(), &indices[0], GL_STATIC_DRAW);
-
 
 	program.AddShaderFile(ShaderType::Vertex, "Assets/Shaders/Vertex/uniforms.vert");
 	program.AddShaderFile(ShaderType::Fragment, "Assets/Shaders/Fragment/uniforms.frag");
@@ -146,7 +147,7 @@ void LoadingObjDemo::InitializeObj(string filePath)
 {
 	Assimp::Importer importer;
 	auto scene = importer.ReadFile(filePath.c_str(),
-		aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_FlipWindingOrder);
+		aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs );
 	if (scene)
 	{
 		auto mesh = scene->mMeshes[0];
@@ -156,7 +157,7 @@ void LoadingObjDemo::InitializeObj(string filePath)
 			auto position = mesh->mVertices[i];
 			auto normal = mesh->HasNormals() ? mesh->mNormals[i] : aiVector3D(0, 0, 0);
 			auto uv = mesh->HasTextureCoords(i) ? mesh->mTextureCoords[0][i] : aiVector3D(0, 0, 0);
-			auto vertex = FullVertex();//{ vec3(position.x,position.y,position.y),vec2(uv.x,uv.y),vec3(normal.x,normal.y,normal.y) };
+			auto vertex = FullVertex();
 			
 			vertex.position = vec3(position.x, position.y, position.z);
 			vertex.uv = vec2(uv.x, uv.y);
@@ -179,6 +180,8 @@ void LoadingObjDemo::InitializeObj(string filePath)
 
 void LoadingObjDemo::Shutdown()
 {
+	
+	auto var = GL_STATIC_DRAW;
 	glDeleteVertexArrays(1, &vao);
 	glDeleteBuffers(1, &vertexBuffer);
 	glDeleteBuffers(1, &indexBuffer);

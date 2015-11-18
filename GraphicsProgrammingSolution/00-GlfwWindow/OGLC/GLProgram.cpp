@@ -18,6 +18,17 @@ GLProgram::~GLProgram()
 	Delete();
 }
 
+auto GLProgram::GetUniformLocation(const char * name)
+{
+	return glGetUniformLocation(program, name);
+}
+
+auto GLProgram::GetHandle() const noexcept
+{
+	return program;
+}
+
+
 void GLProgram::AddShaderSource(ShaderType shaderType, const char * source)
 {
 	if (!initailzed)
@@ -234,13 +245,3 @@ void GLProgram::Delete()
 	DeleteUniformBuffers();
 }
 
-
-GLuint GLProgram::GetHandle() const
-{
-	return program;
-}
-
-GLint GLProgram::GetUniformLocation(const char * name)
-{
-	return glGetUniformLocation(program,name);
-}

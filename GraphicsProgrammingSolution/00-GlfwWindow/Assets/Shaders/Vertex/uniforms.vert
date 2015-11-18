@@ -18,6 +18,6 @@ out VS_OUT{
 
 void main()
 {
-    vs_out.color = vec4(normal,1.0);
+    vs_out.color = vec4(normal,uv.y);
     gl_Position = transform.projection * transform.view * model * vec4(position,1.0);
 }

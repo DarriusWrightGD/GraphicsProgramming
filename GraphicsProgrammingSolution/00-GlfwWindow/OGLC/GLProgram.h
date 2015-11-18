@@ -91,10 +91,10 @@ public:
 	void Delete();
 	void Initialize();
 	
-	GLuint GetHandle()const;
+	auto GetHandle()const noexcept;
 private:
 	void UpdateUniform(GLint location, Uniform uniform);
-	GLint GetUniformLocation(const char * name);
+	auto GetUniformLocation(const char * name);
 	bool initailzed = false;
 	void DeleteShaders();
 	void DeleteUniformBuffers();

@@ -10,9 +10,9 @@ using std::vector;
 class InputHandler
 {
 public:
-	InputHandler();
-	~InputHandler();
-	void addBinding(int keyCode, function<void(InputInfo)> callback);
+	InputHandler() noexcept;
+	~InputHandler()noexcept;
+	void addBinding(int keyCode, function<void(InputInfo)> callback) noexcept;
 	virtual void handleKeys(InputInfo input) = 0;
 protected:
 	static InputHandler * inputInstance;
