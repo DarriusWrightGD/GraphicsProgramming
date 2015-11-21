@@ -9,14 +9,13 @@ class GameObject;
 class MeshComponent : public DrawableComponent
 {
 public:
-	MeshComponent(GameObject * gameObject, aiMesh * mesh,const GLProgram & program);
+	MeshComponent(GameObject * gameObject, aiMesh * mesh,GLProgram & program);
 	~MeshComponent();
 	virtual void Update() override;
 	virtual void Draw() override;
 
 private:
-	void InitializeMesh(const aiMesh * mesh);
+	void InitializeMesh(const aiMesh * mesh, GLProgram & program);
 	Renderable * renderable;
-	GLProgram program;
 };
 

@@ -15,10 +15,9 @@ therefore you should pull the data in only to forward it to a render layer with
 the appropriate placements
 */
 
-MeshComponent::MeshComponent(GameObject * gameObject, aiMesh * mesh,const GLProgram & program) : DrawableComponent(gameObject), 
-program(program)
+MeshComponent::MeshComponent(GameObject * gameObject, aiMesh * mesh,GLProgram & program) : DrawableComponent(gameObject) 
 {
-	InitializeMesh(mesh);
+	InitializeMesh(mesh, program);
 }
 
 MeshComponent::~MeshComponent()
@@ -34,7 +33,7 @@ void MeshComponent::Draw()
 {
 }
 
-void MeshComponent::InitializeMesh(const aiMesh * mesh)
+void MeshComponent::InitializeMesh(const aiMesh * mesh, GLProgram & program)
 {
 	auto renderer = Services.Get<GLRenderer>();
 	if (renderer != nullptr)

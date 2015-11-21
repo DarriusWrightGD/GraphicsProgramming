@@ -20,24 +20,21 @@ GLRenderer::~GLRenderer() noexcept
 
 void GLRenderer::Render()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glBindVertexArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, 3);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 2);
-	glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
-
-
-	//for (auto & renderable  : renderables)
-	//{
-	//	renderable.UpdateUniforms();
-	//	glBindVertexArray(renderable.GetVertexArrayObject());
-	//	glBindBuffer(GL_ARRAY_BUFFER, renderable.GetVertexBuffer());
-	//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderable.GetIndexBuffer());
-	//	glDrawElements(renderable.GetDrawMode(), renderable.GetIndicesCount(), GL_UNSIGNED_INT, 0);
-	//}
+	for (auto & renderable  : renderables)
+	{
+		if (renderable.visible)
+		{
+			renderable.UpdateUniforms();
+			glBindVertexArray(renderable.GetVertexArrayObject());
+			glBindBuffer(GL_ARRAY_BUFFER, renderable.GetVertexBuffer());
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderable.GetIndexBuffer());
+			glDrawElements(renderable.GetDrawMode(), renderable.GetIndicesCount(), GL_UNSIGNED_INT, 0);
+		}
+		
+	}
 }
 
-Renderable & GLRenderer::AddRenderable(const GLProgram & program, const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layouts)
+Renderable & GLRenderer::AddRenderable(GLProgram & program, const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layouts)
 {
 	GLuint vertexBuffer;
 	GLuint indexBuffer;

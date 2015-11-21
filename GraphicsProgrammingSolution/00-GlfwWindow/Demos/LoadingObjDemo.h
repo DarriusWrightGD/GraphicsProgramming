@@ -35,17 +35,10 @@ private:
 	std::unique_ptr<GameObject> gameObject;
 	GLProgram program;
 	GLuint vao;
-	GLuint vertexBuffer;
-	GLuint indexBuffer;
-	GLuint transformBuffer;
 	GLfloat aspectRatio;
 	glm::mat4 projectionMatrix;
 	glm::mat4 viewMatrix;
 	glm::mat4 modelMatrix;
-
-
-	std::vector<Vertex> vertices;
-	std::vector<GLuint> indices;
 	GLRenderer * renderer;
 
 	// Inherited via GlfwWindow

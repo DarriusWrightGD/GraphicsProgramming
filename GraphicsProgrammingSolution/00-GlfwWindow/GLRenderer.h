@@ -8,7 +8,7 @@
 struct Renderable
 {
 public:
-	Renderable(const GLProgram & program, GLuint vertexArrayObject, GLuint vertexBuffer, GLuint indexBuffer, GLuint numberOfIndices,
+	Renderable(GLProgram & program, GLuint vertexArrayObject, GLuint vertexBuffer, GLuint indexBuffer, GLuint numberOfIndices,
 		GLint drawMode = GL_TRIANGLES) : 
 		program(program), vertexBuffer(vertexBuffer), 
 		indexBuffer(indexBuffer),vertexArrayObject(vertexArrayObject), numberOfIndices(numberOfIndices), drawMode(drawMode)
@@ -43,14 +43,14 @@ public:
 	{
 		program.Update();
 	}
-private:
 	bool visible = true;
+private:
 	GLuint vertexBuffer;
 	GLuint indexBuffer;
 	GLuint vertexArrayObject;
 	GLuint numberOfIndices;
 	GLint drawMode;
-	GLProgram program;
+	GLProgram & program;
 };
 
 struct VertexLayout
@@ -121,7 +121,7 @@ public:
 	GLRenderer() noexcept;
 	~GLRenderer() noexcept;
 	void Render();
-	Renderable & AddRenderable(const GLProgram & program,const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layout);
+	Renderable & AddRenderable(GLProgram & program,const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layout);
 private:
 	std::vector<Renderable> renderables;
 };
