@@ -158,7 +158,7 @@ int GlfwWindow::InitGLFW()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	
-#ifdef DEBUG || _DEBUG
+#ifdef DEBUG
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 #endif
 
@@ -192,7 +192,7 @@ int GlfwWindow::InitGLFW()
 		return -1;
 	}
 
-#ifdef DEBUG  || _DEBUG
+#ifdef DEBUG
 	glEnable(GL_DEBUG_OUTPUT);
 	glDebugMessageCallback(debugCallback, nullptr);
 	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE,0,nullptr,GL_TRUE);

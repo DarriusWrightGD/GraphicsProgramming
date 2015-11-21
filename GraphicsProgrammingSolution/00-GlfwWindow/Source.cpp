@@ -5,7 +5,6 @@
 #include <Demos\VertexBufferDemo.h>
 #include <Demos\LoadingObjDemo.h>
 #include <memory>
-#include<ServiceLocator.h>
 using std::unique_ptr;
 
 int main()

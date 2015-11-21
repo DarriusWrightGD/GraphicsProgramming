@@ -5,19 +5,16 @@
 #include <vec2.hpp>
 #include <mat4x4.hpp>
 #include <iostream>
-
+#include <Components\MeshComponent.h>
+#include <GameObjects\GameObject.h>
+#include <GLRenderer.h>
+#include <memory>
+#include "Vertex.h"
 using glm::vec2;
 using glm::vec3;
 using glm::mat4;
 using std::cout;
 using std::endl;
-
-struct FullVertex
-{
-	vec3 position;
-	vec2 uv;
-	vec3 normal;
-};
 
 class LoadingObjDemo : public GlfwWindow
 {
@@ -34,9 +31,8 @@ public:
 private:
 	void InitializeObj(string filePath);
 	void PrintUniformInfo();
-	void CreateUniformBuffer();
-	void UpdateUniformBuffer();
-
+	std::unique_ptr<MeshComponent> meshComponent;
+	std::unique_ptr<GameObject> gameObject;
 	GLProgram program;
 	GLuint vao;
 	GLuint vertexBuffer;
@@ -48,9 +44,9 @@ private:
 	glm::mat4 modelMatrix;
 
 
-	std::vector<FullVertex> vertices;
+	std::vector<Vertex> vertices;
 	std::vector<GLuint> indices;
-
+	GLRenderer * renderer;
 
 	// Inherited via GlfwWindow
 	virtual void OnResize(int width, int height) override;
