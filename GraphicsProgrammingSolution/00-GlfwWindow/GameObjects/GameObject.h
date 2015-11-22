@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <mat4x4.hpp>
 class Component;
 class TransformComponent;
 /*Eventually move away from updating each gameobject 
@@ -15,6 +16,7 @@ public:
 	void AddChild(GameObject * gameObject);
 	void SetParent(GameObject * parent);
 	const std::vector<GameObject *> & GetChildren();
+	glm::mat4 & GetWorld()noexcept;
 	void Update();
 	void Draw();
 	TransformComponent * GetTransform();

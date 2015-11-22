@@ -1,14 +1,23 @@
 #include "GameObject.h"
 #include <Components\Component.h>
 #include <Components\DrawableComponent.h>
-
+#include <Components\TransformComponent.h>
 GameObject::GameObject(GameObject * parent) : parent(parent)
 {
+	transform = new TransformComponent(this);
+	SetParent(parent);
+	AddComponent(transform);
 }
 
 
 GameObject::~GameObject()
 {
+	delete transform;
+}
+
+glm::mat4 & GameObject::GetWorld() noexcept
+{
+	return transform->GetWorld();
 }
 
 void GameObject::AddComponent(Component * component)
@@ -34,6 +43,7 @@ void GameObject::AddChild(GameObject * gameObject)
 void GameObject::SetParent(GameObject * parent)
 {
 	this->parent = parent;
+	transform->SetParent((parent == nullptr) ? nullptr : parent->GetTransform());
 }
 const std::vector<GameObject *> & GameObject::GetChildren()
 {

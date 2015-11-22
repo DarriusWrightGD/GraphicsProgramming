@@ -1,6 +1,6 @@
 #include "TransformComponent.h"
 #include <gtx\transform.hpp>
-
+#include <GameObjects\GameObject.h>
 
 TransformComponent::TransformComponent(GameObject * gameObject)noexcept : Component(gameObject), parent(nullptr), scale(glm::scale(glm::vec3(1.0f,1.0f,1.0f)))
 {
@@ -27,10 +27,17 @@ void TransformComponent::Update()
 	{
 		local = translation * rotation * scale;
 		world = (parent == nullptr) ? local : local * parent->GetWorld();
-		for(auto child : gameObject->GetChildren())
+		for (auto child : gameObject->GetChildren())
+		{
+			child->GetTransform()->WorldChanged();
+		}
 		worldChanged = false;
 	}
+}
 
+glm::mat4 & TransformComponent::GetWorld() noexcept
+{
+	return world;
 }
 
 void TransformComponent::Translate(glm::vec3 translate) noexcept

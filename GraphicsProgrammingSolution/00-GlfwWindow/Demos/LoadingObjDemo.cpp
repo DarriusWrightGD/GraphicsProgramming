@@ -4,7 +4,7 @@
 #include <assimp\scene.h>
 #include <assimp\postprocess.h>
 #include <gtc/constants.hpp>
-
+#include <Components\TransformComponent.h>
 
 #include <gtc/matrix_transform.hpp>
 #include <gtx/transform.hpp>
@@ -21,7 +21,8 @@ LoadingObjDemo::~LoadingObjDemo()
 
 void LoadingObjDemo::Update()
 {
-	modelMatrix *= glm::rotate(0.1f, glm::vec3(0.0f, 1.0f, 0.0f));
+	gameObject->GetTransform()->Rotate(glm::vec3(0.1f, 0.1f, 0.0f));
+	gameObject->Update();
 }
 
 void LoadingObjDemo::Render()
@@ -45,7 +46,6 @@ void LoadingObjDemo::Initialize()
 
 	viewMatrix = glm::lookAt(vec3(4.0f, 4.0f, 6.5f), vec3(0.0f, 0.75f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
 	modelMatrix = glm::translate(glm::vec3(0.0f, 0.0f, -4.0f));
-	program.AddUniform("model", &modelMatrix[0][0], UniformType::MAT4);
 
 	UniformBufferBlock uniformBufferBlock("TransformBlock", {
 		{ "TransformBlock.projection",&projectionMatrix[0][0],sizeof(mat4) },
@@ -94,6 +94,7 @@ void LoadingObjDemo::InitializeObj(string filePath)
 		auto mesh = scene->mMeshes[0];
 		gameObject = std::unique_ptr<GameObject>(new GameObject());
 		meshComponent = std::unique_ptr<MeshComponent>(new MeshComponent(gameObject.get(),mesh,program));
+		program.AddUniform("model", &gameObject->GetWorld()[0][0], UniformType::MAT4);
 	}
 }
 

@@ -2,7 +2,7 @@
 #include <Components\Component.h>
 #include <mat4x4.hpp>
 #include <vec3.hpp>
-class TransformComponent : Component
+class TransformComponent : public Component
 {
 public:
 	TransformComponent(GameObject * gameObject)noexcept;
@@ -15,11 +15,12 @@ public:
 
 	void Scale(glm::vec3 scale) noexcept;
 	void SetScale(glm::vec3 scale) noexcept;
-	// Inherited via Component
-	const glm::mat4 & GetWorld()const noexcept;
-	virtual void Update() override;
+	glm::mat4 & GetWorld() noexcept;
 	void WorldChanged()noexcept;
 	void SetParent(TransformComponent * transform)noexcept;
+
+	// Inherited via Component
+	virtual void Update() override;
 private:
 	TransformComponent * parent;
 	glm::mat4 local;
