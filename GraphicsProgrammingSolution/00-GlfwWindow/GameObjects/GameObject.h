@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <mat4x4.hpp>
+#include <memory>
 class Component;
 class TransformComponent;
 /*Eventually move away from updating each gameobject 
@@ -22,7 +23,7 @@ public:
 	TransformComponent * GetTransform();
 private:
 	std::vector<Component *> components;
-	TransformComponent * transform;
+	std::unique_ptr<TransformComponent> transform;
 	GameObject * parent;
 	std::vector<GameObject *> children;
 };

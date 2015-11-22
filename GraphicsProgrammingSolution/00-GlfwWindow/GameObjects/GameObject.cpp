@@ -4,15 +4,14 @@
 #include <Components\TransformComponent.h>
 GameObject::GameObject(GameObject * parent) : parent(parent)
 {
-	transform = new TransformComponent(this);
+	transform = std::unique_ptr<TransformComponent>(new TransformComponent(this));
 	SetParent(parent);
-	AddComponent(transform);
+	AddComponent(transform.get());
 }
 
 
 GameObject::~GameObject()
 {
-	delete transform;
 }
 
 glm::mat4 & GameObject::GetWorld() noexcept
@@ -52,7 +51,7 @@ const std::vector<GameObject *> & GameObject::GetChildren()
 
 TransformComponent * GameObject::GetTransform()
 {
-	return transform;
+	return transform.get();
 }
 
 void GameObject::Update()
