@@ -2,7 +2,7 @@
 #include <Components\Component.h>
 #include <Components\DrawableComponent.h>
 
-GameObject::GameObject()
+GameObject::GameObject(GameObject * parent) : parent(parent)
 {
 }
 
@@ -25,6 +25,24 @@ void GameObject::Draw()
 			drawableComponent->Draw();
 		}
 	}
+}
+
+void GameObject::AddChild(GameObject * gameObject)
+{
+	children.push_back(gameObject);
+}
+void GameObject::SetParent(GameObject * parent)
+{
+	this->parent = parent;
+}
+const std::vector<GameObject *> & GameObject::GetChildren()
+{
+	return children;
+}
+
+TransformComponent * GameObject::GetTransform()
+{
+	return transform;
 }
 
 void GameObject::Update()

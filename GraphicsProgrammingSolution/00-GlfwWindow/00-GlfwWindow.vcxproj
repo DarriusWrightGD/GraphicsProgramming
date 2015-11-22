@@ -167,6 +167,7 @@
     <ClCompile Include="Demos\ShaderColorDemo.cpp" />
     <ClCompile Include="Demos\VertexBufferDemo.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
+    <ClCompile Include="Components\TransformComponent.cpp" />
     <ClCompile Include="Window\GlfwWindow.cpp" />
     <ClCompile Include="Window\WindowInterface.cpp" />
     <ClCompile Include="Input\InputHandler.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="Demos\ShaderColorDemo.h" />
     <ClInclude Include="Demos\VertexBufferDemo.h" />
     <ClInclude Include="ServiceLocator.h" />
+    <ClInclude Include="Components\TransformComponent.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window\GlfwWindow.h" />
     <ClInclude Include="Window\WindowInterface.h" />
