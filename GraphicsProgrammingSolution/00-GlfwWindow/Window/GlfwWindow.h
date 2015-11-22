@@ -21,7 +21,7 @@ protected:
 	virtual void SwapBuffers();
 	virtual void Shutdown() = 0;
 	GLFWwindow * window;
-	InputHandler * input;
+	GlfwInputHandler * input;
 	string title;
 	int width, height, glMajor, glMinor;
 	double time;

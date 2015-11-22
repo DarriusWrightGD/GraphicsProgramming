@@ -36,7 +36,7 @@ void LoadingObjDemo::Initialize()
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.4f, 0.7f, 0.2f, 1.0f);
 	PrintUniformInfo();
-	Services.Set<GLRenderer, GLRenderer>();
+
 	renderer = Services.Get<GLRenderer>();
 
 	program.Initialize();
@@ -100,5 +100,4 @@ void LoadingObjDemo::InitializeObj(string filePath)
 
 void LoadingObjDemo::Shutdown()
 {
-	Services.CleanUp();
 }

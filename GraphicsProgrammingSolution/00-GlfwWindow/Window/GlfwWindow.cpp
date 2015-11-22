@@ -1,6 +1,7 @@
 #include "GlfwWindow.h"
 #include <iostream>
-
+#include <ServiceLocator.h>
+#include <GLRenderer.h>
 using std::cout;
 using std::endl;
 
@@ -119,8 +120,8 @@ void GlfwWindow::CleanUp()
 {
 	glfwDestroyWindow(window);
 	glfwTerminate();
-	delete input;
 	Shutdown();
+	Services.CleanUp();
 }
 
 void GlfwWindow::SetTitle(const char * title)
@@ -197,6 +198,8 @@ int GlfwWindow::InitGLFW()
 	glDebugMessageCallback(debugCallback, nullptr);
 	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE,0,nullptr,GL_TRUE);
 #endif
+	Services.Set<InputHandler, GlfwInputHandler>(input);
+	Services.Set<GLRenderer, GLRenderer>();
 
 	return 0;
 }
