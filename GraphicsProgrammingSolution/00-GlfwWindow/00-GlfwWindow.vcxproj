@@ -77,13 +77,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)Middleware\glm;$(SolutionDir)Middleware\glfw\include;$(SolutionDir)Middleware\assimp\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)Middleware\soil\include;$(SolutionDir)Middleware\glm;$(SolutionDir)Middleware\glfw\include;$(SolutionDir)Middleware\assimp\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DEBUG;_DEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Middleware\glfw\lib;$(SolutionDir)Middleware\glew\lib\Release\$(Platform);$(SolutionDir)Middleware\lib;$(SolutionDir)Middleware\assimp\lib;$(SolutionDir)Middleware\glfw\test</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glu32.lib;opengl32.lib;glfw3.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Middleware\soil\lib;$(SolutionDir)Middleware\glfw\lib;$(SolutionDir)Middleware\glew\lib\Release\$(Platform);$(SolutionDir)Middleware\lib;$(SolutionDir)Middleware\assimp\lib;$(SolutionDir)Middleware\glfw\test</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SOIL.lib;glu32.lib;opengl32.lib;glfw3.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
     <ProjectReference>

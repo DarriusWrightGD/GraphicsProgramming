@@ -139,6 +139,8 @@ int GlfwWindow::InitGLFW()
 	glDebugMessageCallback(debugCallback, nullptr);
 	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE,0,nullptr,GL_TRUE);
 #endif
+	
+
 	Services.Set<InputHandler, GlfwInputHandler>(input);
 	Services.Set<GLRenderer, GLRenderer>();
 	Services.Set<Logger, ConsoleLogger>();
