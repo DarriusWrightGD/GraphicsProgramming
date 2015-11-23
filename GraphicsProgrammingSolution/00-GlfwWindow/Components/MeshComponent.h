@@ -1,8 +1,8 @@
 #pragma once
 #include <assimp\mesh.h>
 #include <Components\DrawableComponent.h>
-#include <GLRenderer.h>
-#include <ServiceLocator.h>
+#include <Rendering\GLRenderer.h>
+#include <Util\ServiceLocator.h>
 class DrawableComponent;
 class GameObject;
 

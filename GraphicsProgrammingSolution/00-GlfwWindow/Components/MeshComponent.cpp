@@ -1,9 +1,9 @@
 #include "MeshComponent.h"
 #include <GameObjects\GameObject.h>
 
-#include <GLRenderer.h>
+#include <Rendering\GLRenderer.h>
 
-#include <Vertex.h>
+#include <Data\Vertex.h>
 #include <vec3.hpp>
 #include <vec2.hpp>
 using glm::vec3;

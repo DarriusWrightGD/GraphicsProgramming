@@ -7,9 +7,9 @@
 #include <iostream>
 #include <Components\MeshComponent.h>
 #include <GameObjects\GameObject.h>
-#include <GLRenderer.h>
+#include <Rendering\GLRenderer.h>
 #include <memory>
-#include "Vertex.h"
+#include <Data\Vertex.h>
 using glm::vec2;
 using glm::vec3;
 using glm::mat4;

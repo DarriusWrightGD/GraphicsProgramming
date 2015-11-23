@@ -1,4 +1,5 @@
 #include "LoadingObjDemo.h"
+#include <Util\ServiceLocator.h>
 
 #include <assimp\Importer.hpp>
 #include <assimp\scene.h>
@@ -8,7 +9,7 @@
 
 #include <gtc/matrix_transform.hpp>
 #include <gtx/transform.hpp>
-#include "Vertex.h"
+#include <Data\Vertex.h>
 
 LoadingObjDemo::LoadingObjDemo()
 {
@@ -30,7 +31,6 @@ void LoadingObjDemo::Render()
 	glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
 	renderer->Render();
 }
-#include <ServiceLocator.h>
 void LoadingObjDemo::Initialize()
 {
 	glEnable(GL_DEPTH_TEST);
