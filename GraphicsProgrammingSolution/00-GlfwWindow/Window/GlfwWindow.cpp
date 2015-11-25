@@ -4,6 +4,8 @@
 #include <Rendering\GLRenderer.h>
 #include <Util\GLDebug.h>
 #include <Logging\ConsoleLogger.h>
+#include <Cameras\Camera.h>
+
 using std::cout;
 using std::endl;
 
@@ -114,7 +116,9 @@ int GlfwWindow::InitGLFW()
 
 	glfwSetKeyCallback(window, GlfwInputHandler::keyCallback);
 	glfwSetWindowSizeCallback(window, GlfwWindow::Resize);
-	input = new GlfwInputHandler();
+	Services.Set<InputHandler, GlfwInputHandler>();
+
+	input = Services.Get<InputHandler>();
 	input->addBinding(GLFW_KEY_ESCAPE, [this](InputInfo info)
 	{
 		if (info.action == GLFW_PRESS)
@@ -141,8 +145,10 @@ int GlfwWindow::InitGLFW()
 #endif
 	
 
-	Services.Set<InputHandler, GlfwInputHandler>(input);
 	Services.Set<GLRenderer, GLRenderer>();
 	Services.Set<Logger, ConsoleLogger>();
+	Services.Set<Camera, Camera>(new Camera(static_cast<float>(width)/height));
+	camera = Services.Get<Camera>();
+
 	return 0;
 }

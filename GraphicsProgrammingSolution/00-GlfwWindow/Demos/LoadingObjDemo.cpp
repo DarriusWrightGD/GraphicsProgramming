@@ -44,12 +44,30 @@ void LoadingObjDemo::Initialize()
 	program.AddShaderFile(ShaderType::Fragment, "Assets/Shaders/Fragment/uniforms.frag");
 	program.Build();
 
-	viewMatrix = glm::lookAt(vec3(4.0f, 4.0f, 6.5f), vec3(0.0f, 0.75f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
-	modelMatrix = glm::translate(glm::vec3(0.0f, 0.0f, -4.0f));
+	input->addBinding(GLFW_KEY_LEFT, [this](InputInfo info){
+		camera->MoveLeft();
+		program.UpdateUniformBlock("TransformBlock");
+	});
 
+	input->addBinding(GLFW_KEY_RIGHT, [this](InputInfo info) {
+		camera->MoveRight();
+		program.UpdateUniformBlock("TransformBlock");
+	});
+
+
+	input->addBinding(GLFW_KEY_UP, [this](InputInfo info) {
+		camera->MoveForward();
+		program.UpdateUniformBlock("TransformBlock");
+	});
+
+	input->addBinding(GLFW_KEY_DOWN, [this](InputInfo info) {
+		camera->MoveBack();
+		program.UpdateUniformBlock("TransformBlock");
+	});
+	
 	UniformBufferBlock uniformBufferBlock("TransformBlock", {
-		{ "TransformBlock.projection",&projectionMatrix[0][0],sizeof(mat4) },
-		{ "TransformBlock.view",&viewMatrix[0][0],sizeof(mat4) },
+		{ "TransformBlock.projection",&camera->GetProjection()[0][0],sizeof(mat4) },
+		{ "TransformBlock.view",&camera->GetView()[0][0],sizeof(mat4) },
 	});
 
 	program.AddUniformBlock(uniformBufferBlock);
@@ -79,8 +97,7 @@ void LoadingObjDemo::OnResize(int w, int h)
 {
 	glViewport(0, 0, w, h);
 	aspectRatio = (float)w / h;
-	projectionMatrix = glm::perspectiveFov(glm::radians(60.0f),
-		static_cast<float>(w),static_cast<float>(h), 0.3f, 100.0f);
+	camera->SetAspectRatio(aspectRatio);
 	program.UpdateUniformBlock("TransformBlock");
 }
 
@@ -94,6 +111,7 @@ void LoadingObjDemo::InitializeObj(string filePath)
 		auto mesh = scene->mMeshes[0];
 		gameObject = std::unique_ptr<GameObject>(new GameObject());
 		meshComponent = std::unique_ptr<MeshComponent>(new MeshComponent(gameObject.get(),mesh,program));
+		gameObject->GetTransform()->SetPosition(glm::vec3(0, 0, -10));
 		program.AddUniform("model", &gameObject->GetWorld()[0][0], UniformType::MAT4);
 	}
 }

@@ -4,6 +4,7 @@
 #include <GLFW\glfw3.h>
 #include <string>
 #include <Input\GlfwInputHandler.h>
+#include <Cameras\Camera.h>
 
 using std::string;
 class GlfwWindow : public WindowInterface
@@ -21,7 +22,8 @@ protected:
 	virtual void SwapBuffers();
 	virtual void Shutdown() = 0;
 	GLFWwindow * window;
-	GlfwInputHandler * input;
+	InputHandler * input;
+	Camera * camera;
 	string title;
 	int width, height, glMajor, glMinor;
 	double time;

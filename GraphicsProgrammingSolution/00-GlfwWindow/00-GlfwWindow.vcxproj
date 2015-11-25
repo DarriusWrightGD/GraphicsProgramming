@@ -151,6 +151,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cameras\Camera.cpp" />
     <ClCompile Include="Components\Component.cpp" />
     <ClCompile Include="Logging\ConsoleLogger.cpp" />
     <ClCompile Include="Demos\BufferDemo.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cameras\Camera.h" />
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Logging\ConsoleLogger.h" />
     <ClInclude Include="Demos\BufferDemo.h" />
