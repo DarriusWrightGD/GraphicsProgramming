@@ -146,6 +146,7 @@ int GlfwWindow::InitGLFW()
 	
 
 	Services.Set<GLRenderer, GLRenderer>();
+	renderer = Services.Get<GLRenderer>();
 	Services.Set<Logger, ConsoleLogger>();
 	Services.Set<Camera, Camera>(new Camera(static_cast<float>(width)/height));
 	camera = Services.Get<Camera>();

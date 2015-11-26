@@ -1,17 +1,20 @@
 #pragma once
 #include <GL\gl_core_4_5.h>
 #include <OGLC\GLProgram.h>
+#include <functional>
 #include <vector>
+
 // 1000
 
 
 struct Renderable
 {
 public:
-	Renderable(GLProgram & program, GLuint vertexArrayObject, GLuint vertexBuffer, GLuint indexBuffer, GLuint numberOfIndices,
-		GLint drawMode = GL_TRIANGLES) : 
-		program(program), vertexBuffer(vertexBuffer), 
-		indexBuffer(indexBuffer),vertexArrayObject(vertexArrayObject), numberOfIndices(numberOfIndices), drawMode(drawMode)
+	Renderable(GLProgram & program, GLuint vertexArrayObject, GLuint vertexBuffer, GLuint indexBuffer, GLuint numberOfIndices, std::function<void(GLProgram&)> instanceUpdate,
+		GLint drawMode = GL_TRIANGLES) :
+		program(program), vertexBuffer(vertexBuffer),
+		indexBuffer(indexBuffer), vertexArrayObject(vertexArrayObject), numberOfIndices(numberOfIndices), drawMode(drawMode),
+		instanceUpdate(instanceUpdate)
 	{
 
 	}
@@ -41,6 +44,8 @@ public:
 
 	void UpdateUniforms()
 	{
+		program.Use();
+		instanceUpdate(program);
 		program.Update();
 	}
 	bool visible = true;
@@ -51,6 +56,7 @@ private:
 	GLuint numberOfIndices;
 	GLint drawMode;
 	GLProgram & program;
+	std::function<void(GLProgram&)> instanceUpdate;
 };
 
 struct VertexLayout
@@ -121,7 +127,7 @@ public:
 	GLRenderer() noexcept;
 	~GLRenderer() noexcept;
 	void Render();
-	Renderable & AddRenderable(GLProgram & program,const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layout);
+	Renderable & AddRenderable(GLProgram & program,const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layout, std::function<void(GLProgram&)> instanceUpdate);
 private:
 	std::vector<Renderable> renderables;
 };

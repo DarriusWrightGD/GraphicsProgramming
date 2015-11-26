@@ -4,6 +4,7 @@
 #include <GLFW\glfw3.h>
 #include <string>
 #include <Input\GlfwInputHandler.h>
+#include <Rendering\GLRenderer.h>
 #include <Cameras\Camera.h>
 
 using std::string;
@@ -24,6 +25,7 @@ protected:
 	GLFWwindow * window;
 	InputHandler * input;
 	Camera * camera;
+	GLRenderer * renderer;
 	string title;
 	int width, height, glMajor, glMinor;
 	double time;

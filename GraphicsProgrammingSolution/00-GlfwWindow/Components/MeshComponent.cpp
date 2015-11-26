@@ -15,14 +15,20 @@ therefore you should pull the data in only to forward it to a render layer with
 the appropriate placements
 */
 
-MeshComponent::MeshComponent(GameObject * gameObject, aiMesh * mesh,GLProgram & program) : DrawableComponent(gameObject) 
+MeshComponent::MeshComponent(GameObject * gameObject, aiMesh * mesh,GLProgram & program , std::function<void(GLProgram&)> instanceUpdate) : DrawableComponent(gameObject),
+material({glm::vec3(0.4f),glm::vec3(0.4f),glm::vec3(0.4f)})
 {
-	InitializeMesh(mesh, program);
+	InitializeMesh(mesh, program,instanceUpdate);
 }
 
 MeshComponent::~MeshComponent()
 {
 	
+}
+
+Material & MeshComponent::GetMaterial()
+{
+	return material;
 }
 
 void MeshComponent::Update()
@@ -33,7 +39,7 @@ void MeshComponent::Draw()
 {
 }
 
-void MeshComponent::InitializeMesh(const aiMesh * mesh, GLProgram & program)
+void MeshComponent::InitializeMesh(const aiMesh * mesh, GLProgram & program , std::function<void(GLProgram&)> instanceUpdate)
 {
 	auto renderer = Services.Get<GLRenderer>();
 	if (renderer != nullptr)
@@ -65,11 +71,12 @@ void MeshComponent::InitializeMesh(const aiMesh * mesh, GLProgram & program)
 			}
 		}
 
-		renderable = &renderer->AddRenderable(program,VertexBufferLayout(&vertices[0], vertices.size(), &indices[0], indices.size(), sizeof(Vertex)),{ 
+		renderable = &renderer->AddRenderable(program,VertexBufferLayout(&vertices[0], vertices.size(), &indices[0], indices.size() , sizeof(Vertex)),{ 
 			{ 3,offsetof(Vertex,position) },
 			{ 3,offsetof(Vertex,normal) },
-			{ 2,offsetof(Vertex,uv) }
-		});
+			{ 2,offsetof(Vertex,uv) },},
+			instanceUpdate
+		);
 
 		indices.clear();
 		vertices.clear();

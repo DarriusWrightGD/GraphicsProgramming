@@ -24,6 +24,7 @@ void GLRenderer::Render()
 	{
 		if (renderable.visible)
 		{
+		
 			renderable.UpdateUniforms();
 			glBindVertexArray(renderable.GetVertexArrayObject());
 			glBindBuffer(GL_ARRAY_BUFFER, renderable.GetVertexBuffer());
@@ -34,7 +35,7 @@ void GLRenderer::Render()
 	}
 }
 
-Renderable & GLRenderer::AddRenderable(GLProgram & program, const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layouts)
+Renderable & GLRenderer::AddRenderable(GLProgram & program, const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layouts, std::function <void(GLProgram&)> instanceUpdate)
 {
 	GLuint vertexBuffer;
 	GLuint indexBuffer;
@@ -59,7 +60,7 @@ Renderable & GLRenderer::AddRenderable(GLProgram & program, const VertexBufferLa
 		index++;
 	}
 
-	Renderable renderable(program, vertexArrayObject, vertexBuffer, indexBuffer, bufferLayout.GetIndexCount());
+	Renderable renderable(program, vertexArrayObject, vertexBuffer, indexBuffer, bufferLayout.GetIndexCount(),instanceUpdate);
 	renderables.push_back(renderable);
 	return renderables[renderables.size() - 1];
 }

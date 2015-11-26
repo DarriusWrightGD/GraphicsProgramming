@@ -37,8 +37,6 @@ void LoadingObjDemo::Initialize()
 	glClearColor(0.4f, 0.7f, 0.2f, 1.0f);
 	PrintUniformInfo();
 
-	renderer = Services.Get<GLRenderer>();
-
 	program.Initialize();
 	program.AddShaderFile(ShaderType::Vertex, "Assets/Shaders/Vertex/uniforms.vert");
 	program.AddShaderFile(ShaderType::Fragment, "Assets/Shaders/Fragment/uniforms.frag");
@@ -110,9 +108,11 @@ void LoadingObjDemo::InitializeObj(string filePath)
 	{
 		auto mesh = scene->mMeshes[0];
 		gameObject = std::unique_ptr<GameObject>(new GameObject());
-		meshComponent = std::unique_ptr<MeshComponent>(new MeshComponent(gameObject.get(),mesh,program));
+		meshComponent = std::unique_ptr<MeshComponent>(new MeshComponent(gameObject.get(), mesh, program, [this](GLProgram & progran) {
+			program.UpdateUniform(program.GetUniformLocation("model"), { UniformType::MAT4,&gameObject->GetWorld()[0][0] });
+		}));
 		gameObject->GetTransform()->SetPosition(glm::vec3(0, 0, -10));
-		program.AddUniform("model", &gameObject->GetWorld()[0][0], UniformType::MAT4);
+		//program.AddUniform("model", , UniformType::MAT4);
 	}
 }
 

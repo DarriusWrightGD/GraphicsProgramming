@@ -87,6 +87,9 @@
     <ClCompile Include="Cameras\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Demos\DiffuseDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -170,6 +173,15 @@
     <ClInclude Include="Cameras\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Demos\DiffuseDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="00-GlfwWindow.rc">
@@ -192,5 +204,7 @@
     <None Include="Assets\Shaders\Fragment\buffer.frag" />
     <None Include="Assets\Shaders\Fragment\uniforms.frag" />
     <None Include="Assets\Shaders\Vertex\uniforms.vert" />
+    <None Include="Assets\Shaders\Fragment\diffuseLight.frag" />
+    <None Include="Assets\Shaders\Vertex\diffuseLight.vert" />
   </ItemGroup>
 </Project>

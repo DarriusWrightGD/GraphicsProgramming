@@ -84,17 +84,17 @@ public:
 	void AddUniform(const char * name, float * value, UniformType type);
 	void AddUniform(std::string name, float * value, UniformType type);
 	void AddUniformBlock(UniformBufferBlock uniformBlock);
+	GLint GetUniformLocation(const char * name);
 	void UpdateUniformBlock(std::string name);
 	void Update();
 	void Build();
 	void Use();
 	void Delete();
 	void Initialize();
-	
+	void UpdateUniform(GLint location, Uniform uniform);
+
 	auto GetHandle()const noexcept;
 private:
-	void UpdateUniform(GLint location, Uniform uniform);
-	auto GetUniformLocation(const char * name);
 	bool initailzed = false;
 	void DeleteShaders();
 	void DeleteUniformBuffers();

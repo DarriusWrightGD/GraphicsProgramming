@@ -37,7 +37,6 @@ private:
 	GLuint vao;
 	GLfloat aspectRatio;
 	
-	GLRenderer * renderer;
 	// Inherited via GlfwWindow
 	virtual void OnResize(int width, int height) override;
 };

@@ -18,7 +18,7 @@ GLProgram::~GLProgram()
 	Delete();
 }
 
-auto GLProgram::GetUniformLocation(const char * name)
+GLint GLProgram::GetUniformLocation(const char * name)
 {
 	return glGetUniformLocation(program, name);
 }
@@ -99,6 +99,7 @@ void GLProgram::AddUniformBlock(UniformBufferBlock uniformBlock)
 	auto uniformIndex = glGetUniformBlockIndex(GetHandle(), uniformBlock.name.c_str());
 	if (uniformIndex != MAXUINT32)
 	{
+		glUniformBlockBinding(GetHandle(), uniformIndex, uniformBlocks.size());
 		GLint uniformBlockSize;
 		glGetActiveUniformBlockiv(GetHandle(), uniformIndex, GL_UNIFORM_BLOCK_DATA_SIZE, &uniformBlockSize);
 		auto uniformBufferData = new GLubyte[uniformBlockSize];
@@ -130,7 +131,7 @@ void GLProgram::AddUniformBlock(UniformBufferBlock uniformBlock)
 		glCreateBuffers(1, &blockValue.buffer);
 		glBindBuffer(GL_UNIFORM_BUFFER, blockValue.buffer);
 		glBufferData(GL_UNIFORM_BUFFER, uniformBlockSize, uniformBufferData, GL_DYNAMIC_DRAW);
-		glBindBufferBase(GL_UNIFORM_BUFFER, 0, blockValue.buffer);
+		glBindBufferBase(GL_UNIFORM_BUFFER,uniformBlocks.size(), blockValue.buffer);
 		uniformBlocks.insert({ uniformBlock.name.c_str(),blockValue });
 		delete [] uniformBufferData;
 	}

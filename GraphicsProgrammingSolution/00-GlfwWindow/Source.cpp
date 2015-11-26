@@ -4,11 +4,12 @@
 #include <Demos\BufferDemo.h>
 #include <Demos\VertexBufferDemo.h>
 #include <Demos\LoadingObjDemo.h>
+#include <Demos\DiffuseDemo.h>
 #include <memory>
 using std::unique_ptr;
 
 int main()
 {
-	auto window = unique_ptr<WindowInterface>(new LoadingObjDemo());
+	auto window = unique_ptr<WindowInterface>(new DiffuseDemo());
 	return window->Execute();
 }
