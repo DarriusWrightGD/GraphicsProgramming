@@ -92,7 +92,7 @@ public:
 	void Delete();
 	void Initialize();
 	void UpdateUniform(GLint location, Uniform uniform);
-
+	void UpdateUniform(const char * name, Uniform uniform);
 	auto GetHandle()const noexcept;
 private:
 	bool initailzed = false;

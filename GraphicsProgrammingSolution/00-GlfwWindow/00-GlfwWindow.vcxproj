@@ -151,9 +151,11 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Demos\ADSDemo.cpp" />
     <ClCompile Include="Cameras\Camera.cpp" />
     <ClCompile Include="Components\Component.cpp" />
     <ClCompile Include="Demos\DiffuseDemo.cpp" />
+    <ClCompile Include="Demos\DiscardDemo.cpp" />
     <ClCompile Include="Logging\ConsoleLogger.cpp" />
     <ClCompile Include="Demos\BufferDemo.cpp" />
     <ClCompile Include="Demos\FragCoordDemo.cpp" />
@@ -178,11 +180,13 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Demos\ADSDemo.h" />
     <ClInclude Include="Cameras\Camera.h" />
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Data\Light.h" />
     <ClInclude Include="Data\Material.h" />
     <ClInclude Include="Demos\DiffuseDemo.h" />
+    <ClInclude Include="Demos\DiscardDemo.h" />
     <ClInclude Include="Logging\ConsoleLogger.h" />
     <ClInclude Include="Demos\BufferDemo.h" />
     <ClInclude Include="Demos\FragCoordDemo.h" />
@@ -213,8 +217,10 @@
     <ResourceCompile Include="00-GlfwWindow.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shaders\Fragment\ads.frag" />
     <None Include="Assets\Shaders\Fragment\buffer.frag" />
     <None Include="Assets\Shaders\Fragment\diffuseLight.frag" />
+    <None Include="Assets\Shaders\Fragment\discard.frag" />
     <None Include="Assets\Shaders\Fragment\fragCoord.frag" />
     <None Include="Assets\Shaders\Fragment\pipeline.frag" />
     <None Include="Assets\Shaders\Fragment\shaderColor.frag" />
@@ -223,8 +229,10 @@
     <None Include="Assets\Shaders\Geometry\pipeline.geo" />
     <None Include="Assets\Shaders\Tessellation\pipeline.tc" />
     <None Include="Assets\Shaders\Tessellation\pipeline.te" />
+    <None Include="Assets\Shaders\Vertex\ads.vert" />
     <None Include="Assets\Shaders\Vertex\buffer.vert" />
     <None Include="Assets\Shaders\Vertex\diffuseLight.vert" />
+    <None Include="Assets\Shaders\Vertex\discard.vert" />
     <None Include="Assets\Shaders\Vertex\fragCoord.vert" />
     <None Include="Assets\Shaders\Vertex\pipeline.vert" />
     <None Include="Assets\Shaders\Vertex\shaderColor.vert" />

@@ -16,7 +16,7 @@ the appropriate placements
 */
 
 MeshComponent::MeshComponent(GameObject * gameObject, aiMesh * mesh,GLProgram & program , std::function<void(GLProgram&)> instanceUpdate) : DrawableComponent(gameObject),
-material({glm::vec3(0.4f),glm::vec3(0.4f),glm::vec3(0.4f)})
+material({glm::vec3(0.4f),glm::vec3(0.4f),glm::vec4(0.4f)})
 {
 	InitializeMesh(mesh, program,instanceUpdate);
 }
@@ -50,7 +50,7 @@ void MeshComponent::InitializeMesh(const aiMesh * mesh, GLProgram & program , st
 		{
 			auto position = mesh->mVertices[i];
 			auto normal = mesh->HasNormals() ? mesh->mNormals[i] : aiVector3D(0, 0, 0);
-			auto uv = mesh->HasTextureCoords(i) ? mesh->mTextureCoords[0][i] : aiVector3D(0, 0, 0);
+			auto uv = mesh->HasTextureCoords(0) ? mesh->mTextureCoords[0][i] : aiVector3D(0, 0, 0);
 			auto vertex = Vertex();
 
 			vertex.position = vec3(position.x, position.y, position.z);

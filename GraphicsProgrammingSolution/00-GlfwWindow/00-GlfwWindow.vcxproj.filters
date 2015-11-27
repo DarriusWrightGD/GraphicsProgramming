@@ -90,6 +90,12 @@
     <ClCompile Include="Demos\DiffuseDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Demos\ADSDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\DiscardDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -182,6 +188,12 @@
     <ClInclude Include="Data\Material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Demos\ADSDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\DiscardDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="00-GlfwWindow.rc">
@@ -206,5 +218,9 @@
     <None Include="Assets\Shaders\Vertex\uniforms.vert" />
     <None Include="Assets\Shaders\Fragment\diffuseLight.frag" />
     <None Include="Assets\Shaders\Vertex\diffuseLight.vert" />
+    <None Include="Assets\Shaders\Vertex\ads.vert" />
+    <None Include="Assets\Shaders\Fragment\ads.frag" />
+    <None Include="Assets\Shaders\Vertex\discard.vert" />
+    <None Include="Assets\Shaders\Fragment\discard.frag" />
   </ItemGroup>
 </Project>

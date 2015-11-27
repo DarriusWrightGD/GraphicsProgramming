@@ -94,6 +94,11 @@ void GLProgram::AddUniform(std::string name, float * value, UniformType type)
 	AddUniform(name.c_str(), value, type);
 }
 
+void GLProgram::UpdateUniform(const char * name, Uniform uniform)
+{
+	UpdateUniform(GetUniformLocation(name), uniform);
+}
+
 void GLProgram::AddUniformBlock(UniformBufferBlock uniformBlock)
 {
 	auto uniformIndex = glGetUniformBlockIndex(GetHandle(), uniformBlock.name.c_str());

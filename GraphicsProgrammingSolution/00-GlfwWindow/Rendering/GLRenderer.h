@@ -44,9 +44,8 @@ public:
 
 	void UpdateUniforms()
 	{
-		program.Use();
-		instanceUpdate(program);
 		program.Update();
+		instanceUpdate(program);
 	}
 	bool visible = true;
 private:
