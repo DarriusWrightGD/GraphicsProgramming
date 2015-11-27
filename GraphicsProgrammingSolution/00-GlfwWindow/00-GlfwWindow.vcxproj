@@ -172,6 +172,7 @@
     <ClCompile Include="Demos\ShaderPipelineDemo.cpp" />
     <ClCompile Include="Demos\ShaderColorDemo.cpp" />
     <ClCompile Include="Demos\VertexBufferDemo.cpp" />
+    <ClCompile Include="Texture2DDemo.cpp" />
     <ClCompile Include="Util\ServiceLocator.cpp" />
     <ClCompile Include="Components\TransformComponent.cpp" />
     <ClCompile Include="Window\GlfwWindow.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="Demos\ShaderPipelineDemo.h" />
     <ClInclude Include="Demos\ShaderColorDemo.h" />
     <ClInclude Include="Demos\VertexBufferDemo.h" />
+    <ClInclude Include="Texture2DDemo.h" />
     <ClInclude Include="Util\GLDebug.h" />
     <ClInclude Include="Util\ServiceLocator.h" />
     <ClInclude Include="Components\TransformComponent.h" />
