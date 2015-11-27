@@ -96,7 +96,7 @@
     <ClCompile Include="Demos\DiscardDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Texture2DDemo.cpp">
+    <ClCompile Include="Demos\Texture2DDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -197,7 +197,7 @@
     <ClInclude Include="Demos\DiscardDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Texture2DDemo.h">
+    <ClInclude Include="Demos\Texture2DDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
