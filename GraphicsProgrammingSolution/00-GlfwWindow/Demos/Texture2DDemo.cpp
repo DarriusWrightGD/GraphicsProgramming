@@ -74,9 +74,6 @@ void Texture2DDemo::Initialize()
 
 	delete[] imageBytes;
 
-	auto textureLocation = glGetUniformLocation(program.GetHandle(), "texture1");
-	if (textureLocation >= 0)
-		glUniform1i(textureLocation, 0);
 }
 
 void Texture2DDemo::Shutdown()

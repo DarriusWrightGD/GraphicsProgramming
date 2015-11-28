@@ -1,5 +1,5 @@
 #version 450
-uniform sampler2D texture1;
+layout (binding = 0)uniform sampler2D texture1;
 
 in VS_OUT
 {

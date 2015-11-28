@@ -6,6 +6,8 @@
 #include <Demos\LoadingObjDemo.h>
 #include <Demos\DiffuseDemo.h>
 #include <Demos\ADSDemo.h>
+#include <Demos\ADSFragDemo.h>
+#include <Demos\MultiLightDemo.h>
 #include <Demos\DiscardDemo.h>
 #include <Demos\Texture2DDemo.h>
 #include <memory>
@@ -13,6 +15,6 @@ using std::unique_ptr;
 
 int main()
 {
-	auto window = unique_ptr<WindowInterface>(new Texture2DDemo());
+	auto window = unique_ptr<WindowInterface>(new MultiLightDemo());
 	return window->Execute();
 }

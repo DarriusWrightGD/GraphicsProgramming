@@ -32,7 +32,7 @@ vec3 phongModel(vec4 position, vec3 normal)
 	vec3 diffuseColor = light.color * material.diffuse * max(lightDotNormal,0.0);
 	//vec3 reflectedVector = -lightDir + 2 * lightDotNormal * normal;
 	vec3 reflectedVector = reflect(-lightDir,normal);
-	vec3 viewer = normalize(-transform.eyePosition);
+	vec3 viewer = normalize(transform.eyePosition - position);
 	vec3 spec = vec3(0.0);
 
 	if(lightDotNormal > 0.0f)
@@ -53,6 +53,6 @@ uniform mat4 world;
 void main()
 {	
 	vec4 worldPosition = world * vec4(position,1.0f);
-	vs_out.color = phongModel(worldPosition, normal);
+	vs_out.color = phongModel(worldPosition.xyz, normal);
 	gl_Position = transform.projection * transform.view * worldPosition;
 }

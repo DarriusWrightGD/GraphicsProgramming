@@ -99,6 +99,15 @@
     <ClCompile Include="Demos\Texture2DDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Demos\ADSFragDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\CartoonShadingDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\MultiLightDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -200,6 +209,15 @@
     <ClInclude Include="Demos\Texture2DDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Demos\ADSFragDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\CartoonShadingDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\MultiLightDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="00-GlfwWindow.rc">
@@ -230,6 +248,10 @@
     <None Include="Assets\Shaders\Fragment\discard.frag" />
     <None Include="Assets\Shaders\Vertex\texture.vert" />
     <None Include="Assets\Shaders\Fragment\texture.frag" />
+    <None Include="Assets\Shaders\Vertex\adsFrag.vert" />
+    <None Include="Assets\Shaders\Fragment\adsFrag.frag" />
+    <None Include="Assets\Shaders\Vertex\multiLight.vert" />
+    <None Include="Assets\Shaders\Fragment\multiLight.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\Desktop\images.jpg">

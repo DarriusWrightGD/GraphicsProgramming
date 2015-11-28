@@ -151,6 +151,8 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Demos\CartoonShadingDemo.cpp" />
+    <ClCompile Include="Demos\ADSFragDemo.cpp" />
     <ClCompile Include="Demos\ADSDemo.cpp" />
     <ClCompile Include="Cameras\Camera.cpp" />
     <ClCompile Include="Components\Component.cpp" />
@@ -162,6 +164,7 @@
     <ClCompile Include="Components\DrawableComponent.cpp" />
     <ClCompile Include="GameObjects\GameObject.cpp" />
     <ClCompile Include="Logging\Logger.cpp" />
+    <ClCompile Include="Demos\MultiLightDemo.cpp" />
     <ClCompile Include="Rendering\GLRenderer.cpp" />
     <ClCompile Include="GL\gl_core_4_5.c" />
     <ClCompile Include="Demos\LoadingObjDemo.cpp" />
@@ -181,6 +184,8 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Demos\CartoonShadingDemo.h" />
+    <ClInclude Include="Demos\ADSFragDemo.h" />
     <ClInclude Include="Demos\ADSDemo.h" />
     <ClInclude Include="Cameras\Camera.h" />
     <ClInclude Include="Components\Component.h" />
@@ -194,6 +199,7 @@
     <ClInclude Include="Components\DrawableComponent.h" />
     <ClInclude Include="GameObjects\GameObject.h" />
     <ClInclude Include="Logging\Logger.h" />
+    <ClInclude Include="Demos\MultiLightDemo.h" />
     <ClInclude Include="Rendering\GLRenderer.h" />
     <ClInclude Include="GL\gl_core_4_5.h" />
     <ClInclude Include="Demos\LoadingObjDemo.h" />
@@ -220,10 +226,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Fragment\ads.frag" />
+    <None Include="Assets\Shaders\Fragment\adsFrag.frag" />
     <None Include="Assets\Shaders\Fragment\buffer.frag" />
     <None Include="Assets\Shaders\Fragment\diffuseLight.frag" />
     <None Include="Assets\Shaders\Fragment\discard.frag" />
     <None Include="Assets\Shaders\Fragment\fragCoord.frag" />
+    <None Include="Assets\Shaders\Fragment\multiLight.frag" />
     <None Include="Assets\Shaders\Fragment\pipeline.frag" />
     <None Include="Assets\Shaders\Fragment\shaderColor.frag" />
     <None Include="Assets\Shaders\Fragment\texture.frag" />
@@ -233,10 +241,12 @@
     <None Include="Assets\Shaders\Tessellation\pipeline.tc" />
     <None Include="Assets\Shaders\Tessellation\pipeline.te" />
     <None Include="Assets\Shaders\Vertex\ads.vert" />
+    <None Include="Assets\Shaders\Vertex\adsFrag.vert" />
     <None Include="Assets\Shaders\Vertex\buffer.vert" />
     <None Include="Assets\Shaders\Vertex\diffuseLight.vert" />
     <None Include="Assets\Shaders\Vertex\discard.vert" />
     <None Include="Assets\Shaders\Vertex\fragCoord.vert" />
+    <None Include="Assets\Shaders\Vertex\multiLight.vert" />
     <None Include="Assets\Shaders\Vertex\pipeline.vert" />
     <None Include="Assets\Shaders\Vertex\shaderColor.vert" />
     <None Include="Assets\Shaders\Vertex\texture.vert" />
