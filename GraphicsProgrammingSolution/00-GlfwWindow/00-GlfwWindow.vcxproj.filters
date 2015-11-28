@@ -228,5 +228,15 @@
     <None Include="Assets\Shaders\Fragment\ads.frag" />
     <None Include="Assets\Shaders\Vertex\discard.vert" />
     <None Include="Assets\Shaders\Fragment\discard.frag" />
+    <None Include="Assets\Shaders\Vertex\texture.vert" />
+    <None Include="Assets\Shaders\Fragment\texture.frag" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\Desktop\images.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Textures\brick.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -93,7 +93,7 @@ public:
 	void Initialize();
 	void UpdateUniform(GLint location, Uniform uniform);
 	void UpdateUniform(const char * name, Uniform uniform);
-	auto GetHandle()const noexcept;
+	GLuint GetHandle()const noexcept;
 private:
 	bool initailzed = false;
 	void DeleteShaders();

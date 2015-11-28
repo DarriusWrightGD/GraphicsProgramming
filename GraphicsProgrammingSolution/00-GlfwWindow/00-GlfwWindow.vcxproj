@@ -226,6 +226,7 @@
     <None Include="Assets\Shaders\Fragment\fragCoord.frag" />
     <None Include="Assets\Shaders\Fragment\pipeline.frag" />
     <None Include="Assets\Shaders\Fragment\shaderColor.frag" />
+    <None Include="Assets\Shaders\Fragment\texture.frag" />
     <None Include="Assets\Shaders\Fragment\triangleShader.frag" />
     <None Include="Assets\Shaders\Fragment\uniforms.frag" />
     <None Include="Assets\Shaders\Geometry\pipeline.geo" />
@@ -238,8 +239,13 @@
     <None Include="Assets\Shaders\Vertex\fragCoord.vert" />
     <None Include="Assets\Shaders\Vertex\pipeline.vert" />
     <None Include="Assets\Shaders\Vertex\shaderColor.vert" />
+    <None Include="Assets\Shaders\Vertex\texture.vert" />
     <None Include="Assets\Shaders\Vertex\triangleShader.vert" />
     <None Include="Assets\Shaders\Vertex\uniforms.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\Desktop\images.jpg" />
+    <Image Include="Assets\Textures\brick.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

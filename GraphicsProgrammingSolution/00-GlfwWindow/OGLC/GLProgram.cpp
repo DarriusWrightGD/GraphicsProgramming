@@ -18,16 +18,16 @@ GLProgram::~GLProgram()
 	Delete();
 }
 
-GLint GLProgram::GetUniformLocation(const char * name)
-{
-	return glGetUniformLocation(program, name);
-}
-
-auto GLProgram::GetHandle() const noexcept
+GLuint GLProgram::GetHandle() const noexcept
 {
 	return program;
 }
 
+
+GLint GLProgram::GetUniformLocation(const char * name)
+{
+	return glGetUniformLocation(program, name);
+}
 
 void GLProgram::AddShaderSource(ShaderType shaderType, const char * source)
 {
