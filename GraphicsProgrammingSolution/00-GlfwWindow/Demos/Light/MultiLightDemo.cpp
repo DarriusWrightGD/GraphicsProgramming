@@ -105,8 +105,8 @@ void MultiLightDemo::Initialize()
 		}));
 	}
 
-	mesh->GetMaterial().ambient = glm::vec3(0.6, 0.7, 0.1);
-	mesh->GetMaterial().diffuse = glm::vec3(0.5, 0.2, 0.8);
+	mesh->GetMaterial().ambient = glm::vec3(0.6f, 0.7f, 0.1f);
+	mesh->GetMaterial().diffuse = glm::vec3(0.5f, 0.2f, 0.8f);
 	mesh->GetMaterial().specular = glm::vec4(0.3f, 0.2f, 0.2f, 10.0f);
 }
 

@@ -33,28 +33,7 @@
     <ClCompile Include="OGLC\GLProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Demos\ShaderPipelineDemo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Demos\ShaderDemo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Demos\FragCoordDemo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Demos\ShaderColorDemo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Demos\BufferDemo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Demos\VertexBufferDemo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GL\gl_core_4_5.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Demos\LoadingObjDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Components\Component.cpp">
@@ -87,25 +66,52 @@
     <ClCompile Include="Cameras\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Demos\DiffuseDemo.cpp">
+    <ClCompile Include="Demos\Light\ADSDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Demos\ADSDemo.cpp">
+    <ClCompile Include="Demos\Light\ADSFragDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Demos\DiscardDemo.cpp">
+    <ClCompile Include="Demos\Light\CartoonShadingDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Demos\Texture2DDemo.cpp">
+    <ClCompile Include="Demos\Light\DiffuseDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Demos\ADSFragDemo.cpp">
+    <ClCompile Include="Demos\Intro\BufferDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Demos\CartoonShadingDemo.cpp">
+    <ClCompile Include="Demos\Intro\DiscardDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Demos\MultiLightDemo.cpp">
+    <ClCompile Include="Demos\Intro\FragCoordDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\Intro\LoadingObjDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\Light\MultiLightDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\Intro\ShaderColorDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\Intro\ShaderDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\Intro\ShaderPipelineDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\Intro\VertexBufferDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\Texture\Texture2DDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\Light\DirectionalLightDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\Light\ADSHalfwayVecDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -131,28 +137,7 @@
     <ClInclude Include="OGLC\GLProgram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Demos\ShaderPipelineDemo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Demos\ShaderDemo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Demos\FragCoordDemo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Demos\ShaderColorDemo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Demos\BufferDemo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Demos\VertexBufferDemo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GL\gl_core_4_5.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Demos\LoadingObjDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Components\Component.h">
@@ -191,31 +176,58 @@
     <ClInclude Include="Cameras\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Demos\DiffuseDemo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Data\Light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Data\Material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Demos\ADSDemo.h">
+    <ClInclude Include="Demos\Light\ADSDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Demos\DiscardDemo.h">
+    <ClInclude Include="Demos\Light\ADSFragDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Demos\Texture2DDemo.h">
+    <ClInclude Include="Demos\Light\CartoonShadingDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Demos\ADSFragDemo.h">
+    <ClInclude Include="Demos\Light\DiffuseDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Demos\CartoonShadingDemo.h">
+    <ClInclude Include="Demos\Intro\BufferDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Demos\MultiLightDemo.h">
+    <ClInclude Include="Demos\Intro\DiscardDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\Intro\FragCoordDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\Intro\LoadingObjDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\Light\MultiLightDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\Intro\ShaderDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\Intro\ShaderColorDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\Intro\ShaderPipelineDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\Intro\VertexBufferDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\Texture\Texture2DDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\Light\DirectionalLightDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\Light\ADSHalfwayVecDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -252,6 +264,10 @@
     <None Include="Assets\Shaders\Fragment\adsFrag.frag" />
     <None Include="Assets\Shaders\Vertex\multiLight.vert" />
     <None Include="Assets\Shaders\Fragment\multiLight.frag" />
+    <None Include="Assets\Shaders\Fragment\directionalLight.frag" />
+    <None Include="Assets\Shaders\Vertex\directionalLight.vert" />
+    <None Include="Assets\Shaders\Vertex\halfwayVector.vert" />
+    <None Include="Assets\Shaders\Fragment\halfwayVector.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\Desktop\images.jpg">
