@@ -178,6 +178,7 @@
     <ClCompile Include="Demos\Intro\ShaderColorDemo.cpp" />
     <ClCompile Include="Demos\Intro\VertexBufferDemo.cpp" />
     <ClCompile Include="Demos\Texture\Texture2DDemo.cpp" />
+    <ClCompile Include="Demos\Light\SpotLightDemo.cpp" />
     <ClCompile Include="Util\ServiceLocator.cpp" />
     <ClCompile Include="Components\TransformComponent.cpp" />
     <ClCompile Include="Window\GlfwWindow.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="Demos\Intro\ShaderColorDemo.h" />
     <ClInclude Include="Demos\Intro\VertexBufferDemo.h" />
     <ClInclude Include="Demos\Texture\Texture2DDemo.h" />
+    <ClInclude Include="Demos\Light\SpotLightDemo.h" />
     <ClInclude Include="Util\GLDebug.h" />
     <ClInclude Include="Util\ServiceLocator.h" />
     <ClInclude Include="Components\TransformComponent.h" />
@@ -240,6 +242,7 @@
     <None Include="Assets\Shaders\Fragment\multiLight.frag" />
     <None Include="Assets\Shaders\Fragment\pipeline.frag" />
     <None Include="Assets\Shaders\Fragment\shaderColor.frag" />
+    <None Include="Assets\Shaders\Fragment\spotlight.frag" />
     <None Include="Assets\Shaders\Fragment\texture.frag" />
     <None Include="Assets\Shaders\Fragment\triangleShader.frag" />
     <None Include="Assets\Shaders\Fragment\uniforms.frag" />
@@ -257,6 +260,7 @@
     <None Include="Assets\Shaders\Vertex\multiLight.vert" />
     <None Include="Assets\Shaders\Vertex\pipeline.vert" />
     <None Include="Assets\Shaders\Vertex\shaderColor.vert" />
+    <None Include="Assets\Shaders\Vertex\spotlight.vert" />
     <None Include="Assets\Shaders\Vertex\texture.vert" />
     <None Include="Assets\Shaders\Vertex\triangleShader.vert" />
     <None Include="Assets\Shaders\Vertex\uniforms.vert" />

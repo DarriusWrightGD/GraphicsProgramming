@@ -114,6 +114,9 @@
     <ClCompile Include="Demos\Light\ADSHalfwayVecDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Demos\Light\SpotLightDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -230,6 +233,9 @@
     <ClInclude Include="Demos\Light\ADSHalfwayVecDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Demos\Light\SpotLightDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="00-GlfwWindow.rc">
@@ -268,6 +274,8 @@
     <None Include="Assets\Shaders\Vertex\directionalLight.vert" />
     <None Include="Assets\Shaders\Vertex\halfwayVector.vert" />
     <None Include="Assets\Shaders\Fragment\halfwayVector.frag" />
+    <None Include="Assets\Shaders\Fragment\spotlight.frag" />
+    <None Include="Assets\Shaders\Vertex\spotlight.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\Desktop\images.jpg">
