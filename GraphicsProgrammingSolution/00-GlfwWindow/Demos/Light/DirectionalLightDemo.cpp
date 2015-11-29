@@ -69,6 +69,8 @@ void DirectionalLightDemo::Initialize()
 			program.UpdateUniform("material.specular", { UniformType::VEC4, &mesh->GetMaterial().specular[0] });
 		}));
 	}
+
+	importer.FreeScene();
 }
 
 void DirectionalLightDemo::Shutdown()

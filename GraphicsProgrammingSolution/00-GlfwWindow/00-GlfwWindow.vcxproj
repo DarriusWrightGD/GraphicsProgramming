@@ -234,6 +234,7 @@
     <None Include="Assets\Shaders\Fragment\ads.frag" />
     <None Include="Assets\Shaders\Fragment\adsFrag.frag" />
     <None Include="Assets\Shaders\Fragment\buffer.frag" />
+    <None Include="Assets\Shaders\Fragment\cartoonEffect.frag" />
     <None Include="Assets\Shaders\Fragment\diffuseLight.frag" />
     <None Include="Assets\Shaders\Fragment\directionalLight.frag" />
     <None Include="Assets\Shaders\Fragment\discard.frag" />
@@ -252,6 +253,7 @@
     <None Include="Assets\Shaders\Vertex\ads.vert" />
     <None Include="Assets\Shaders\Vertex\adsFrag.vert" />
     <None Include="Assets\Shaders\Vertex\buffer.vert" />
+    <None Include="Assets\Shaders\Vertex\cartoonEffect.vert" />
     <None Include="Assets\Shaders\Vertex\diffuseLight.vert" />
     <None Include="Assets\Shaders\Vertex\directionalLight.vert" />
     <None Include="Assets\Shaders\Vertex\discard.vert" />

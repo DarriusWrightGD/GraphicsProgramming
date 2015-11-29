@@ -276,6 +276,8 @@
     <None Include="Assets\Shaders\Fragment\halfwayVector.frag" />
     <None Include="Assets\Shaders\Fragment\spotlight.frag" />
     <None Include="Assets\Shaders\Vertex\spotlight.vert" />
+    <None Include="Assets\Shaders\Vertex\cartoonEffect.vert" />
+    <None Include="Assets\Shaders\Fragment\cartoonEffect.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\Desktop\images.jpg">

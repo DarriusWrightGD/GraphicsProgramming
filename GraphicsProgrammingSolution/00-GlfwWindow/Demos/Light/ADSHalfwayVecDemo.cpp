@@ -74,6 +74,8 @@ void ADSHalfwayVecDemo::Initialize()
 		mesh->GetMaterial().diffuse = glm::vec3(0.2f, 0.1f, 0.4f);
 		mesh->GetMaterial().specular = glm::vec4(0.7f, 0.2f, 0.8f, 10.0f);
 	}
+	importer.FreeScene();
+
 }
 
 void ADSHalfwayVecDemo::Shutdown()

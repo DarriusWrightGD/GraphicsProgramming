@@ -92,6 +92,8 @@ void ADSFragDemo::Initialize()
 		monkeyMesh->GetMaterial().diffuse = glm::vec3(0.8f, 0.2f, 0.2f);
 		monkeyMesh->GetMaterial().specular = glm::vec4(0.0f, 0.0f, 0.6f, 10.0f);
 	}
+	importer.FreeScene();
+
 }
 
 void ADSFragDemo::Shutdown()

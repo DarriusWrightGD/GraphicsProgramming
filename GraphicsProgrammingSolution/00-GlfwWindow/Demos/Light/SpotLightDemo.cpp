@@ -79,8 +79,7 @@ void SpotLightDemo::Initialize()
 		mesh->GetMaterial().diffuse = glm::vec3(0.8f, 0.1f, 0.1f);
 		mesh->GetMaterial().specular = glm::vec4(0.3f, 0.7f, 0.3f,10.0f);
 	}
-
-	
+	importer.FreeScene();
 }
 
 void SpotLightDemo::Shutdown()

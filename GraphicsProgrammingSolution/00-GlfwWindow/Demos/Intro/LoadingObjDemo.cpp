@@ -114,6 +114,7 @@ void LoadingObjDemo::InitializeObj(string filePath)
 		gameObject->GetTransform()->SetPosition(glm::vec3(0, 0, -10));
 		//program.AddUniform("model", , UniformType::MAT4);
 	}
+	importer.FreeScene();
 }
 
 void LoadingObjDemo::Shutdown()

@@ -90,6 +90,9 @@ void ADSDemo::Initialize()
 		monkeyMesh->GetMaterial().diffuse = glm::vec3(0.8f, 0.2f, 0.2f);
 		monkeyMesh->GetMaterial().specular = glm::vec4( 0.8f,0.1f,0.3f,1.0f );
 	}
+
+	importer.FreeScene();
+
 }
 
 void ADSDemo::Shutdown()

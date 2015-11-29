@@ -83,6 +83,7 @@ void DiffuseDemo::Initialize()
 		}));
 		monkeyObject->AddComponent(monkey.get());
 	}
+	importer.FreeScene();
 
 	auto boxScene = importer.ReadFile("Assets/Models/Obj/box.obj", aiProcess_Triangulate);
 	if (boxScene)
@@ -95,7 +96,11 @@ void DiffuseDemo::Initialize()
 		box->GetMaterial().diffuse = glm::vec3(0.2f, 0.7f, 0.5);
 		boxObject->AddComponent(box.get());
 	}
+
+	importer.FreeScene();
+
 }
+
 
 void DiffuseDemo::Shutdown()
 {
