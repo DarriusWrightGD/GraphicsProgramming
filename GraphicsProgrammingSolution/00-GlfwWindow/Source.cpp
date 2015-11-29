@@ -3,11 +3,12 @@
 #include<Demos\Light\ADSHalfwayVecDemo.h>
 #include <Demos\Light\SpotLightDemo.h>
 #include <Demos\Light\CartoonShadingDemo.h>
+#include <Demos\Misc\FogDemo.h>
 #include <memory>
 using std::unique_ptr;
 
 int main()
 {
-	auto window = unique_ptr<WindowInterface>(new CartoonShadingDemo());
+	auto window = unique_ptr<WindowInterface>(new FogDemo());
 	return window->Execute();
 }

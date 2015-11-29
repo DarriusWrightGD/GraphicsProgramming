@@ -160,6 +160,7 @@
     <ClCompile Include="Demos\Light\DiffuseDemo.cpp" />
     <ClCompile Include="Demos\Intro\DiscardDemo.cpp" />
     <ClCompile Include="Demos\Light\DirectionalLightDemo.cpp" />
+    <ClCompile Include="Demos\Misc\FogDemo.cpp" />
     <ClCompile Include="Logging\ConsoleLogger.cpp" />
     <ClCompile Include="Demos\Intro\BufferDemo.cpp" />
     <ClCompile Include="Demos\Intro\FragCoordDemo.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Demos\Light\DiffuseDemo.h" />
     <ClInclude Include="Demos\Intro\DiscardDemo.h" />
     <ClInclude Include="Demos\Light\DirectionalLightDemo.h" />
+    <ClInclude Include="Demos\Misc\FogDemo.h" />
     <ClInclude Include="Logging\ConsoleLogger.h" />
     <ClInclude Include="Demos\Intro\BufferDemo.h" />
     <ClInclude Include="Demos\Intro\FragCoordDemo.h" />
@@ -238,6 +240,7 @@
     <None Include="Assets\Shaders\Fragment\diffuseLight.frag" />
     <None Include="Assets\Shaders\Fragment\directionalLight.frag" />
     <None Include="Assets\Shaders\Fragment\discard.frag" />
+    <None Include="Assets\Shaders\Fragment\fog.frag" />
     <None Include="Assets\Shaders\Fragment\fragCoord.frag" />
     <None Include="Assets\Shaders\Fragment\halfwayVector.frag" />
     <None Include="Assets\Shaders\Fragment\multiLight.frag" />
@@ -257,6 +260,7 @@
     <None Include="Assets\Shaders\Vertex\diffuseLight.vert" />
     <None Include="Assets\Shaders\Vertex\directionalLight.vert" />
     <None Include="Assets\Shaders\Vertex\discard.vert" />
+    <None Include="Assets\Shaders\Vertex\fog.vert" />
     <None Include="Assets\Shaders\Vertex\fragCoord.vert" />
     <None Include="Assets\Shaders\Vertex\halfwayVector.vert" />
     <None Include="Assets\Shaders\Vertex\multiLight.vert" />

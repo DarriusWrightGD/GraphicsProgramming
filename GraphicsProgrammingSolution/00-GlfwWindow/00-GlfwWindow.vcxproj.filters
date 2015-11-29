@@ -117,6 +117,9 @@
     <ClCompile Include="Demos\Light\SpotLightDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Demos\Misc\FogDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -236,6 +239,9 @@
     <ClInclude Include="Demos\Light\SpotLightDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Demos\Misc\FogDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="00-GlfwWindow.rc">
@@ -278,6 +284,8 @@
     <None Include="Assets\Shaders\Vertex\spotlight.vert" />
     <None Include="Assets\Shaders\Vertex\cartoonEffect.vert" />
     <None Include="Assets\Shaders\Fragment\cartoonEffect.frag" />
+    <None Include="Assets\Shaders\Vertex\fog.vert" />
+    <None Include="Assets\Shaders\Fragment\fog.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\Desktop\images.jpg">
