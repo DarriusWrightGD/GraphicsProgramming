@@ -20,6 +20,7 @@ public:
 	void Update();
 	bool visible = true;
 private:
+	void FlipY(unsigned char * image, int width, int height, int channels);
 	GLuint vertexBuffer;
 	GLuint indexBuffer;
 	GLuint vertexArrayObject;

@@ -120,10 +120,10 @@
     <ClCompile Include="Demos\Misc\FogDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Renderable.cpp">
+    <ClCompile Include="Demos\Texture\MultiTextureDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Demos\Texture\MultiTextureDemo.cpp">
+    <ClCompile Include="Rendering\Renderable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -248,10 +248,10 @@
     <ClInclude Include="Demos\Misc\FogDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Renderable.h">
+    <ClInclude Include="Demos\Texture\MultiTextureDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Demos\Texture\MultiTextureDemo.h">
+    <ClInclude Include="Rendering\Renderable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -298,6 +298,8 @@
     <None Include="Assets\Shaders\Fragment\cartoonEffect.frag" />
     <None Include="Assets\Shaders\Vertex\fog.vert" />
     <None Include="Assets\Shaders\Fragment\fog.frag" />
+    <None Include="Assets\Shaders\Vertex\multiTexture.vert" />
+    <None Include="Assets\Shaders\Fragment\multiTexture.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\Desktop\images.jpg">
@@ -306,7 +308,28 @@
     <Image Include="Assets\Textures\brick.jpg">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Assets\Textures\moss.png">
+    <Image Include="..\..\..\..\..\Downloads\random\add-sugar.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\Downloads\random\amazing.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\Downloads\random\cupid.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\Downloads\random\super.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Textures\super.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Textures\cupid.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Textures\amazing.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Textures\add-sugar.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

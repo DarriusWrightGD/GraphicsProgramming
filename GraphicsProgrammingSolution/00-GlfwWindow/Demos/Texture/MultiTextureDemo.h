@@ -16,5 +16,10 @@ public:
 	virtual void OnResize(int width, int height) override;
 	virtual void Initialize() override;
 	virtual void Shutdown() override;
+
+private:
+	std::unique_ptr<GameObject> boxObject;
+	std::unique_ptr<MeshComponent> boxMesh;
+	GLProgram program;
 };
 
