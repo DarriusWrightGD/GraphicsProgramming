@@ -168,6 +168,8 @@
     <ClCompile Include="GameObjects\GameObject.cpp" />
     <ClCompile Include="Logging\Logger.cpp" />
     <ClCompile Include="Demos\Light\MultiLightDemo.cpp" />
+    <ClCompile Include="Demos\Texture\MultiTextureDemo.cpp" />
+    <ClCompile Include="Renderable.cpp" />
     <ClCompile Include="Rendering\GLRenderer.cpp" />
     <ClCompile Include="GL\gl_core_4_5.c" />
     <ClCompile Include="Demos\Intro\LoadingObjDemo.cpp" />
@@ -207,6 +209,8 @@
     <ClInclude Include="GameObjects\GameObject.h" />
     <ClInclude Include="Logging\Logger.h" />
     <ClInclude Include="Demos\Light\MultiLightDemo.h" />
+    <ClInclude Include="Demos\Texture\MultiTextureDemo.h" />
+    <ClInclude Include="Renderable.h" />
     <ClInclude Include="Rendering\GLRenderer.h" />
     <ClInclude Include="GL\gl_core_4_5.h" />
     <ClInclude Include="Demos\Intro\LoadingObjDemo.h" />
@@ -274,6 +278,7 @@
   <ItemGroup>
     <Image Include="..\..\..\..\..\Desktop\images.jpg" />
     <Image Include="Assets\Textures\brick.jpg" />
+    <Image Include="Assets\Textures\moss.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,11 +4,13 @@
 #include <Demos\Light\SpotLightDemo.h>
 #include <Demos\Light\CartoonShadingDemo.h>
 #include <Demos\Misc\FogDemo.h>
+#include <Demos\Texture\Texture2DDemo.h>
+#include <Demos\Texture\MultiTextureDemo.h>
 #include <memory>
 using std::unique_ptr;
 
 int main()
 {
-	auto window = unique_ptr<WindowInterface>(new FogDemo());
+	auto window = unique_ptr<WindowInterface>(new MultiTextureDemo());
 	return window->Execute();
 }

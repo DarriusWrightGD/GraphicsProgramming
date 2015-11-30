@@ -39,6 +39,11 @@ void MeshComponent::Draw()
 {
 }
 
+void MeshComponent::AddTexture(const char * file)
+{
+	renderable->AddTexture(file);
+}
+
 void MeshComponent::InitializeMesh(const aiMesh * mesh, GLProgram & program , std::function<void(GLProgram&)> instanceUpdate)
 {
 	auto renderer = Services.Get<GLRenderer>();

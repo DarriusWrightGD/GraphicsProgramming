@@ -25,7 +25,7 @@ void GLRenderer::Render()
 		if (renderable.visible)
 		{
 		
-			renderable.UpdateUniforms();
+			renderable.Update();
 			glBindVertexArray(renderable.GetVertexArrayObject());
 			glBindBuffer(GL_ARRAY_BUFFER, renderable.GetVertexBuffer());
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderable.GetIndexBuffer());

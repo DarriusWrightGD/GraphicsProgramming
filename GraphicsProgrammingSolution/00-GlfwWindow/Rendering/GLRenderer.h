@@ -1,62 +1,8 @@
 #pragma once
-#include <GL\gl_core_4_5.h>
-#include <OGLC\GLProgram.h>
-#include <functional>
 #include <vector>
-
+#include <Renderable.h>
 // 1000
 
-
-struct Renderable
-{
-public:
-	Renderable(GLProgram & program, GLuint vertexArrayObject, GLuint vertexBuffer, GLuint indexBuffer, GLuint numberOfIndices, std::function<void(GLProgram&)> instanceUpdate,
-		GLint drawMode = GL_TRIANGLES) :
-		program(program), vertexBuffer(vertexBuffer),
-		indexBuffer(indexBuffer), vertexArrayObject(vertexArrayObject), numberOfIndices(numberOfIndices), drawMode(drawMode),
-		instanceUpdate(instanceUpdate)
-	{
-
-	}
-	GLuint GetDrawMode() const noexcept
-	{
-		return drawMode;
-	}
-	GLuint GetVertexBuffer()const noexcept
-	{
-		return vertexBuffer;
-	}
-
-	GLuint GetIndexBuffer()const noexcept
-	{
-		return indexBuffer;
-	}
-
-	GLuint GetVertexArrayObject()const noexcept
-	{
-		return vertexArrayObject;
-	}
-
-	GLuint GetIndicesCount() const noexcept
-	{
-		return numberOfIndices;
-	}
-
-	void UpdateUniforms()
-	{
-		program.Update();
-		instanceUpdate(program);
-	}
-	bool visible = true;
-private:
-	GLuint vertexBuffer;
-	GLuint indexBuffer;
-	GLuint vertexArrayObject;
-	GLuint numberOfIndices;
-	GLint drawMode;
-	GLProgram & program;
-	std::function<void(GLProgram&)> instanceUpdate;
-};
 
 struct VertexLayout
 {

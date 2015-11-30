@@ -15,7 +15,7 @@ public:
 	Material & GetMaterial();
 	virtual void Update() override;
 	virtual void Draw() override;
-
+	void AddTexture(const char * file);
 private:
 	void InitializeMesh(const aiMesh * mesh, GLProgram & program, std::function<void(GLProgram&)>instanceUpdate);
 	Renderable * renderable;

@@ -57,23 +57,9 @@ void Texture2DDemo::Initialize()
 		boxMesh = unique_ptr<MeshComponent>(new MeshComponent(boxObject.get(), scene->mMeshes[0], program, [this](GLProgram & program) {
 			program.UpdateUniform("world", { UniformType::MAT4,&boxObject->GetWorld()[0][0] });
 		}));
+		boxMesh->AddTexture("Assets/Textures/brick.jpg");
 		boxObject->AddComponent(boxMesh.get());
 	}
-
-	auto width = 0, height = 0, channels = 0;
-	auto imageBytes = SOIL_load_image("Assets/Textures/brick.jpg", &width, &height, &channels, SOIL_LOAD_RGB);
-	program.Use();
-	glActiveTexture(GL_TEXTURE0);
-	glGenTextures(1, &textureId);
-	glBindTexture(GL_TEXTURE_2D, textureId);
-	glTexStorage2D(GL_TEXTURE_2D, 1, (channels == 3) ? GL_RGB8 : GL_RGBA8, width, height);
-	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, (channels == 3) ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, imageBytes);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-	delete[] imageBytes;
-
 }
 
 void Texture2DDemo::Shutdown()

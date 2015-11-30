@@ -120,6 +120,12 @@
     <ClCompile Include="Demos\Misc\FogDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Renderable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\Texture\MultiTextureDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -242,6 +248,12 @@
     <ClInclude Include="Demos\Misc\FogDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Renderable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\Texture\MultiTextureDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="00-GlfwWindow.rc">
@@ -292,6 +304,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Assets\Textures\brick.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Textures\moss.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
