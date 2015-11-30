@@ -1,5 +1,7 @@
 #version 450
 
+layout (early_fragment_tests) in
+
 struct Material
 {
 	vec3 ambient;

@@ -1,5 +1,5 @@
 #version 450 core
-
+layout(early_fragment_tests) in;
 out vec4 color;
 
 in VS_OUT

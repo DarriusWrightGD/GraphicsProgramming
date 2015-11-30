@@ -1,5 +1,7 @@
 #version 450
 
+layout (early_fragment_tests);
+
 layout (std140) uniform LightBlock
 {
 	vec3 color;
