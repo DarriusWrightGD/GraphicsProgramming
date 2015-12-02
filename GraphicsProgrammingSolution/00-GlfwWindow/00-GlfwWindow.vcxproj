@@ -151,7 +151,6 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Data\Material.cpp" />
     <ClCompile Include="Demos\Light\ADSHalfwayVecDemo.cpp" />
     <ClCompile Include="Demos\Light\CartoonShadingDemo.cpp" />
     <ClCompile Include="Demos\Light\ADSFragDemo.cpp" />
