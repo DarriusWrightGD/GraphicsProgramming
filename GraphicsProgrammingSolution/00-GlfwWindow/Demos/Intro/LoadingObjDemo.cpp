@@ -108,11 +108,11 @@ void LoadingObjDemo::InitializeObj(string filePath)
 	{
 		auto mesh = scene->mMeshes[0];
 		gameObject = std::unique_ptr<GameObject>(new GameObject());
-		meshComponent = std::unique_ptr<MeshComponent>(new MeshComponent(gameObject.get(), mesh, program, [this](GLProgram & progran) {
-			program.UpdateUniform(program.GetUniformLocation("model"), { UniformType::MAT4,&gameObject->GetWorld()[0][0] });
-		}));
+		meshComponent = std::unique_ptr<MeshComponent>(new MeshComponent(gameObject.get()));
+		meshComponent->Initialize(mesh, program, {
+			{ "model", UniformType::MAT4,&gameObject->GetWorld()[0][0] }
+		});
 		gameObject->GetTransform()->SetPosition(glm::vec3(0, 0, -10));
-		//program.AddUniform("model", , UniformType::MAT4);
 	}
 	importer.FreeScene();
 }

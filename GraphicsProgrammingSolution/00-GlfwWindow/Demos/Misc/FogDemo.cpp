@@ -24,6 +24,7 @@ void FogDemo::Render()
 
 void FogDemo::OnResize(int width, int height)
 {
+	glViewport(0, 0, width, height);
 	camera->SetAspectRatio(static_cast<float>(width) / static_cast<float>(height));
 	program.UpdateUniformBlock("TransformBlock");
 }
@@ -64,9 +65,11 @@ void FogDemo::Initialize()
 
 	if (scene && scene->HasMeshes())
 	{
-		mesh = std::unique_ptr<MeshComponent>(new MeshComponent(monkey.get(), scene->mMeshes[0], program, [this](GLProgram & program) {
-			program.UpdateUniform("world", { UniformType::MAT4, &monkey->GetWorld()[0][0] });
-		}));
+		mesh = std::unique_ptr<MeshComponent>(new MeshComponent(monkey.get()));
+		mesh->Initialize(scene->mMeshes[0], program, {
+			{ "world",  UniformType::MAT4, &monkey->GetWorld()[0][0] },
+		});
+		monkey->AddComponent(mesh.get());
 	}
 
 }

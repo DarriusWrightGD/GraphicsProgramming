@@ -15,10 +15,9 @@ therefore you should pull the data in only to forward it to a render layer with
 the appropriate placements
 */
 
-MeshComponent::MeshComponent(GameObject * gameObject, aiMesh * mesh,GLProgram & program , std::function<void(GLProgram&)> instanceUpdate) : DrawableComponent(gameObject),
-material({glm::vec3(0.4f),glm::vec3(0.4f),glm::vec4(0.4f)})
+MeshComponent::MeshComponent(GameObject * gameObject) : DrawableComponent(gameObject),
+material({glm::vec3(0.4f),glm::vec3(0.4f),glm::vec4(0.4f)}), initialized(false)
 {
-	InitializeMesh(mesh, program,instanceUpdate);
 }
 
 MeshComponent::~MeshComponent()
@@ -44,10 +43,10 @@ void MeshComponent::AddTexture(const char * file)
 	renderable->AddTexture(file);
 }
 
-void MeshComponent::InitializeMesh(const aiMesh * mesh, GLProgram & program , std::function<void(GLProgram&)> instanceUpdate)
+void MeshComponent::Initialize(const aiMesh * mesh, GLProgram & program , const std::vector<UniformUpdate> & instanceUniforms)
 {
 	auto renderer = Services.Get<GLRenderer>();
-	if (renderer != nullptr)
+	if (renderer != nullptr && !initialized)
 	{
 		std::vector<Vertex> vertices;
 		vertices.resize(mesh->mNumVertices);
@@ -80,10 +79,11 @@ void MeshComponent::InitializeMesh(const aiMesh * mesh, GLProgram & program , st
 			{ 3,offsetof(Vertex,position) },
 			{ 3,offsetof(Vertex,normal) },
 			{ 2,offsetof(Vertex,uv) },},
-			instanceUpdate
+			instanceUniforms
 		);
 
 		indices.clear();
 		vertices.clear();
+		initialized = true;
 	}
 }

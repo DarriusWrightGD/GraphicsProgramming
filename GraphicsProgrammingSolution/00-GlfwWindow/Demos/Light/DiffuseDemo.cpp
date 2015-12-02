@@ -76,11 +76,11 @@ void DiffuseDemo::Initialize()
 	auto monkeyScene = importer.ReadFile("Assets/Models/Obj/monkey.obj", aiProcess_Triangulate);
 	if (monkeyScene)
 	{
-		monkey = std::unique_ptr<MeshComponent>(new MeshComponent(monkeyObject.get(), monkeyScene->mMeshes[0], program, [this](GLProgram & program) {
-			program.UpdateUniform(program.GetUniformLocation("world"), {UniformType::MAT4,&monkeyObject->GetWorld()[0][0] });
-			program.UpdateUniform(program.GetUniformLocation("diffuse"), { UniformType::VEC3,&monkey->GetMaterial().diffuse[0] });
-
-		}));
+		monkey = std::unique_ptr<MeshComponent>(new MeshComponent(monkeyObject.get()));
+		monkey->Initialize(monkeyScene->mMeshes[0], program, {
+			{ "world",  UniformType::MAT4,&monkeyObject->GetWorld()[0][0] },
+			{ "diffuse", UniformType::VEC3,&monkey->GetMaterial().diffuse[0] }
+		});
 		monkeyObject->AddComponent(monkey.get());
 	}
 	importer.FreeScene();
@@ -88,11 +88,11 @@ void DiffuseDemo::Initialize()
 	auto boxScene = importer.ReadFile("Assets/Models/Obj/box.obj", aiProcess_Triangulate);
 	if (boxScene)
 	{
-		box = std::unique_ptr<MeshComponent>(new MeshComponent(boxObject.get(), boxScene->mMeshes[0], program, [this](GLProgram & program) {
-			program.UpdateUniform(program.GetUniformLocation("world"), { UniformType::MAT4,&boxObject->GetWorld()[0][0] });
-			program.UpdateUniform(program.GetUniformLocation("diffuse"), { UniformType::VEC3,&box->GetMaterial().diffuse[0] });
-
-		}));
+		box = std::unique_ptr<MeshComponent>(new MeshComponent(boxObject.get()));
+		box->Initialize(boxScene->mMeshes[0], program, {
+			{ "world",UniformType::MAT4,&boxObject->GetWorld()[0][0] },
+			{ "diffuse", UniformType::VEC3,&box->GetMaterial().diffuse[0] }
+		});
 		box->GetMaterial().diffuse = glm::vec3(0.2f, 0.7f, 0.5);
 		boxObject->AddComponent(box.get());
 	}

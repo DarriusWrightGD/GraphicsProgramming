@@ -35,7 +35,7 @@ void GLRenderer::Render()
 	}
 }
 
-Renderable & GLRenderer::AddRenderable(GLProgram & program, const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layouts, std::function <void(GLProgram&)> instanceUpdate)
+Renderable & GLRenderer::AddRenderable(GLProgram & program, const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layouts, const std::vector<UniformUpdate> & instanceUniforms)
 {
 	GLuint vertexBuffer;
 	GLuint indexBuffer;
@@ -60,7 +60,7 @@ Renderable & GLRenderer::AddRenderable(GLProgram & program, const VertexBufferLa
 		index++;
 	}
 
-	Renderable renderable(program, vertexArrayObject, vertexBuffer, indexBuffer, bufferLayout.GetIndexCount(),instanceUpdate);
+	Renderable renderable(program, vertexArrayObject, vertexBuffer, indexBuffer, bufferLayout.GetIndexCount(),instanceUniforms);
 	renderables.push_back(renderable);
 	return renderables[renderables.size() - 1];
 }

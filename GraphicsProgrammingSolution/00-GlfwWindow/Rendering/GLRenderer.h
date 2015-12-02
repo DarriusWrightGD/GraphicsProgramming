@@ -72,7 +72,7 @@ public:
 	GLRenderer() noexcept;
 	~GLRenderer() noexcept;
 	void Render();
-	Renderable & AddRenderable(GLProgram & program,const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layout, std::function<void(GLProgram&)> instanceUpdate);
+	Renderable & AddRenderable(GLProgram & program,const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layout, const std::vector<UniformUpdate> & instanceUniforms);
 private:
 	std::vector<Renderable> renderables;
 };

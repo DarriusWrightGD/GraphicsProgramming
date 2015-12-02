@@ -1,13 +1,13 @@
 #include "Renderable.h"
 #include <SOIL.h>
 
-Renderable::Renderable(GLProgram & program, GLuint vertexArrayObject, GLuint vertexBuffer, GLuint indexBuffer, GLuint numberOfIndices, std::function<void(GLProgram&)> instanceUpdate,
+Renderable::Renderable(GLProgram & program, GLuint vertexArrayObject, GLuint vertexBuffer, GLuint indexBuffer, GLuint numberOfIndices, std::vector<UniformUpdate> uniforms,
 	GLint drawMode ) :
 	program(program), vertexBuffer(vertexBuffer),
-	indexBuffer(indexBuffer), vertexArrayObject(vertexArrayObject), numberOfIndices(numberOfIndices), drawMode(drawMode),
-	instanceUpdate(instanceUpdate)
+	indexBuffer(indexBuffer), vertexArrayObject(vertexArrayObject), numberOfIndices(numberOfIndices), drawMode(drawMode)
 {
-
+	instanceUniforms.resize(uniforms.size());
+	std::move(uniforms.begin(), uniforms.end(), instanceUniforms.begin());
 }
 GLuint Renderable::GetDrawMode() const noexcept
 {
@@ -41,7 +41,10 @@ void Renderable::Update()
 		glBindTexture(GL_TEXTURE_2D, textures[i]);
 	}
 	program.Update();
-	instanceUpdate(program);
+	for (auto uniform : instanceUniforms)
+	{
+		program.UpdateUniform(uniform.name, { uniform.type, uniform.value });
+	}
 }
 
 void Renderable::FlipY(unsigned char * image, int width, int height, int channels)

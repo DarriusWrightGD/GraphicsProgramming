@@ -4,10 +4,17 @@
 #include <vector>
 #include <functional>
 
+struct UniformUpdate
+{
+	const char * name;
+	UniformType type;
+	float * value;
+};
+
 struct Renderable
 {
 public:
-	Renderable(GLProgram & program, GLuint vertexArrayObject, GLuint vertexBuffer, GLuint indexBuffer, GLuint numberOfIndices, std::function<void(GLProgram&)> instanceUpdate,
+	Renderable(GLProgram & program, GLuint vertexArrayObject, GLuint vertexBuffer, GLuint indexBuffer, GLuint numberOfIndices, std::vector<UniformUpdate> uniforms = {},
 		GLint drawMode = GL_TRIANGLES);
 
 	GLuint GetDrawMode() const noexcept;
@@ -27,7 +34,7 @@ private:
 	GLuint numberOfIndices;
 	GLint drawMode;
 	std::vector<GLuint> textures;
+	std::vector<UniformUpdate> instanceUniforms;
 	GLProgram & program;
-	std::function<void(GLProgram&)> instanceUpdate;
 };
 

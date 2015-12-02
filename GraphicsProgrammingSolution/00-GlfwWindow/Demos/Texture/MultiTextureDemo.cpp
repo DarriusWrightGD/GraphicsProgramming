@@ -55,10 +55,10 @@ void MultiTextureDemo::Initialize()
 
 	if (scene && scene->HasMeshes())
 	{
-		boxMesh = unique_ptr<MeshComponent>(new MeshComponent(boxObject.get(), scene->mMeshes[0], program, [this](GLProgram & program) {
-			program.UpdateUniform("world", { UniformType::MAT4,&boxObject->GetWorld()[0][0] });
-		}));
-
+		boxMesh = unique_ptr<MeshComponent>(new MeshComponent(boxObject.get()));
+		boxMesh->Initialize(scene->mMeshes[0], program, {
+			{ "world",  UniformType::MAT4,&boxObject->GetWorld()[0][0] }
+		});
 		boxObject->AddComponent(boxMesh.get());
 		boxMesh->AddTexture("Assets/Textures/amazing.png");
 		boxMesh->AddTexture("Assets/Textures/brick.jpg");

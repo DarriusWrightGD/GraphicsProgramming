@@ -10,15 +10,16 @@ class GameObject;
 class MeshComponent : public DrawableComponent
 {
 public:
-	MeshComponent(GameObject * gameObject, aiMesh * mesh,GLProgram & program,std::function<void(GLProgram&)>instanceUpdate);
+	MeshComponent(GameObject * gameObject);
 	~MeshComponent();
+	void Initialize(const aiMesh * mesh, GLProgram & program, const std::vector<UniformUpdate> & instanceUniforms);
 	Material & GetMaterial();
 	virtual void Update() override;
 	virtual void Draw() override;
 	void AddTexture(const char * file);
 private:
-	void InitializeMesh(const aiMesh * mesh, GLProgram & program, std::function<void(GLProgram&)>instanceUpdate);
 	Renderable * renderable;
 	Material material;
+	bool initialized = false;
 };
 

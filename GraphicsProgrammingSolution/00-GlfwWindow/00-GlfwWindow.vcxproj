@@ -151,6 +151,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Data\Material.cpp" />
     <ClCompile Include="Demos\Light\ADSHalfwayVecDemo.cpp" />
     <ClCompile Include="Demos\Light\CartoonShadingDemo.cpp" />
     <ClCompile Include="Demos\Light\ADSFragDemo.cpp" />
@@ -278,11 +279,6 @@
     <None Include="Assets\Shaders\Vertex\uniforms.vert" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\..\Desktop\images.jpg" />
-    <Image Include="..\..\..\..\..\Downloads\random\add-sugar.png" />
-    <Image Include="..\..\..\..\..\Downloads\random\amazing.png" />
-    <Image Include="..\..\..\..\..\Downloads\random\cupid.png" />
-    <Image Include="..\..\..\..\..\Downloads\random\super.png" />
     <Image Include="Assets\Textures\add-sugar.png" />
     <Image Include="Assets\Textures\amazing.png" />
     <Image Include="Assets\Textures\brick.jpg" />

@@ -62,12 +62,15 @@ void DirectionalLightDemo::Initialize()
 	auto scene = importer.ReadFile("Assets/Models/Obj/monkey.obj", aiProcess_Triangulate);
 	if (scene && scene->HasMeshes())
 	{
-		mesh = unique_ptr<MeshComponent>(new MeshComponent(monkey.get(), scene->mMeshes[0], program, [this](GLProgram & program) {
-			program.UpdateUniform("world", { UniformType::MAT4,&monkey->GetWorld()[0][0] });
-			program.UpdateUniform("material.ambient", { UniformType::VEC3, &mesh->GetMaterial().ambient[0] });
-			program.UpdateUniform("material.diffuse", { UniformType::VEC3, &mesh->GetMaterial().diffuse[0] });
-			program.UpdateUniform("material.specular", { UniformType::VEC4, &mesh->GetMaterial().specular[0] });
-		}));
+		mesh = unique_ptr<MeshComponent>(new MeshComponent(monkey.get()));
+		mesh->Initialize(scene->mMeshes[0], program, {
+			{ "world", UniformType::MAT4,&monkey->GetWorld()[0][0] },
+			{ "material.ambient", UniformType::VEC3, &mesh->GetMaterial().ambient[0] },
+			{ "material.diffuse", UniformType::VEC3, &mesh->GetMaterial().diffuse[0] },
+			{ "material.specular", UniformType::VEC4, &mesh->GetMaterial().specular[0] },
+		});
+		monkey->AddComponent(mesh.get());
+		mesh->GetMaterial().diffuse = glm::vec3(0.9f, 0.1f, 0.5f);
 	}
 
 	importer.FreeScene();

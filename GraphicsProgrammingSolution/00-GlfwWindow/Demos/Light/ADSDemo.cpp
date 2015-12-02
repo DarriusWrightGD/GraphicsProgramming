@@ -28,7 +28,7 @@ void ADSDemo::OnResize(int width, int height)
 	camera->SetAspectRatio(static_cast<float>(width)/static_cast<float>(height));
 	program.UpdateUniformBlock("TransformBlock");
 }
-
+#include <vector>
 void ADSDemo::Initialize()
 {
 	glEnable(GL_DEPTH_TEST);
@@ -79,13 +79,14 @@ void ADSDemo::Initialize()
 	monkeyObject->Update();
 	if (scene && scene->HasMeshes())
 	{
-		monkeyMesh = std::unique_ptr<MeshComponent>(new MeshComponent(monkeyObject.get(), scene->mMeshes[0], program, [this](GLProgram &) {
-			program.UpdateUniform("world", { UniformType::MAT4, &monkeyObject->GetTransform()->GetWorld()[0][0] });
-			program.UpdateUniform("material.diffuse", { UniformType::VEC3, &monkeyMesh->GetMaterial().diffuse[0] });
-			program.UpdateUniform("material.ambient", { UniformType::VEC3, &monkeyMesh->GetMaterial().ambient[0] });
-			program.UpdateUniform("material.specular", { UniformType::VEC4, &monkeyMesh->GetMaterial().specular[0] });
-		}));
-		
+
+		monkeyMesh = std::unique_ptr<MeshComponent>(new MeshComponent(monkeyObject.get()));
+		monkeyMesh->Initialize(scene->mMeshes[0], program, {
+			{ "world", UniformType::MAT4, &monkeyObject->GetTransform()->GetWorld()[0][0] },
+			{ "material.diffuse", UniformType::VEC3, &monkeyMesh->GetMaterial().diffuse[0] },
+			{ "material.ambient", UniformType::VEC3, &monkeyMesh->GetMaterial().ambient[0] },
+			{ "material.specular", UniformType::VEC4, &monkeyMesh->GetMaterial().specular[0] }
+		});
 		monkeyMesh->GetMaterial().ambient = glm::vec3(0.1f, 0.1f, 0.1f);
 		monkeyMesh->GetMaterial().diffuse = glm::vec3(0.8f, 0.2f, 0.2f);
 		monkeyMesh->GetMaterial().specular = glm::vec4( 0.8f,0.1f,0.3f,1.0f );

@@ -63,16 +63,19 @@ void ADSHalfwayVecDemo::Initialize()
 	
 	if (scene && scene->HasMeshes())
 	{
-		mesh = unique_ptr<MeshComponent>(new MeshComponent(sphere.get(), scene->mMeshes[0], program, [this](GLProgram & program) {
-			program.UpdateUniform("world", { UniformType::MAT4, &sphere->GetWorld()[0][0] });
-			program.UpdateUniform("material.ambient", { UniformType::VEC3, &mesh->GetMaterial().ambient[0] }),
-			program.UpdateUniform("material.diffuse", { UniformType::VEC3, &mesh->GetMaterial().diffuse[0] });
-			program.UpdateUniform("material.specular", { UniformType::VEC4, &mesh->GetMaterial().specular[0] });
-		}));
+
+
+		mesh = unique_ptr<MeshComponent>(new MeshComponent(sphere.get()));
+		mesh->Initialize(scene->mMeshes[0], program, {
+			{ "world", UniformType::MAT4, &sphere->GetWorld()[0][0] },
+			{ "material.ambient", UniformType::VEC3, &mesh->GetMaterial().ambient[0] },
+			{ "material.diffuse", UniformType::VEC3, &mesh->GetMaterial().diffuse[0] },
+			{ "material.specular", UniformType::VEC4, &mesh->GetMaterial().specular[0] },
+		});
 		sphere->AddComponent(mesh.get());
-		mesh->GetMaterial().ambient = glm::vec3(0.1f, 0.6f, 0.2f);
+		/*mesh->GetMaterial().ambient = glm::vec3(0.1f, 0.6f, 0.2f);
 		mesh->GetMaterial().diffuse = glm::vec3(0.2f, 0.1f, 0.4f);
-		mesh->GetMaterial().specular = glm::vec4(0.7f, 0.2f, 0.8f, 10.0f);
+		mesh->GetMaterial().specular = glm::vec4(0.7f, 0.2f, 0.8f, 10.0f);*/
 	}
 	importer.FreeScene();
 
