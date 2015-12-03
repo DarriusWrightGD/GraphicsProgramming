@@ -6,11 +6,12 @@
 #include <Demos\Misc\FogDemo.h>
 #include <Demos\Texture\Texture2DDemo.h>
 #include <Demos\Texture\MultiTextureDemo.h>
+#include <Demos\Texture\AlphaMapDemo.h>
 #include <memory>
 using std::unique_ptr;
 
 int main()
 {
-	auto window = unique_ptr<WindowInterface>(new DirectionalLightDemo());
+	auto window = unique_ptr<WindowInterface>(new AlphaMapDemo());
 	return window->Execute();
 }

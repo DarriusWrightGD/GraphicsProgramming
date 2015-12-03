@@ -49,7 +49,7 @@ void Renderable::Update()
 
 void Renderable::FlipY(unsigned char * image, int width, int height, int channels)
 {
-	for (size_t h = 0; h * 2 < height; h++)
+	for (size_t h = 0u; h * 2 < height; h++)
 	{
 		auto pixel1 = h * width * channels;
 		auto pixel2 = (height - 1 - h) * width * channels;

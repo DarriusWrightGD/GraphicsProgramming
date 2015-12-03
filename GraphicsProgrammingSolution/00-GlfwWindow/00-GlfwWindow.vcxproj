@@ -151,6 +151,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Demos\Texture\AlphaMapDemo.cpp" />
     <ClCompile Include="Demos\Light\ADSHalfwayVecDemo.cpp" />
     <ClCompile Include="Demos\Light\CartoonShadingDemo.cpp" />
     <ClCompile Include="Demos\Light\ADSFragDemo.cpp" />
@@ -169,6 +170,7 @@
     <ClCompile Include="Logging\Logger.cpp" />
     <ClCompile Include="Demos\Light\MultiLightDemo.cpp" />
     <ClCompile Include="Demos\Texture\MultiTextureDemo.cpp" />
+    <ClCompile Include="Demos\Texture\NormalMapDemo.cpp" />
     <ClCompile Include="Rendering\Renderable.cpp" />
     <ClCompile Include="Rendering\GLRenderer.cpp" />
     <ClCompile Include="GL\gl_core_4_5.c" />
@@ -190,6 +192,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Demos\Texture\AlphaMapDemo.h" />
     <ClInclude Include="Demos\Light\ADSHalfwayVecDemo.h" />
     <ClInclude Include="Demos\Light\CartoonShadingDemo.h" />
     <ClInclude Include="Demos\Light\ADSFragDemo.h" />
@@ -210,6 +213,7 @@
     <ClInclude Include="Logging\Logger.h" />
     <ClInclude Include="Demos\Light\MultiLightDemo.h" />
     <ClInclude Include="Demos\Texture\MultiTextureDemo.h" />
+    <ClInclude Include="Demos\Texture\NormalMapDemo.h" />
     <ClInclude Include="Rendering\Renderable.h" />
     <ClInclude Include="Rendering\GLRenderer.h" />
     <ClInclude Include="GL\gl_core_4_5.h" />
@@ -239,6 +243,7 @@
   <ItemGroup>
     <None Include="Assets\Shaders\Fragment\ads.frag" />
     <None Include="Assets\Shaders\Fragment\adsFrag.frag" />
+    <None Include="Assets\Shaders\Fragment\alphamap.frag" />
     <None Include="Assets\Shaders\Fragment\buffer.frag" />
     <None Include="Assets\Shaders\Fragment\cartoonEffect.frag" />
     <None Include="Assets\Shaders\Fragment\diffuseLight.frag" />
@@ -260,6 +265,7 @@
     <None Include="Assets\Shaders\Tessellation\pipeline.te" />
     <None Include="Assets\Shaders\Vertex\ads.vert" />
     <None Include="Assets\Shaders\Vertex\adsFrag.vert" />
+    <None Include="Assets\Shaders\Vertex\alphamap.vert" />
     <None Include="Assets\Shaders\Vertex\buffer.vert" />
     <None Include="Assets\Shaders\Vertex\cartoonEffect.vert" />
     <None Include="Assets\Shaders\Vertex\diffuseLight.vert" />

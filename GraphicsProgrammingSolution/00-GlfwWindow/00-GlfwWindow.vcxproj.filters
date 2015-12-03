@@ -126,6 +126,12 @@
     <ClCompile Include="Rendering\Renderable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Demos\Texture\AlphaMapDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\Texture\NormalMapDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -254,6 +260,12 @@
     <ClInclude Include="Rendering\Renderable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Demos\Texture\AlphaMapDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\Texture\NormalMapDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="00-GlfwWindow.rc">
@@ -300,6 +312,8 @@
     <None Include="Assets\Shaders\Fragment\fog.frag" />
     <None Include="Assets\Shaders\Vertex\multiTexture.vert" />
     <None Include="Assets\Shaders\Fragment\multiTexture.frag" />
+    <None Include="Assets\Shaders\Fragment\alphamap.frag" />
+    <None Include="Assets\Shaders\Vertex\alphamap.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\brick.jpg">

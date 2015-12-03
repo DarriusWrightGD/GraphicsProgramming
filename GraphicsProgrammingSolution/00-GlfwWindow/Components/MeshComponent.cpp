@@ -55,11 +55,15 @@ void MeshComponent::Initialize(const aiMesh * mesh, GLProgram & program , const 
 			auto position = mesh->mVertices[i];
 			auto normal = mesh->HasNormals() ? mesh->mNormals[i] : aiVector3D(0, 0, 0);
 			auto uv = mesh->HasTextureCoords(0) ? mesh->mTextureCoords[0][i] : aiVector3D(0, 0, 0);
+			auto tangent = mesh->HasTangentsAndBitangents() ? mesh->mTangents[i] : aiVector3D(0, 0, 0);
+			auto biTangent = mesh->HasTangentsAndBitangents() ? mesh->mBitangents[i] : aiVector3D(0, 0, 0);
 			auto vertex = Vertex();
 
 			vertex.position = vec3(position.x, position.y, position.z);
 			vertex.uv = vec2(uv.x, uv.y);
 			vertex.normal = vec3(normal.x, normal.y, normal.z);
+			vertex.tangent = vec3(tangent.x, tangent.y, tangent.z);
+			vertex.biTangent = vec3(biTangent.x,biTangent.y,biTangent.z);
 
 			vertices[i] = vertex;
 		}
@@ -78,7 +82,10 @@ void MeshComponent::Initialize(const aiMesh * mesh, GLProgram & program , const 
 		renderable = &renderer->AddRenderable(program,VertexBufferLayout(&vertices[0], vertices.size(), &indices[0], indices.size() , sizeof(Vertex)),{ 
 			{ 3,offsetof(Vertex,position) },
 			{ 3,offsetof(Vertex,normal) },
-			{ 2,offsetof(Vertex,uv) },},
+			{ 2,offsetof(Vertex,uv) },
+			{ 3,offsetof(Vertex,tangent) },
+			{ 3,offsetof(Vertex,biTangent) },
+			},
 			instanceUniforms
 		);
 
