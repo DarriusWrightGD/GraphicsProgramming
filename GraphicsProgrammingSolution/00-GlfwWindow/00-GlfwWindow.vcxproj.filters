@@ -132,6 +132,9 @@
     <ClCompile Include="Demos\Texture\NormalMapDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Demos\Texture\CubemapDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -266,6 +269,9 @@
     <ClInclude Include="Demos\Texture\NormalMapDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Demos\Texture\CubemapDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="00-GlfwWindow.rc">
@@ -316,6 +322,8 @@
     <None Include="Assets\Shaders\Vertex\alphamap.vert" />
     <None Include="Assets\Shaders\Vertex\normal-map.vert" />
     <None Include="Assets\Shaders\Fragment\normal-map.frag" />
+    <None Include="Assets\Shaders\Fragment\cubemap.frag" />
+    <None Include="Assets\Shaders\Vertex\cubemap.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\brick.jpg">
@@ -340,6 +348,24 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Assets\Textures\ogre_normal.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Textures\Cubemaps\Storforsen\negx.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Textures\Cubemaps\Storforsen\negy.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Textures\Cubemaps\Storforsen\negz.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Textures\Cubemaps\Storforsen\posx.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Textures\Cubemaps\Storforsen\posy.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Textures\Cubemaps\Storforsen\posz.jpg">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

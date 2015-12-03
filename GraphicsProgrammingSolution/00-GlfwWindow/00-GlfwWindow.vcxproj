@@ -151,6 +151,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Demos\Texture\CubemapDemo.cpp" />
     <ClCompile Include="Demos\Texture\AlphaMapDemo.cpp" />
     <ClCompile Include="Demos\Light\ADSHalfwayVecDemo.cpp" />
     <ClCompile Include="Demos\Light\CartoonShadingDemo.cpp" />
@@ -192,6 +193,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Demos\Texture\CubemapDemo.h" />
     <ClInclude Include="Demos\Texture\AlphaMapDemo.h" />
     <ClInclude Include="Demos\Light\ADSHalfwayVecDemo.h" />
     <ClInclude Include="Demos\Light\CartoonShadingDemo.h" />
@@ -246,6 +248,7 @@
     <None Include="Assets\Shaders\Fragment\alphamap.frag" />
     <None Include="Assets\Shaders\Fragment\buffer.frag" />
     <None Include="Assets\Shaders\Fragment\cartoonEffect.frag" />
+    <None Include="Assets\Shaders\Fragment\cubemap.frag" />
     <None Include="Assets\Shaders\Fragment\diffuseLight.frag" />
     <None Include="Assets\Shaders\Fragment\directionalLight.frag" />
     <None Include="Assets\Shaders\Fragment\discard.frag" />
@@ -255,6 +258,7 @@
     <None Include="Assets\Shaders\Fragment\multiLight.frag" />
     <None Include="Assets\Shaders\Fragment\multiTexture.frag" />
     <None Include="Assets\Shaders\Fragment\normal-map.frag" />
+    <None Include="Assets\Shaders\Vertex\cubemap.vert" />
     <None Include="Assets\Shaders\Vertex\normal-map.vert" />
     <None Include="Assets\Shaders\Fragment\pipeline.frag" />
     <None Include="Assets\Shaders\Fragment\shaderColor.frag" />
@@ -289,6 +293,12 @@
     <Image Include="Assets\Textures\add-sugar.png" />
     <Image Include="Assets\Textures\amazing.png" />
     <Image Include="Assets\Textures\brick.jpg" />
+    <Image Include="Assets\Textures\Cubemaps\Storforsen\negx.jpg" />
+    <Image Include="Assets\Textures\Cubemaps\Storforsen\negy.jpg" />
+    <Image Include="Assets\Textures\Cubemaps\Storforsen\negz.jpg" />
+    <Image Include="Assets\Textures\Cubemaps\Storforsen\posx.jpg" />
+    <Image Include="Assets\Textures\Cubemaps\Storforsen\posy.jpg" />
+    <Image Include="Assets\Textures\Cubemaps\Storforsen\posz.jpg" />
     <Image Include="Assets\Textures\cupid.png" />
     <Image Include="Assets\Textures\ogre_diffuse.png" />
     <Image Include="Assets\Textures\ogre_normal.png" />
