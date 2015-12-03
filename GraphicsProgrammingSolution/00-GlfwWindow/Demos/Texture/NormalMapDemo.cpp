@@ -41,7 +41,7 @@ void NormalMapDemo::Initialize()
 	program.Build();
 
 	light.position = glm::vec3(0.0f, 0.0f, 1.0f);
-	light.color = glm::vec3(0.2f,0.2f,0.5f);
+	light.color = glm::vec3(0.8f,0.8f,0.8f);
 
 	program.AddUniformBlock({ "TransformBlock",{
 		{ "TransformBlock.view",&camera->GetView()[0][0], sizeof(camera->GetView()) },
@@ -85,8 +85,13 @@ void NormalMapDemo::Initialize()
 	{
 		mesh = std::unique_ptr<MeshComponent>(new MeshComponent(ogre.get()));
 		mesh->Initialize(scene->mMeshes[0], program, {
-			{"world",UniformType::MAT4, &ogre->GetWorld()[0][0]}
+			{"world",UniformType::MAT4, &ogre->GetWorld()[0][0]},
+			{ "material.ambient", UniformType::VEC3, &mesh->GetMaterial().ambient[0] },
+			{"material.specular", UniformType::VEC4, &mesh->GetMaterial().specular[0]},
 		});
+		mesh->GetMaterial().ambient = glm::vec3(0.5f, 0.5f, 0.5f);
+		mesh->GetMaterial().specular = glm::vec4(.4f, .2f, .7f,4.0f);
+
 		mesh->AddTexture("Assets/Textures/ogre_diffuse.png");
 		mesh->AddTexture("Assets/Textures/ogre_normal.png");
 

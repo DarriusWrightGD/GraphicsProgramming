@@ -73,11 +73,35 @@ void Renderable::AddTexture(const char * filePath)
 	{
 		FlipY(imageBytes,width, height, channels);
 		GLuint textureId;
+
+		int colorComponents;
+		int colorChannels;
+
+		switch (channels)
+		{
+		case 1:
+			colorComponents = GL_R8;
+			colorChannels = GL_RED;
+			break;
+		case 2:
+			colorComponents = GL_RG8;
+			colorChannels = GL_RG;
+			break;
+		case 3:
+			colorComponents = GL_RGB8;
+			colorChannels = GL_RGB;
+			break;
+		case 4:
+			colorComponents = GL_RGBA8;
+			colorChannels = GL_RGBA;
+			break;
+		}
+
 		glActiveTexture(GL_TEXTURE0 + textures.size());
 		glGenTextures(1, &textureId);
 		glBindTexture(GL_TEXTURE_2D, textureId);
-		glTexStorage2D(GL_TEXTURE_2D, 1, (channels == 3) ? GL_RGB8 : GL_RGBA8, width, height);
-		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, (channels == 3) ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, imageBytes);
+		glTexStorage2D(GL_TEXTURE_2D, 1, colorComponents, width, height);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height,colorChannels, GL_UNSIGNED_BYTE, imageBytes);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -85,6 +109,5 @@ void Renderable::AddTexture(const char * filePath)
 		delete[] imageBytes;
 
 		textures.push_back(textureId);
-	}
-	
+	}	
 }
