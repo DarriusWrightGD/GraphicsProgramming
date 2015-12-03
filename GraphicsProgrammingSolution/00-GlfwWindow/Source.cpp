@@ -7,11 +7,12 @@
 #include <Demos\Texture\Texture2DDemo.h>
 #include <Demos\Texture\MultiTextureDemo.h>
 #include <Demos\Texture\AlphaMapDemo.h>
+#include <Demos\Texture\NormalMapDemo.h>
 #include <memory>
 using std::unique_ptr;
 
 int main()
 {
-	auto window = unique_ptr<WindowInterface>(new AlphaMapDemo());
+	auto window = unique_ptr<WindowInterface>(new NormalMapDemo());
 	return window->Execute();
 }

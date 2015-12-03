@@ -254,6 +254,8 @@
     <None Include="Assets\Shaders\Fragment\halfwayVector.frag" />
     <None Include="Assets\Shaders\Fragment\multiLight.frag" />
     <None Include="Assets\Shaders\Fragment\multiTexture.frag" />
+    <None Include="Assets\Shaders\Fragment\normal-map.frag" />
+    <None Include="Assets\Shaders\Vertex\normal-map.vert" />
     <None Include="Assets\Shaders\Fragment\pipeline.frag" />
     <None Include="Assets\Shaders\Fragment\shaderColor.frag" />
     <None Include="Assets\Shaders\Fragment\spotlight.frag" />
@@ -288,6 +290,9 @@
     <Image Include="Assets\Textures\amazing.png" />
     <Image Include="Assets\Textures\brick.jpg" />
     <Image Include="Assets\Textures\cupid.png" />
+    <Image Include="Assets\Textures\ogre_diffuse.png" />
+    <Image Include="Assets\Textures\ogre_normal.png" />
+    <Image Include="Assets\Textures\ogre_occulsion.png" />
     <Image Include="Assets\Textures\super.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

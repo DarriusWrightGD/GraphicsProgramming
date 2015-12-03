@@ -314,6 +314,8 @@
     <None Include="Assets\Shaders\Fragment\multiTexture.frag" />
     <None Include="Assets\Shaders\Fragment\alphamap.frag" />
     <None Include="Assets\Shaders\Vertex\alphamap.vert" />
+    <None Include="Assets\Shaders\Vertex\normal-map.vert" />
+    <None Include="Assets\Shaders\Fragment\normal-map.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\brick.jpg">
@@ -329,6 +331,15 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Assets\Textures\add-sugar.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Textures\ogre_diffuse.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Textures\ogre_occulsion.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Textures\ogre_normal.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

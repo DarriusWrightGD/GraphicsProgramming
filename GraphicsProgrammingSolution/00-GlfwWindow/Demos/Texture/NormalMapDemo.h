@@ -3,6 +3,7 @@
 #include <GameObjects\GameObject.h>
 #include <Components\MeshComponent.h>
 #include <Components\TransformComponent.h>
+#include <Data\Light.h>
 
 class NormalMapDemo : public GlfwWindow
 {
@@ -10,9 +11,6 @@ public:
 	NormalMapDemo();
 	~NormalMapDemo();
 
-
-
-	// Inherited via GlfwWindow
 	virtual void Update() override;
 
 	virtual void Render() override;
@@ -27,5 +25,6 @@ private:
 	std::unique_ptr<GameObject> ogre;
 	std::unique_ptr<MeshComponent> mesh;
 	GLProgram program;
+	PointLight light;
 };
 
