@@ -35,10 +35,11 @@ GLuint Renderable::GetIndicesCount() const noexcept
 
 void Renderable::Update()
 {
+	
 	for (auto i = 0u; i < textures.size(); i++)
 	{
 		glActiveTexture(GL_TEXTURE0 + i);
-		glBindTexture(GL_TEXTURE_2D, textures[i]);
+		glBindTexture(textures[i].type, textures[i].id);
 	}
 	program.Update();
 	for (auto uniform : instanceUniforms)
@@ -108,6 +109,52 @@ void Renderable::AddTexture(const char * filePath)
 
 		delete[] imageBytes;
 
-		textures.push_back(textureId);
+		textures.push_back({ textureId ,GL_TEXTURE_2D });
 	}	
+}
+
+
+const char * suffixes[] = {
+	"posx", "negx",
+	"posy", "negy",
+	"posz", "negz",
+};
+
+const GLuint targets[] = {
+	GL_TEXTURE_CUBE_MAP_POSITIVE_X,
+	GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
+	GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
+	GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
+	GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
+	GL_TEXTURE_CUBE_MAP_NEGATIVE_Z,
+};
+
+void Renderable::AddCubeMap(const char * folderPath, const char * extension)
+{
+	GLuint textureId;
+	glActiveTexture(GL_TEXTURE0 + textures.size());
+	glGenTextures(1, &textureId);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
+
+	GLint w, h, channels;
+	//std::string basePath = "Assets/Textures/Cubemaps/Storforsen";
+	for (auto i = 0u; i < 6; i++)
+	{
+		auto path = (std::string(folderPath) + "/" + suffixes[i] + "." + extension);
+		auto image = SOIL_load_image(path.c_str(), &w, &h, &channels, SOIL_LOAD_AUTO);
+		if (i == 0)
+		{
+			glTexStorage2D(GL_TEXTURE_CUBE_MAP, 1, GL_RGB8, w, h);
+		}
+		glTexSubImage2D(targets[i], 0, 0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, image);
+		delete[] image;
+	}
+
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+	textures.push_back({ textureId ,GL_TEXTURE_CUBE_MAP});
 }

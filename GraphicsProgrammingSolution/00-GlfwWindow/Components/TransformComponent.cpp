@@ -73,5 +73,6 @@ void TransformComponent::Scale(glm::vec3 scale) noexcept
 }
 void TransformComponent::SetScale(glm::vec3 scale) noexcept
 {
+	this->scale = glm::scale(scale);
 	WorldChanged();
 }

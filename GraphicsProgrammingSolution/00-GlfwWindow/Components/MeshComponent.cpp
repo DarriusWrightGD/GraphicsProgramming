@@ -43,6 +43,11 @@ void MeshComponent::AddTexture(const char * file)
 	renderable->AddTexture(file);
 }
 
+void MeshComponent::AddCubeMap(const char * folderPath, const char * extension)
+{
+	renderable->AddCubeMap(folderPath, extension);
+}
+
 void MeshComponent::Initialize(const aiMesh * mesh, GLProgram & program , const std::vector<UniformUpdate> & instanceUniforms)
 {
 	auto renderer = Services.Get<GLRenderer>();

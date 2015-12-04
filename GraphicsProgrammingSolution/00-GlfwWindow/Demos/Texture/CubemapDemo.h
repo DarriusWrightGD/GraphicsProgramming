@@ -19,7 +19,12 @@ public:
 private:
 	GLProgram program;
 	std::unique_ptr<GameObject> box;
+	std::unique_ptr<GameObject> skyBox;
+	std::unique_ptr<MeshComponent> skyBoxMesh;
 	std::unique_ptr<MeshComponent> mesh;
-
+	GLuint textureId;
+	float skyBoxDraw = 1.0f;
+	float objectDraw = 0.0f;
+	float reflection = 0.7f;
 };
 

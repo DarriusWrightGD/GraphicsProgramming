@@ -11,6 +11,12 @@ struct UniformUpdate
 	float * value;
 };
 
+struct TextureInfo
+{
+	GLuint id;
+	GLint type;
+};
+
 struct Renderable
 {
 public:
@@ -24,6 +30,7 @@ public:
 	GLuint GetIndicesCount() const noexcept;
 	
 	void AddTexture(const char * filePath);
+	void AddCubeMap(const char * folderPath, const char * extension);
 	void Update();
 	bool visible = true;
 private:
@@ -33,8 +40,9 @@ private:
 	GLuint vertexArrayObject;
 	GLuint numberOfIndices;
 	GLint drawMode;
-	std::vector<GLuint> textures;
+	std::vector<TextureInfo> textures;
 	std::vector<UniformUpdate> instanceUniforms;
 	GLProgram & program;
+
 };
 

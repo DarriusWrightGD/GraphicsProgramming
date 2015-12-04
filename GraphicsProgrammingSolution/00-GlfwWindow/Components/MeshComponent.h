@@ -17,6 +17,7 @@ public:
 	virtual void Update() override;
 	virtual void Draw() override;
 	void AddTexture(const char * file);
+	void AddCubeMap(const char * folderPath, const char * extension);
 private:
 	Renderable * renderable;
 	Material material;
