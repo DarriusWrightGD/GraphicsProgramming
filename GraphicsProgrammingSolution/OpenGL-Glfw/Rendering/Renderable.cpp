@@ -75,8 +75,8 @@ void Renderable::AddTexture(const char * filePath)
 		FlipY(imageBytes,width, height, channels);
 		GLuint textureId;
 
-		int colorComponents;
-		int colorChannels;
+		int colorComponents = GL_RGBA8;;
+		int colorChannels = GL_RGBA;;
 
 		switch (channels)
 		{

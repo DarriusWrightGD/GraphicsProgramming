@@ -274,11 +274,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="00-GlfwWindow.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Assets\Shaders\Fragment\triangleShader.frag" />
     <None Include="Assets\Shaders\Vertex\triangleShader.vert" />
     <None Include="Assets\Shaders\Vertex\pipeline.vert" />

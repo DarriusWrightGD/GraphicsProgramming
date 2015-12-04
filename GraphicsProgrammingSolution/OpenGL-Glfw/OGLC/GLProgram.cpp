@@ -51,7 +51,7 @@ void GLProgram::AddShaderSource(ShaderType shaderType, const char * source)
 		glGetShaderInfoLog(shader, maxLength, &maxLength, errorLog);
 		cout << errorLog << endl;
 		glDeleteShader(shader);
-		delete errorLog;
+		delete [] errorLog;
 	}
 	shaders.push_back(shader);
 }
@@ -217,7 +217,7 @@ void GLProgram::Build()
 		auto infoLog = new GLchar[maxLength];
 		glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
 		cout << infoLog << endl;
-		delete infoLog;
+		delete [] infoLog;
 		glDeleteProgram(program);
 	}
 	DeleteShaders();

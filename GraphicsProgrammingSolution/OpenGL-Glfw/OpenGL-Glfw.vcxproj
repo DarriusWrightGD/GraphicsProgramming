@@ -71,6 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SolutionDir)Middleware\glfw\include;$(IncludePath)</IncludePath>
+    <CodeAnalysisRuleSet>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -79,6 +81,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)Middleware\soil\include;$(SolutionDir)Middleware\glm;$(SolutionDir)Middleware\glfw\include;$(SolutionDir)Middleware\assimp\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DEBUG;_DEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -238,9 +241,6 @@
     <ClInclude Include="Input\InputHandler.h" />
     <ClInclude Include="Input\InputInfo.h" />
     <ClInclude Include="resource.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="00-GlfwWindow.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Fragment\ads.frag" />

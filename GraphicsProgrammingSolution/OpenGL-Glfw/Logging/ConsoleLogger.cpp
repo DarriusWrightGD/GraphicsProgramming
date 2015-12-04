@@ -10,7 +10,7 @@ ConsoleLogger::ConsoleLogger()
 
 void ConsoleLogger::Log(LogLevel level,  const char * message)
 {
-	ConsoleColor color;
+	ConsoleColor color = ConsoleColor::Info;;
 	switch (level)
 	{
 	case LogLevel::Info:

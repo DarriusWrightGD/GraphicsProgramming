@@ -20,7 +20,7 @@ void APIENTRY debugCallback(GLenum source,
 	if (logger != nullptr)
 	{
 		std::string logMessage;
-		LogLevel level;
+		LogLevel level = LogLevel::Info;;
 		switch (severity) {
 		case GL_DEBUG_SEVERITY_NOTIFICATION:
 			level = LogLevel::Info;
