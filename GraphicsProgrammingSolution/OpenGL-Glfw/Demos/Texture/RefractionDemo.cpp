@@ -89,13 +89,12 @@ void RefractionDemo::Initialize()
 		mesh->Initialize(scene->mMeshes[0], program, {
 			{ "world", UniformType::MAT4, &box->GetWorld()[0][0] },
 			{ "drawSkyBox", UniformType::BOOL,&objectDraw },
-			//{ "materialColor", UniformType::VEC3,&mesh->GetMaterial().diffuse[0] },
 			{ "material.reflectionFactor", UniformType::FLOAT, &refraction },
 			{"material.eta", UniformType::FLOAT, &eta}
 		});
 		box->AddComponent(mesh.get());
 
-		mesh->AddCubeMap("Assets/Textures/Cubemaps/Storforsen", "jpg");
+		
 
 		skyBoxMesh = std::unique_ptr<MeshComponent>(new MeshComponent(skyBox.get()));
 		skyBoxMesh->Initialize(scene->mMeshes[0], program, {
@@ -104,7 +103,7 @@ void RefractionDemo::Initialize()
 		});
 
 		skyBox->AddComponent(skyBoxMesh.get());
-		skyBoxMesh->AddCubeMap("Assets/Textures/Cubemaps/Storforsen", "jpg");
+		skyBoxMesh->AddTexture(mesh->AddCubeMap("Assets/Textures/Cubemaps/Storforse", "jpg"));
 
 		import.FreeScene();
 	}

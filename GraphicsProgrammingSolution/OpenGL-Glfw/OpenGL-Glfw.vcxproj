@@ -166,6 +166,7 @@
     <ClCompile Include="Demos\Intro\DiscardDemo.cpp" />
     <ClCompile Include="Demos\Light\DirectionalLightDemo.cpp" />
     <ClCompile Include="Demos\Misc\FogDemo.cpp" />
+    <ClCompile Include="Exceptions\FileNotFoundException.cpp" />
     <ClCompile Include="Logging\ConsoleLogger.cpp" />
     <ClCompile Include="Demos\Intro\BufferDemo.cpp" />
     <ClCompile Include="Demos\Intro\FragCoordDemo.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="Demos\Texture\MultiTextureDemo.cpp" />
     <ClCompile Include="Demos\Texture\NormalMapDemo.cpp" />
     <ClCompile Include="Demos\Texture\RefractionDemo.cpp" />
+    <ClCompile Include="Demos\Texture\ProjectedTextureDemo.cpp" />
     <ClCompile Include="Rendering\Renderable.cpp" />
     <ClCompile Include="Rendering\GLRenderer.cpp" />
     <ClCompile Include="GL\gl_core_4_5.c" />
@@ -197,6 +199,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Demos.h" />
     <ClInclude Include="Demos\Texture\ReflectionDemo.h" />
     <ClInclude Include="Demos\Texture\AlphaMapDemo.h" />
     <ClInclude Include="Demos\Light\ADSHalfwayVecDemo.h" />
@@ -211,6 +214,7 @@
     <ClInclude Include="Demos\Intro\DiscardDemo.h" />
     <ClInclude Include="Demos\Light\DirectionalLightDemo.h" />
     <ClInclude Include="Demos\Misc\FogDemo.h" />
+    <ClInclude Include="Exceptions\FileNotFoundException.h" />
     <ClInclude Include="Logging\ConsoleLogger.h" />
     <ClInclude Include="Demos\Intro\BufferDemo.h" />
     <ClInclude Include="Demos\Intro\FragCoordDemo.h" />
@@ -221,6 +225,7 @@
     <ClInclude Include="Demos\Texture\MultiTextureDemo.h" />
     <ClInclude Include="Demos\Texture\NormalMapDemo.h" />
     <ClInclude Include="Demos\Texture\RefractionDemo.h" />
+    <ClInclude Include="Demos\Texture\ProjectedTextureDemo.h" />
     <ClInclude Include="Rendering\Renderable.h" />
     <ClInclude Include="Rendering\GLRenderer.h" />
     <ClInclude Include="GL\gl_core_4_5.h" />
@@ -250,6 +255,7 @@
     <None Include="Assets\Shaders\Fragment\alphamap.frag" />
     <None Include="Assets\Shaders\Fragment\buffer.frag" />
     <None Include="Assets\Shaders\Fragment\cartoonEffect.frag" />
+    <None Include="Assets\Shaders\Fragment\projectedTexture.frag" />
     <None Include="Assets\Shaders\Fragment\reflection.frag" />
     <None Include="Assets\Shaders\Fragment\diffuseLight.frag" />
     <None Include="Assets\Shaders\Fragment\directionalLight.frag" />
@@ -261,6 +267,7 @@
     <None Include="Assets\Shaders\Fragment\multiTexture.frag" />
     <None Include="Assets\Shaders\Fragment\normal-map.frag" />
     <None Include="Assets\Shaders\Fragment\refraction.frag" />
+    <None Include="Assets\Shaders\Vertex\projectedTexture.vert" />
     <None Include="Assets\Shaders\Vertex\reflection.vert" />
     <None Include="Assets\Shaders\Vertex\normal-map.vert" />
     <None Include="Assets\Shaders\Fragment\pipeline.frag" />

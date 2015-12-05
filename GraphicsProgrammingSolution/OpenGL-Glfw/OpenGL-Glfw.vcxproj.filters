@@ -138,6 +138,12 @@
     <ClCompile Include="Demos\Texture\RefractionDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Demos\Texture\ProjectedTextureDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Exceptions\FileNotFoundException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -278,6 +284,15 @@
     <ClInclude Include="Demos\Texture\RefractionDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Demos\Texture\ProjectedTextureDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Exceptions\FileNotFoundException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Fragment\triangleShader.frag" />
@@ -327,6 +342,8 @@
     <None Include="Assets\Shaders\Vertex\reflection.vert" />
     <None Include="Assets\Shaders\Vertex\refraction.vert" />
     <None Include="Assets\Shaders\Fragment\refraction.frag" />
+    <None Include="Assets\Shaders\Vertex\projectedTexture.vert" />
+    <None Include="Assets\Shaders\Fragment\projectedTexture.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\brick.jpg">

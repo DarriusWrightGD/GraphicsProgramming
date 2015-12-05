@@ -29,8 +29,9 @@ public:
 	GLuint GetVertexArrayObject()const noexcept;
 	GLuint GetIndicesCount() const noexcept;
 	
-	void AddTexture(const char * filePath);
-	void AddCubeMap(const char * folderPath, const char * extension);
+	TextureInfo AddTexture(const char * filePath);
+	void AddTexture(TextureInfo texture);
+	TextureInfo AddCubeMap(const char * folderPath, const char * extension);
 	void Update();
 	bool visible = true;
 private:

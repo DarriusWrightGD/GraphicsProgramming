@@ -96,6 +96,7 @@ public:
 	GLuint GetHandle()const noexcept;
 private:
 	bool initailzed = false;
+	const char * GetShaderName(ShaderType shaderType);
 	void DeleteShaders();
 	void DeleteUniformBuffers();
 	std::vector<GLuint> shaders;

@@ -1,5 +1,6 @@
 #include "Renderable.h"
 #include <SOIL.h>
+#include <Exceptions\FileNotFoundException.h>
 
 Renderable::Renderable(GLProgram & program, GLuint vertexArrayObject, GLuint vertexBuffer, GLuint indexBuffer, GLuint numberOfIndices, std::vector<UniformUpdate> uniforms,
 	GLint drawMode ) :
@@ -65,11 +66,11 @@ void Renderable::FlipY(unsigned char * image, int width, int height, int channel
 	}
 }
 
-void Renderable::AddTexture(const char * filePath)
+TextureInfo Renderable::AddTexture(const char * filePath)
 {
 	auto width = 0, height = 0, channels = 0;
 	auto imageBytes = SOIL_load_image(filePath, &width, &height, &channels,SOIL_LOAD_AUTO);
-
+	TextureInfo texture;
 	if (imageBytes != nullptr)
 	{
 		FlipY(imageBytes,width, height, channels);
@@ -110,7 +111,19 @@ void Renderable::AddTexture(const char * filePath)
 		delete[] imageBytes;
 
 		textures.push_back({ textureId ,GL_TEXTURE_2D });
+		texture = textures[textures.size() - 1];
 	}	
+	else
+	{
+		throw FileNotFoundException(filePath);
+	}
+
+	return texture;
+}
+
+void Renderable::AddTexture(TextureInfo texture)
+{
+	textures.push_back(texture);
 }
 
 
@@ -129,7 +142,7 @@ const GLuint targets[] = {
 	GL_TEXTURE_CUBE_MAP_NEGATIVE_Z,
 };
 
-void Renderable::AddCubeMap(const char * folderPath, const char * extension)
+TextureInfo Renderable::AddCubeMap(const char * folderPath, const char * extension)
 {
 	GLuint textureId;
 	glActiveTexture(GL_TEXTURE0 + textures.size());
@@ -137,11 +150,16 @@ void Renderable::AddCubeMap(const char * folderPath, const char * extension)
 	glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
 
 	GLint w, h, channels;
-	//std::string basePath = "Assets/Textures/Cubemaps/Storforsen";
 	for (auto i = 0u; i < 6; i++)
 	{
 		auto path = (std::string(folderPath) + "/" + suffixes[i] + "." + extension);
 		auto image = SOIL_load_image(path.c_str(), &w, &h, &channels, SOIL_LOAD_AUTO);
+		
+		if (image == nullptr)
+		{
+			throw FileNotFoundException(path.c_str());
+		}
+		
 		if (i == 0)
 		{
 			glTexStorage2D(GL_TEXTURE_CUBE_MAP, 1, GL_RGB8, w, h);
@@ -157,4 +175,5 @@ void Renderable::AddCubeMap(const char * folderPath, const char * extension)
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
 	textures.push_back({ textureId ,GL_TEXTURE_CUBE_MAP});
+	return textures[textures.size()-1];
 }

@@ -35,6 +35,18 @@ void GLRenderer::Render()
 	}
 }
 
+void GLRenderer::Render(Renderable * renderable)
+{
+	if (renderable->visible)
+	{
+		renderable->Update();
+		glBindVertexArray(renderable->GetVertexArrayObject());
+		glBindBuffer(GL_ARRAY_BUFFER, renderable->GetVertexBuffer());
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderable->GetIndexBuffer());
+		glDrawElements(renderable->GetDrawMode(), renderable->GetIndicesCount(), GL_UNSIGNED_INT, 0);
+	}
+}
+
 Renderable & GLRenderer::AddRenderable(GLProgram & program, const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layouts, const std::vector<UniformUpdate> & instanceUniforms)
 {
 	GLuint vertexBuffer;

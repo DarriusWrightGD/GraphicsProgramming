@@ -1,7 +1,9 @@
 #pragma once
 #include <Components\Component.h>
 #include <mat4x4.hpp>
+#include <mat3x3.hpp>
 #include <vec3.hpp>
+#include <Cameras\Camera.h>
 class TransformComponent : public Component
 {
 public:
@@ -16,6 +18,7 @@ public:
 	void Scale(glm::vec3 scale) noexcept;
 	void SetScale(glm::vec3 scale) noexcept;
 	glm::mat4 & GetWorld() noexcept;
+	glm::mat3 & GetNormal() noexcept;
 	void WorldChanged()noexcept;
 	void SetParent(TransformComponent * transform)noexcept;
 
@@ -23,8 +26,10 @@ public:
 	virtual void Update() override;
 private:
 	TransformComponent * parent;
+	Camera * camera;
 	glm::mat4 local;
 	glm::mat4 world;
+	glm::mat3 normal;
 	glm::mat4 scale;
 	glm::mat4 translation;
 	glm::mat4 rotation;

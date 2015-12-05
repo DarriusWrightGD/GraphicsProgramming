@@ -16,9 +16,11 @@ public:
 	Material & GetMaterial();
 	virtual void Update() override;
 	virtual void Draw() override;
-	void AddTexture(const char * file);
-	void AddCubeMap(const char * folderPath, const char * extension);
+	TextureInfo AddTexture(const char * file);
+	void AddTexture(TextureInfo texture);
+	TextureInfo AddCubeMap(const char * folderPath, const char * extension);
 private:
+	GLRenderer * renderer = nullptr;
 	Renderable * renderable;
 	Material material;
 	bool initialized = false;

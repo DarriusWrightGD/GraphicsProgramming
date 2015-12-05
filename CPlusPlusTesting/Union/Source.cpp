@@ -2,7 +2,7 @@
 using namespace std;
 
 template<typename T, 
-	typename = typename std::enable_if<std::is_arithmetic<T>::value || std::is_floating_point<std::remove_pointer<T>::type>::value, T>::type >
+	typename = typename std::enable_if<std::is_floating_point<T>::value || std::is_floating_point<std::remove_pointer<T>::type>::value, T>::type >
 struct Value
 {
 	T value;

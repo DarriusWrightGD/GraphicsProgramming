@@ -36,21 +36,30 @@ void MeshComponent::Update()
 
 void MeshComponent::Draw()
 {
+	if (renderer != nullptr)
+	{
+		renderer->Render(renderable);
+	}
 }
 
-void MeshComponent::AddTexture(const char * file)
+TextureInfo MeshComponent::AddTexture(const char * file)
 {
-	renderable->AddTexture(file);
+	return renderable->AddTexture(file);
 }
 
-void MeshComponent::AddCubeMap(const char * folderPath, const char * extension)
+void MeshComponent::AddTexture(TextureInfo texture)
 {
-	renderable->AddCubeMap(folderPath, extension);
+	renderable->AddTexture(texture);
+}
+
+TextureInfo MeshComponent::AddCubeMap(const char * folderPath, const char * extension)
+{
+	return renderable->AddCubeMap(folderPath, extension);
 }
 
 void MeshComponent::Initialize(const aiMesh * mesh, GLProgram & program , const std::vector<UniformUpdate> & instanceUniforms)
 {
-	auto renderer = Services.Get<GLRenderer>();
+	renderer = Services.Get<GLRenderer>();
 	if (renderer != nullptr && !initialized)
 	{
 		std::vector<Vertex> vertices;

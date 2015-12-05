@@ -1,9 +1,12 @@
 #include "TransformComponent.h"
 #include <gtx\transform.hpp>
 #include <GameObjects\GameObject.h>
-
+#include <Util\ServiceLocator.h>
+#include <gtx\transform.hpp>
+#include <gtc\matrix_inverse.hpp>
 TransformComponent::TransformComponent(GameObject * gameObject)noexcept : Component(gameObject), parent(nullptr), scale(glm::scale(glm::vec3(1.0f,1.0f,1.0f)))
 {
+	camera = Services.Get<Camera>();
 }
 
 
@@ -27,6 +30,8 @@ void TransformComponent::Update()
 	{
 		local = translation * rotation * scale;
 		world = (parent == nullptr) ? local : local * parent->GetWorld();
+		normal = glm::inverseTranspose(glm::mat3(camera->GetView() * world));
+
 		for (auto child : gameObject->GetChildren())
 		{
 			child->GetTransform()->WorldChanged();
@@ -38,6 +43,11 @@ void TransformComponent::Update()
 glm::mat4 & TransformComponent::GetWorld() noexcept
 {
 	return world;
+}
+
+glm::mat3 & TransformComponent::GetNormal() noexcept
+{
+	return normal;
 }
 
 void TransformComponent::Translate(glm::vec3 translate) noexcept

@@ -28,6 +28,10 @@ GLint GLProgram::GetUniformLocation(const char * name)
 	return glGetUniformLocation(program, name);
 }
 
+#include <Util\ServiceLocator.h>
+#include <string>
+#include <Logging\Logger.h>
+
 void GLProgram::AddShaderSource(ShaderType shaderType, const char * source)
 {
 	if (!initailzed)
@@ -48,7 +52,7 @@ void GLProgram::AddShaderSource(ShaderType shaderType, const char * source)
 		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
 		auto errorLog = new GLchar[maxLength];
 		glGetShaderInfoLog(shader, maxLength, &maxLength, errorLog);
-		cout << errorLog << endl;
+		Services.Get<Logger>()->Log(LogLevel::Error, (std::string(GetShaderName(shaderType)) + " : "  + errorLog).c_str());
 		glDeleteShader(shader);
 		delete [] errorLog;
 	}
@@ -65,10 +69,16 @@ void GLProgram::Initialize()
 	program = glCreateProgram();
 	initailzed = true;
 }
-
+#include <Exceptions\FileNotFoundException.h>
 void GLProgram::AddShaderFile(ShaderType shaderType, const char * file)
 {
 	ifstream stream(file);
+	
+	if (stream.fail())
+	{
+		throw FileNotFoundException(file);
+	}
+
 	stringstream buffer;
 	buffer << stream.rdbuf();
 	AddShaderSource(shaderType, buffer.str());
@@ -216,6 +226,7 @@ void GLProgram::Build()
 		auto infoLog = new GLchar[maxLength];
 		glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
 		cout << infoLog << endl;
+		Services.Get<Logger>()->Log(LogLevel::Error, infoLog);
 		delete [] infoLog;
 		glDeleteProgram(program);
 	}
@@ -225,6 +236,32 @@ void GLProgram::Build()
 void GLProgram::Use()
 {
 	glUseProgram(program);
+}
+
+const char * GLProgram::GetShaderName(ShaderType shaderType)
+{
+	switch (shaderType)
+	{
+	case ShaderType::Vertex:
+		return "Vertex";
+		break;
+	case ShaderType::TessellationControl:
+		return "TessControl";
+		break;
+	case ShaderType::TessellationEvaluation:
+		return "TessEval";
+		break;
+	case ShaderType::Geometry:
+		return "Geometry";
+		break;
+	case ShaderType::Fragment:
+		return "Fragment";
+		break;
+	default:
+		return "Compute";
+		break;
+	}
+
 }
 
 void GLProgram::DeleteShaders()
