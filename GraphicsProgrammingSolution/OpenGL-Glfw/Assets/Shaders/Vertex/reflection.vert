@@ -11,20 +11,17 @@ layout (std140 ) uniform TransformBlock
 }transform;
 
 uniform mat4 world;
-uniform bool drawSkyBox;
 uniform float reflectFactor;
+uniform bool drawSkyBox;
 
 out VS_OUT
 {
 	vec3 reflectDir;
-	vec2 uv;
-
 }vs_out;
 
 void main()
 {
 	vec4 worldPosition =  world *vec4(position,1.0f) ;
-	vs_out.uv = uv;
 
 	if(drawSkyBox)
 	{

@@ -1,42 +1,42 @@
-#include "CubemapDemo.h"
+#include "ReflectionDemo.h"
 #include <assimp\postprocess.h>
 #include <assimp\Importer.hpp>
 #include <assimp\scene.h>
 
-CubemapDemo::CubemapDemo()
+ReflectionDemo::ReflectionDemo()
 {
 }
 
 
-CubemapDemo::~CubemapDemo()
+ReflectionDemo::~ReflectionDemo()
 {
 }
 
-void CubemapDemo::Update()
+void ReflectionDemo::Update()
 {
 	skyBox->Update();
 	box->Update();
 }
 
-void CubemapDemo::Render()
+void ReflectionDemo::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	renderer->Render();
 }
 
-void CubemapDemo::OnResize(int width, int height)
+void ReflectionDemo::OnResize(int width, int height)
 {
 	glViewport(0, 0, width, height);
 	camera->SetAspectRatio(static_cast<float>(width), static_cast<float>(height));
 	program.UpdateUniformBlock("TransformBlock");
 }
 
-void CubemapDemo::Initialize()
+void ReflectionDemo::Initialize()
 {
 	glEnable(GL_DEPTH_TEST);
 
-	program.AddShaderFile(ShaderType::Vertex,"Assets/Shaders/Vertex/cubemap.vert");
-	program.AddShaderFile(ShaderType::Fragment,"Assets/Shaders/Fragment/cubemap.frag");
+	program.AddShaderFile(ShaderType::Vertex,"Assets/Shaders/Vertex/reflection.vert");
+	program.AddShaderFile(ShaderType::Fragment,"Assets/Shaders/Fragment/reflection.frag");
 	program.Build();
 
 	
@@ -102,12 +102,12 @@ void CubemapDemo::Initialize()
 		});
 
 		skyBox->AddComponent(skyBoxMesh.get());
-		mesh->AddCubeMap("Assets/Textures/Cubemaps/Storforsen", "jpg");
+		skyBoxMesh->AddCubeMap("Assets/Textures/Cubemaps/Storforsen", "jpg");
 
 		import.FreeScene();
 	}
 }
 
-void CubemapDemo::Shutdown()
+void ReflectionDemo::Shutdown()
 {
 }

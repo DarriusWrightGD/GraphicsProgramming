@@ -12,7 +12,6 @@ GLProgram::GLProgram()
 {
 }
 
-
 GLProgram::~GLProgram()
 {
 	Delete();

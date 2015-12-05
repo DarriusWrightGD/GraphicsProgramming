@@ -8,12 +8,13 @@
 #include <Demos\Texture\MultiTextureDemo.h>
 #include <Demos\Texture\AlphaMapDemo.h>
 #include <Demos\Texture\NormalMapDemo.h>
-#include <Demos\Texture\CubemapDemo.h>
+#include <Demos\Texture\ReflectionDemo.h>
+#include <Demos\Texture\RefractionDemo.h>
 #include <memory>
 using std::unique_ptr;
 
 int main()
 {
-	auto window = unique_ptr<WindowInterface>(new CubemapDemo());
+	auto window = unique_ptr<WindowInterface>(new RefractionDemo());
 	return window->Execute();
 }

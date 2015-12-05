@@ -3,11 +3,11 @@
 #include <GameObjects\GameObject.h>
 #include <Components\TransformComponent.h>
 #include <Components\MeshComponent.h>
-class CubemapDemo : public GlfwWindow
+class ReflectionDemo : public GlfwWindow
 {
 public:
-	CubemapDemo();
-	~CubemapDemo();
+	ReflectionDemo();
+	~ReflectionDemo();
 
 	// Inherited via GlfwWindow
 	virtual void Update() override;
@@ -25,6 +25,6 @@ private:
 	GLuint textureId;
 	float skyBoxDraw = 1.0f;
 	float objectDraw = 0.0f;
-	float reflection = 0.7f;
+	float reflection = 0.2f;
 };
 

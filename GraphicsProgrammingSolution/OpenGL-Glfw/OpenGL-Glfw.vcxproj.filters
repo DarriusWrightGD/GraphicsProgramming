@@ -132,7 +132,10 @@
     <ClCompile Include="Demos\Texture\NormalMapDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Demos\Texture\CubemapDemo.cpp">
+    <ClCompile Include="Demos\Texture\ReflectionDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\Texture\RefractionDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -269,7 +272,10 @@
     <ClInclude Include="Demos\Texture\NormalMapDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Demos\Texture\CubemapDemo.h">
+    <ClInclude Include="Demos\Texture\ReflectionDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demos\Texture\RefractionDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -317,8 +323,10 @@
     <None Include="Assets\Shaders\Vertex\alphamap.vert" />
     <None Include="Assets\Shaders\Vertex\normal-map.vert" />
     <None Include="Assets\Shaders\Fragment\normal-map.frag" />
-    <None Include="Assets\Shaders\Fragment\cubemap.frag" />
-    <None Include="Assets\Shaders\Vertex\cubemap.vert" />
+    <None Include="Assets\Shaders\Fragment\reflection.frag" />
+    <None Include="Assets\Shaders\Vertex\reflection.vert" />
+    <None Include="Assets\Shaders\Vertex\refraction.vert" />
+    <None Include="Assets\Shaders\Fragment\refraction.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\brick.jpg">

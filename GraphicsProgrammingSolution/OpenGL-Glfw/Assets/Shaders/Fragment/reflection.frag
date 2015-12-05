@@ -9,7 +9,6 @@ uniform float reflectFactor;
 in VS_OUT
 {
 	vec3 reflectDir;
-	vec2 uv;
 }fs_in;
 
 uniform vec3 materialColor;
