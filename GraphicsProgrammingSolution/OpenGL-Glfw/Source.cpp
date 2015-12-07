@@ -6,6 +6,6 @@ using std::unique_ptr;
 
 int main()
 {
-	auto window = unique_ptr<WindowInterface>(new Texture2DDemo());
+	auto window = unique_ptr<WindowInterface>(new FrameBufferDemo());
 	return window->Execute();
 }

@@ -16,6 +16,7 @@ public:
 	Material & GetMaterial();
 	virtual void Update() override;
 	virtual void Draw() override;
+	Renderable * GetRenderable();
 	TextureInfo AddTexture(const char * file, TextureWrapType wrapType = TextureWrapType::Default);
 	void AddTexture(TextureInfo texture);
 	TextureInfo AddCubeMap(const char * folderPath, const char * extension);

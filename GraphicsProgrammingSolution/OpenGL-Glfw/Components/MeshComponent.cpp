@@ -42,6 +42,11 @@ void MeshComponent::Draw()
 	}
 }
 
+Renderable * MeshComponent::GetRenderable()
+{
+	return renderable;
+}
+
 TextureInfo MeshComponent::AddTexture(const char * file, TextureWrapType wrapType)
 {
 	return renderable->AddTexture(file, wrapType);

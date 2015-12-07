@@ -144,6 +144,9 @@
     <ClCompile Include="Exceptions\FileNotFoundException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Demos\Texture\FrameBufferDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -293,6 +296,9 @@
     <ClInclude Include="Demos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Demos\Texture\FrameBufferDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Fragment\triangleShader.frag" />
@@ -344,6 +350,8 @@
     <None Include="Assets\Shaders\Fragment\refraction.frag" />
     <None Include="Assets\Shaders\Vertex\projectedTexture.vert" />
     <None Include="Assets\Shaders\Fragment\projectedTexture.frag" />
+    <None Include="Assets\Shaders\Fragment\fbo.frag" />
+    <None Include="Assets\Shaders\Vertex\fbo.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\brick.jpg">
