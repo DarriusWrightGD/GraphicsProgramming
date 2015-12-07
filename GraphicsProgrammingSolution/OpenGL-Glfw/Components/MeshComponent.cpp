@@ -42,9 +42,9 @@ void MeshComponent::Draw()
 	}
 }
 
-TextureInfo MeshComponent::AddTexture(const char * file)
+TextureInfo MeshComponent::AddTexture(const char * file, TextureWrapType wrapType)
 {
-	return renderable->AddTexture(file);
+	return renderable->AddTexture(file, wrapType);
 }
 
 void MeshComponent::AddTexture(TextureInfo texture)

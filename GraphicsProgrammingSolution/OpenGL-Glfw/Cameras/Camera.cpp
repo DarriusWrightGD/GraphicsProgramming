@@ -10,7 +10,7 @@ Camera::Camera(float aspectRatio, float nearPlane, float farPlane, glm::vec3 pos
 
 }
 Camera::Camera(float aspectRatio, glm::vec3 position, glm::vec3 lookAt) : 
-	Camera(aspectRatio,0.1f,100.0f,position,lookAt)
+	Camera(aspectRatio,0.1f,1000.0f,position,lookAt)
 {
 
 }
@@ -26,6 +26,11 @@ void Camera::SetNearPlane(float nearPlane) { this->nearPlane = nearPlane; Update
 void Camera::SetFarPlane(float farPlane) { this->farPlane = farPlane; UpdateProjection(); }
 void Camera::SetAspectRatio(float aspectRatio) { this->aspectRatio = aspectRatio; UpdateProjection(); }
 void Camera::SetAspectRatio(float width, float height) { this->aspectRatio = width / height; UpdateProjection(); }
+void Camera::SetAspectRatio(int width, int height)
+{
+	this->aspectRatio = static_cast<float>(width) / static_cast<float>(height);
+	UpdateProjection();
+}
 void Camera::SetFOV(float degrees) { this->fov = degrees; UpdateProjection(); }
 
 glm::vec3 & Camera::GetPosition() { return position; }

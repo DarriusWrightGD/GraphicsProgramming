@@ -11,10 +11,19 @@ struct UniformUpdate
 	float * value;
 };
 
+enum class TextureWrapType
+{
+	Default,
+	Cubemap,
+	Projection,
+};
+
+
 struct TextureInfo
 {
 	GLuint id;
 	GLint type;
+	TextureWrapType wrapType;
 };
 
 struct Renderable
@@ -29,13 +38,14 @@ public:
 	GLuint GetVertexArrayObject()const noexcept;
 	GLuint GetIndicesCount() const noexcept;
 	
-	TextureInfo AddTexture(const char * filePath);
+	TextureInfo AddTexture(const char * filePath, TextureWrapType wrapType = TextureWrapType::Default);
 	void AddTexture(TextureInfo texture);
 	TextureInfo AddCubeMap(const char * folderPath, const char * extension);
 	void Update();
 	bool visible = true;
 private:
 	void FlipY(unsigned char * image, int width, int height, int channels);
+	void SetWrapParameters(TextureWrapType wrapType);
 	GLuint vertexBuffer;
 	GLuint indexBuffer;
 	GLuint vertexArrayObject;

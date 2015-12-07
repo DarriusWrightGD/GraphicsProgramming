@@ -4,7 +4,7 @@
 #include <Util\ServiceLocator.h>
 #include <gtx\transform.hpp>
 #include <gtc\matrix_inverse.hpp>
-TransformComponent::TransformComponent(GameObject * gameObject)noexcept : Component(gameObject), parent(nullptr), scale(glm::scale(glm::vec3(1.0f,1.0f,1.0f)))
+TransformComponent::TransformComponent(GameObject * gameObject)noexcept : Component(gameObject), parent(nullptr), scale(glm::scale(glm::vec3(1.0f, 1.0f, 1.0f)))
 {
 	camera = Services.Get<Camera>();
 }
@@ -21,23 +21,27 @@ void TransformComponent::SetParent(TransformComponent * transform)noexcept
 
 void TransformComponent::WorldChanged() noexcept
 {
-	worldChanged = true;
+	hasWorldChanged = true;
 }
 
 void TransformComponent::Update()
 {
-	if (worldChanged)
+	if (hasWorldChanged)
 	{
 		local = translation * rotation * scale;
 		world = (parent == nullptr) ? local : local * parent->GetWorld();
-		normal = glm::inverseTranspose(glm::mat3(camera->GetView() * world));
-
+		
 		for (auto child : gameObject->GetChildren())
 		{
-			child->GetTransform()->WorldChanged();
+			if (hasWorldChanged)
+			{
+				child->GetTransform()->WorldChanged();
+			}
 		}
-		worldChanged = false;
+		hasWorldChanged = false;
 	}
+
+	normal = glm::transpose(glm::inverse(camera->GetView() * world));
 }
 
 glm::mat4 & TransformComponent::GetWorld() noexcept
@@ -45,7 +49,7 @@ glm::mat4 & TransformComponent::GetWorld() noexcept
 	return world;
 }
 
-glm::mat3 & TransformComponent::GetNormal() noexcept
+glm::mat4 & TransformComponent::GetNormal() noexcept
 {
 	return normal;
 }
@@ -63,16 +67,16 @@ void TransformComponent::SetPosition(glm::vec3 position) noexcept
 
 void TransformComponent::Rotate(glm::vec3 rotate) noexcept
 {
-	rotation *= (glm::rotate(rotate.x, glm::vec3(1.0f, 0.0f, 0.0f)) *
-	glm::rotate(rotate.y, glm::vec3(0.0f, 1.0f, 0.0f)) *
-	glm::rotate(rotate.z,glm::vec3(0.0f,0.0f,1.0f)));
+	rotation *= (glm::rotate(glm::radians(rotate.x), glm::vec3(1.0f, 0.0f, 0.0f)) *
+		glm::rotate(glm::radians(rotate.y), glm::vec3(0.0f, 1.0f, 0.0f)) *
+		glm::rotate(glm::radians(rotate.z), glm::vec3(0.0f, 0.0f, 1.0f)));
 	WorldChanged();
 }
 void TransformComponent::SetRotation(glm::vec3 rotation) noexcept
 {
-	this->rotation = (glm::rotate(rotation.x, glm::vec3(1.0f, 0.0f, 0.0f)) *
-		glm::rotate(rotation.y, glm::vec3(0.0f, 1.0f, 0.0f)) *
-		glm::rotate(rotation.z, glm::vec3(0.0f, 0.0f, 1.0f)));
+	this->rotation = (glm::rotate(glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f)) *
+		glm::rotate(glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f)) *
+		glm::rotate(glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f)));
 	WorldChanged();
 }
 

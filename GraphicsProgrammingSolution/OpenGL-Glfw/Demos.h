@@ -26,7 +26,7 @@
 #include <Demos\Texture\ReflectionDemo.h>
 #include <Demos\Texture\RefractionDemo.h>
 #include <Demos\Texture\Texture2DDemo.h>
-
+#include <Demos\Texture\ProjectedTextureDemo.h>
 
 
 

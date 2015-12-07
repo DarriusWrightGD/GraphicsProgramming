@@ -4,7 +4,7 @@
 class Camera
 {
 public:
-	Camera(float aspectRatio, float nearPlane = 0.1f, float farPlane = 100.0f, glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 lookAt = glm::vec3(0.0f, 0.0f, -10.0f));
+	Camera(float aspectRatio, float nearPlane = 0.1f, float farPlane = 1000.0f, glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 lookAt = glm::vec3(0.0f, 0.0f, -10.0f));
 	Camera(float aspectRatio, glm::vec3 position, glm::vec3 lookAt);
 	~Camera();
 	
@@ -14,6 +14,7 @@ public:
 	void SetFarPlane(float farPlane);
 	void SetAspectRatio(float aspectRatio);
 	void SetAspectRatio(float width, float height);
+	void SetAspectRatio(int width, int height);
 	void SetFOV(float degrees);
 
 	glm::vec3 & GetPosition();

@@ -41,6 +41,7 @@ void Renderable::Update()
 	{
 		glActiveTexture(GL_TEXTURE0 + i);
 		glBindTexture(textures[i].type, textures[i].id);
+		SetWrapParameters(textures[i].wrapType);
 	}
 	program.Update();
 	for (auto uniform : instanceUniforms)
@@ -66,7 +67,34 @@ void Renderable::FlipY(unsigned char * image, int width, int height, int channel
 	}
 }
 
-TextureInfo Renderable::AddTexture(const char * filePath)
+void Renderable::SetWrapParameters(TextureWrapType wrapType)
+{
+	switch (wrapType)
+	{
+	case TextureWrapType::Default:
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		break;
+	case TextureWrapType::Cubemap:
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+		break;
+	case TextureWrapType::Projection:
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+		break;
+	}
+}
+
+TextureInfo Renderable::AddTexture(const char * filePath, TextureWrapType wrapType)
 {
 	auto width = 0, height = 0, channels = 0;
 	auto imageBytes = SOIL_load_image(filePath, &width, &height, &channels,SOIL_LOAD_AUTO);
@@ -105,12 +133,9 @@ TextureInfo Renderable::AddTexture(const char * filePath)
 		glTexStorage2D(GL_TEXTURE_2D, 1, colorComponents, width, height);
 		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height,colorChannels, GL_UNSIGNED_BYTE, imageBytes);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		SetWrapParameters(wrapType);
 
-		delete[] imageBytes;
-
-		textures.push_back({ textureId ,GL_TEXTURE_2D });
+		textures.push_back({ textureId ,GL_TEXTURE_2D,wrapType });
 		texture = textures[textures.size() - 1];
 	}	
 	else
@@ -174,6 +199,6 @@ TextureInfo Renderable::AddCubeMap(const char * folderPath, const char * extensi
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
-	textures.push_back({ textureId ,GL_TEXTURE_CUBE_MAP});
+	textures.push_back({ textureId ,GL_TEXTURE_CUBE_MAP, TextureWrapType::Cubemap});
 	return textures[textures.size()-1];
 }
