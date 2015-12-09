@@ -228,6 +228,7 @@
     <ClInclude Include="Demos\Texture\NormalMapDemo.h" />
     <ClInclude Include="Demos\Texture\RefractionDemo.h" />
     <ClInclude Include="Demos\Texture\ProjectedTextureDemo.h" />
+    <ClInclude Include="Rendering\GLSampler.h" />
     <ClInclude Include="Rendering\Renderable.h" />
     <ClInclude Include="Rendering\GLRenderer.h" />
     <ClInclude Include="GL\gl_core_4_5.h" />
@@ -241,6 +242,10 @@
     <ClInclude Include="Demos\Intro\VertexBufferDemo.h" />
     <ClInclude Include="Demos\Texture\Texture2DDemo.h" />
     <ClInclude Include="Demos\Light\SpotLightDemo.h" />
+    <ClInclude Include="Rendering\SamplerType.h" />
+    <ClInclude Include="Rendering\TextureInfo.h" />
+    <ClInclude Include="Rendering\Uniforms.h" />
+    <ClInclude Include="Rendering\VertexLayout.h" />
     <ClInclude Include="Util\GLDebug.h" />
     <ClInclude Include="Util\ServiceLocator.h" />
     <ClInclude Include="Components\TransformComponent.h" />

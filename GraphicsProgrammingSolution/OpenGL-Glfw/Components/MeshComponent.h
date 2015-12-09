@@ -1,12 +1,16 @@
 #pragma once
 #include <assimp\mesh.h>
 #include <Components\DrawableComponent.h>
-#include <Rendering\GLRenderer.h>
 #include <Util\ServiceLocator.h>
 #include <Data\Material.h>
-class DrawableComponent;
-class GameObject;
+#include <OGLC\GLProgram.h>
+#include <Rendering\TextureInfo.h>
+#include <Rendering\GLSampler.h>
+#include <Rendering\SamplerType.h>
+#include <Rendering\Renderable.h>
+#include <Rendering\GLRenderer.h>
 
+class GameObject;
 class MeshComponent : public DrawableComponent
 {
 public:
@@ -17,7 +21,7 @@ public:
 	virtual void Update() override;
 	virtual void Draw() override;
 	Renderable * GetRenderable();
-	TextureInfo AddTexture(const char * file, TextureWrapType wrapType = TextureWrapType::Default);
+	TextureInfo AddTexture(const char * file, SamplerType wrapType = SamplerType::Linear);
 	void AddTexture(TextureInfo texture);
 	TextureInfo AddCubeMap(const char * folderPath, const char * extension);
 private:

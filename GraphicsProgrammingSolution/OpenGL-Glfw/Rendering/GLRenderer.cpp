@@ -1,4 +1,5 @@
 #include "GLRenderer.h"
+#include <Rendering\Renderable.h>
 
 
 
@@ -35,6 +36,51 @@ void GLRenderer::Render()
 	}
 }
 
+GLSampler GLRenderer::GetSampler(SamplerType samplerType)
+{
+	if (!samplersInitialized)
+	{
+		InitializeSamplers();
+	}
+	
+	return samplerMap[samplerType];
+}
+
+void GLRenderer::InitializeSamplers()
+{
+	GLuint samplers[4];
+	glGenSamplers(4, samplers);
+	samplerMap.insert({ SamplerType::Linear,{ samplers[0] } });
+	samplerMap.insert({ SamplerType::Cubemap,{ samplers[1] } });
+	samplerMap.insert({ SamplerType::Nearest,{ samplers[2] } });
+	samplerMap.insert({ SamplerType::Projection,{ samplers[3] } });
+
+	glSamplerParameteri(samplers[0], GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glSamplerParameteri(samplers[0], GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glSamplerParameteri(samplers[0], GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glSamplerParameteri(samplers[0], GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+
+	glSamplerParameteri(samplers[1], GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glSamplerParameteri(samplers[1], GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glSamplerParameteri(samplers[1], GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glSamplerParameteri(samplers[1], GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glSamplerParameteri(samplers[1], GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+
+	glSamplerParameteri(samplers[2], GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glSamplerParameteri(samplers[2], GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glSamplerParameteri(samplers[2], GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glSamplerParameteri(samplers[2], GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+
+	glSamplerParameteri(samplers[3], GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glSamplerParameteri(samplers[3], GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glSamplerParameteri(samplers[3], GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	glSamplerParameteri(samplers[3], GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+
+}
+
 void GLRenderer::Render(Renderable * renderable)
 {
 	if (renderable->visible)
@@ -47,7 +93,7 @@ void GLRenderer::Render(Renderable * renderable)
 	}
 }
 
-Renderable & GLRenderer::AddRenderable(GLProgram & program, const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layouts, const std::vector<UniformUpdate> & instanceUniforms)
+Renderable * GLRenderer::AddRenderable(GLProgram & program, const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layouts, const std::vector<UniformUpdate> & instanceUniforms)
 {
 	GLuint vertexBuffer;
 	GLuint indexBuffer;
@@ -74,5 +120,5 @@ Renderable & GLRenderer::AddRenderable(GLProgram & program, const VertexBufferLa
 
 	Renderable renderable(program, vertexArrayObject, vertexBuffer, indexBuffer, bufferLayout.GetIndexCount(),instanceUniforms);
 	renderables.push_back(renderable);
-	return renderables[renderables.size() - 1];
+	return &renderables[renderables.size() - 1];
 }

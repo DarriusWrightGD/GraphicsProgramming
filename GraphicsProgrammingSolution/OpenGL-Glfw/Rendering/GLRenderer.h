@@ -1,70 +1,12 @@
 #pragma once
 #include <vector>
-#include <Rendering\Renderable.h>
-// 1000
+#include <Rendering\VertexLayout.h>
+#include <Rendering\SamplerType.h>
+#include <Rendering\GLSampler.h>
+#include <Rendering\Uniforms.h>
+#include <unordered_map>
 
-
-struct VertexLayout
-{
-	int numFloats;
-	int attributeOffset;
-};
-
-struct VertexBufferLayout
-{
-	VertexBufferLayout(
-		void * vertices,
-	GLuint numberOfVertices,
-	unsigned int * indices,
-	GLuint numberOfIndices,
-	GLint sizeOfVertex,
-		GLint drawMode = GL_TRIANGLES
-		):vertices(vertices),numberOfVertices(numberOfVertices),
-		indices(indices),numberOfIndices(numberOfIndices),sizeOfVertex(sizeOfVertex),
-		drawMode(drawMode)
-	{
-
-	}
-
-	void * GetVertices() const noexcept
-	{
-		return vertices;
-	}
-
-	GLuint GetVertexCount()const noexcept
-	{
-		return numberOfVertices;
-	}
-
-	unsigned int * GetIndices() const noexcept
-	{
-		return indices;
-	}
-
-	GLuint GetIndexCount()const noexcept
-	{
-		return numberOfIndices;
-	}
-
-	GLuint GetVertexSize()const noexcept
-	{
-		return sizeOfVertex;
-	}
-
-	GLint GetDrawMode()const noexcept
-	{
-		return drawMode;
-	}
-
-private:
-	void * vertices;
-	GLuint numberOfVertices;
-	unsigned int * indices;
-	GLuint numberOfIndices;
-	GLint sizeOfVertex;
-	GLint drawMode;
-};
-
+class Renderable;
 class GLRenderer 
 {
 public:
@@ -73,9 +15,13 @@ public:
 	~GLRenderer() noexcept;
 	void Render();
 	void Render(Renderable * renderable);
-	Renderable & AddRenderable(GLProgram & program,const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layout, const std::vector<UniformUpdate> & instanceUniforms);
+	Renderable * AddRenderable(GLProgram & program,const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layout, const std::vector<UniformUpdate> & instanceUniforms);
+	GLSampler GetSampler(SamplerType type);
 private:
 	std::vector<Renderable> renderables;
+	std::unordered_map<SamplerType, GLSampler> samplerMap;
+	void InitializeSamplers();
+	bool samplersInitialized;
 };
 
 

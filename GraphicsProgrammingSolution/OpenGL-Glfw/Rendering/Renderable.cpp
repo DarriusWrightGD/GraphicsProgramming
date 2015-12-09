@@ -1,12 +1,14 @@
 #include "Renderable.h"
 #include <SOIL.h>
 #include <Exceptions\FileNotFoundException.h>
-
+#include <Rendering\GLRenderer.h>
+#include <Util\ServiceLocator.h>
 Renderable::Renderable(GLProgram & program, GLuint vertexArrayObject, GLuint vertexBuffer, GLuint indexBuffer, GLuint numberOfIndices, std::vector<UniformUpdate> uniforms,
 	GLint drawMode ) :
 	program(program), vertexBuffer(vertexBuffer),
 	indexBuffer(indexBuffer), vertexArrayObject(vertexArrayObject), numberOfIndices(numberOfIndices), drawMode(drawMode)
 {
+	renderer = Services.Get<GLRenderer>();
 	instanceUniforms.resize(uniforms.size());
 	std::move(uniforms.begin(), uniforms.end(), instanceUniforms.begin());
 }
@@ -41,7 +43,7 @@ void Renderable::Update()
 	{
 		glActiveTexture(GL_TEXTURE0 + i);
 		glBindTexture(textures[i].type, textures[i].id);
-		SetWrapParameters(textures[i].wrapType);
+		glBindSampler(i, textures[i].sampler);
 	}
 	program.Update();
 	for (auto uniform : instanceUniforms)
@@ -67,34 +69,34 @@ void Renderable::FlipY(unsigned char * image, int width, int height, int channel
 	}
 }
 
-void Renderable::SetWrapParameters(TextureWrapType wrapType)
+void Renderable::SetWrapParameters(SamplerType wrapType)
 {
-	switch (wrapType)
-	{
-	case TextureWrapType::Default:
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		break;
-	case TextureWrapType::Cubemap:
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	//switch (wrapType)
+	//{
+	//case TextureWrapType::Default:
+	//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	//	break;
+	//case TextureWrapType::Cubemap:
+	//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	//	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
-		break;
-	case TextureWrapType::Projection:
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-		break;
-	}
+	//	break;
+	//case TextureWrapType::Projection:
+	//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+	//	break;
+	//}
 }
 
-TextureInfo Renderable::AddTexture(const char * filePath, TextureWrapType wrapType)
+TextureInfo Renderable::AddTexture(const char * filePath, SamplerType samplerType)
 {
 	auto width = 0, height = 0, channels = 0;
 	auto imageBytes = SOIL_load_image(filePath, &width, &height, &channels,SOIL_LOAD_AUTO);
@@ -133,9 +135,7 @@ TextureInfo Renderable::AddTexture(const char * filePath, TextureWrapType wrapTy
 		glTexStorage2D(GL_TEXTURE_2D, 1, colorComponents, width, height);
 		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height,colorChannels, GL_UNSIGNED_BYTE, imageBytes);
 
-		SetWrapParameters(wrapType);
-
-		textures.push_back({ textureId ,GL_TEXTURE_2D,wrapType });
+		textures.push_back({ textureId ,GL_TEXTURE_2D,renderer->GetSampler(samplerType).sampler });
 		texture = textures[textures.size() - 1];
 	}	
 	else
@@ -192,13 +192,13 @@ TextureInfo Renderable::AddCubeMap(const char * folderPath, const char * extensi
 		glTexSubImage2D(targets[i], 0, 0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, image);
 		delete[] image;
 	}
-
+/*
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);*/
 
-	textures.push_back({ textureId ,GL_TEXTURE_CUBE_MAP, TextureWrapType::Cubemap});
+	textures.push_back({ textureId ,GL_TEXTURE_CUBE_MAP, renderer->GetSampler(SamplerType::Cubemap).sampler });
 	return textures[textures.size()-1];
 }

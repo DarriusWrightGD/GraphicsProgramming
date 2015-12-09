@@ -1,7 +1,6 @@
 #include "MeshComponent.h"
 #include <GameObjects\GameObject.h>
 
-#include <Rendering\GLRenderer.h>
 
 #include <Data\Vertex.h>
 #include <vec3.hpp>
@@ -47,9 +46,9 @@ Renderable * MeshComponent::GetRenderable()
 	return renderable;
 }
 
-TextureInfo MeshComponent::AddTexture(const char * file, TextureWrapType wrapType)
+TextureInfo MeshComponent::AddTexture(const char * file, SamplerType samplerType)
 {
-	return renderable->AddTexture(file, wrapType);
+	return renderable->AddTexture(file, samplerType);
 }
 
 void MeshComponent::AddTexture(TextureInfo texture)
@@ -97,8 +96,8 @@ void MeshComponent::Initialize(const aiMesh * mesh, GLProgram & program , const 
 				indices[index++] = face.mIndices[j];
 			}
 		}
-
-		renderable = &renderer->AddRenderable(program,VertexBufferLayout(&vertices[0], vertices.size(), &indices[0], indices.size() , sizeof(Vertex)),{ 
+		
+		renderable = renderer->AddRenderable(program,VertexBufferLayout(&vertices[0], vertices.size(), &indices[0], indices.size() , sizeof(Vertex)),{ 
 			{ 3,offsetof(Vertex,position) },
 			{ 3,offsetof(Vertex,normal) },
 			{ 2,offsetof(Vertex,uv) },

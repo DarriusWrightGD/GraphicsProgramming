@@ -122,8 +122,7 @@ void FrameBufferDemo::Initialize()
 		cubeMesh->Initialize(cubeScene->mMeshes[0], fboProgram, {
 			{"world", UniformType::MAT4, &cube->GetWorld()[0][0]},
 		});
-
-		cubeMesh->AddTexture({ renderTargetTexture,GL_TEXTURE_2D, TextureWrapType::Default} );
+		cubeMesh->AddTexture({ renderTargetTexture,GL_TEXTURE_2D, renderer->GetSampler(SamplerType::Linear).sampler });
 	}
 
 	auto monkeyScene = importer.ReadFile("Assets/Models/Obj/monkey.obj", aiProcess_Triangulate);

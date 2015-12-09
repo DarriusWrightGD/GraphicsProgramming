@@ -90,7 +90,7 @@ void ProjectedTextureDemo::Initialize()
 			{"normalMatrix", UniformType::MAT4, &plane->GetTransform()->GetNormal()[0][0]},
 			{"material.diffuse", UniformType::VEC3, &planeMesh->GetMaterial().diffuse[0]}
 		});
-		texture = planeMesh->AddTexture("Assets/Textures/amazing.png", TextureWrapType::Projection);
+		texture = planeMesh->AddTexture("Assets/Textures/amazing.png", SamplerType::Projection);
 		plane->AddComponent(planeMesh.get());
 	}
 	importer.FreeScene();

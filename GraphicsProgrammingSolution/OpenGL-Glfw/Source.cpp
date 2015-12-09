@@ -6,6 +6,6 @@ using std::unique_ptr;
 
 int main()
 {
-	auto window = unique_ptr<WindowInterface>(new FrameBufferDemo());
+	auto window = unique_ptr<WindowInterface>(new ProjectedTextureDemo());
 	return window->Execute();
 }
