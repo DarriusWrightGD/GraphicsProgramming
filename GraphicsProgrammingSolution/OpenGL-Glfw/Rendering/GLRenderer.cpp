@@ -17,6 +17,12 @@ GLRenderer::~GLRenderer() noexcept
 		GLuint buffers[] = { renderable.GetVertexBuffer(),renderable.GetIndexBuffer() };
 		glDeleteBuffers(2, buffers);
 	}
+
+	for (auto pass : renderPasses)
+	{
+		delete pass;
+		pass = nullptr;
+	}
 }
 
 void GLRenderer::Render()
@@ -121,4 +127,11 @@ Renderable * GLRenderer::AddRenderable(GLProgram & program, const VertexBufferLa
 	Renderable renderable(program, vertexArrayObject, vertexBuffer, indexBuffer, bufferLayout.GetIndexCount(),instanceUniforms);
 	renderables.push_back(renderable);
 	return &renderables[renderables.size() - 1];
+}
+
+RenderPass * GLRenderer::AddRenderPass(glm::vec2 size, SamplerType samplerType, int numberOfColorAttachments)
+{
+	RenderPass * pass = new RenderPass(size, this->GetSampler(samplerType).sampler, numberOfColorAttachments);
+	renderPasses.push_back(pass);
+	return pass;
 }

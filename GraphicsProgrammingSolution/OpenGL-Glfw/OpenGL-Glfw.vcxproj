@@ -166,6 +166,7 @@
     <ClCompile Include="Demos\Intro\DiscardDemo.cpp" />
     <ClCompile Include="Demos\Light\DirectionalLightDemo.cpp" />
     <ClCompile Include="Demos\Misc\FogDemo.cpp" />
+    <ClCompile Include="Demos\ImageProcessing\EdgeDetection.cpp" />
     <ClCompile Include="Exceptions\FileNotFoundException.cpp" />
     <ClCompile Include="Demos\Texture\FrameBufferDemo.cpp" />
     <ClCompile Include="Logging\ConsoleLogger.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="Demos\Intro\DiscardDemo.h" />
     <ClInclude Include="Demos\Light\DirectionalLightDemo.h" />
     <ClInclude Include="Demos\Misc\FogDemo.h" />
+    <ClInclude Include="Demos\ImageProcessing\EdgeDetection.h" />
     <ClInclude Include="Exceptions\FileNotFoundException.h" />
     <ClInclude Include="Demos\Texture\FrameBufferDemo.h" />
     <ClInclude Include="Logging\ConsoleLogger.h" />
@@ -242,6 +244,7 @@
     <ClInclude Include="Demos\Intro\VertexBufferDemo.h" />
     <ClInclude Include="Demos\Texture\Texture2DDemo.h" />
     <ClInclude Include="Demos\Light\SpotLightDemo.h" />
+    <ClInclude Include="Rendering\Renderpass.h" />
     <ClInclude Include="Rendering\SamplerType.h" />
     <ClInclude Include="Rendering\TextureInfo.h" />
     <ClInclude Include="Rendering\Uniforms.h" />
@@ -262,6 +265,7 @@
     <None Include="Assets\Shaders\Fragment\alphamap.frag" />
     <None Include="Assets\Shaders\Fragment\buffer.frag" />
     <None Include="Assets\Shaders\Fragment\cartoonEffect.frag" />
+    <None Include="Assets\Shaders\Fragment\edgeDetect.frag" />
     <None Include="Assets\Shaders\Fragment\fbo.frag" />
     <None Include="Assets\Shaders\Fragment\projectedTexture.frag" />
     <None Include="Assets\Shaders\Fragment\reflection.frag" />
@@ -275,6 +279,8 @@
     <None Include="Assets\Shaders\Fragment\multiTexture.frag" />
     <None Include="Assets\Shaders\Fragment\normal-map.frag" />
     <None Include="Assets\Shaders\Fragment\refraction.frag" />
+    <None Include="Assets\Shaders\Fragment\screenQuad.frag" />
+    <None Include="Assets\Shaders\Vertex\edgeDetect.vert" />
     <None Include="Assets\Shaders\Vertex\fbo.vert" />
     <None Include="Assets\Shaders\Vertex\projectedTexture.vert" />
     <None Include="Assets\Shaders\Vertex\reflection.vert" />
@@ -303,6 +309,7 @@
     <None Include="Assets\Shaders\Vertex\multiTexture.vert" />
     <None Include="Assets\Shaders\Vertex\pipeline.vert" />
     <None Include="Assets\Shaders\Vertex\refraction.vert" />
+    <None Include="Assets\Shaders\Vertex\screenQuad.vert" />
     <None Include="Assets\Shaders\Vertex\shaderColor.vert" />
     <None Include="Assets\Shaders\Vertex\spotlight.vert" />
     <None Include="Assets\Shaders\Vertex\texture.vert" />

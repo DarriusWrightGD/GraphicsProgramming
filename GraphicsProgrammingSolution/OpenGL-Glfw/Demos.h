@@ -29,5 +29,5 @@
 #include <Demos\Texture\ProjectedTextureDemo.h>
 #include <Demos\Texture\FrameBufferDemo.h>
 
-
+#include <Demos\ImageProcessing\EdgeDetection.h>
 

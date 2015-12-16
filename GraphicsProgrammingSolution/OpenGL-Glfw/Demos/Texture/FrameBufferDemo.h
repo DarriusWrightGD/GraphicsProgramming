@@ -27,6 +27,7 @@ public:
 private:
 	GLProgram fboProgram;
 	GLProgram textureProgram;
+	RenderPass * renderPass;
 	std::unique_ptr<GameObject> cube;
 	std::unique_ptr<GameObject> monkey;
 

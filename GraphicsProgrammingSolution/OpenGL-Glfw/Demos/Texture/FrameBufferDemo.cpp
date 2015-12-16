@@ -17,10 +17,11 @@ void FrameBufferDemo::Update()
 
 void FrameBufferDemo::Render()
 {
-
+	/*
 	glBindFramebuffer(GL_FRAMEBUFFER, fboHandle);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glViewport(0, 0, 512, 512);
+	glViewport(0, 0, 512, 512);*/
+	renderPass->Bind();
 	camera->SetAspectRatio(512, 512);
 	renderer->Render(monkeyMesh->GetRenderable());
 
@@ -89,7 +90,8 @@ void FrameBufferDemo::Initialize()
 		fboProgram.UpdateUniformBlock("TransformBlock");
 	});
 
-
+	renderPass = renderer->AddRenderPass({512,512},SamplerType::Linear);
+/*
 	glGenFramebuffers(1, &fboHandle);
 	glBindFramebuffer(GL_FRAMEBUFFER, fboHandle);
 
@@ -105,11 +107,13 @@ void FrameBufferDemo::Initialize()
 	glBindRenderbuffer(GL_RENDERBUFFER, depthBufferTexture);
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, 512, 512);
 
+	
+
 	GLenum drawBufs[] = { GL_COLOR_ATTACHMENT0 };
 	glDrawBuffers(1, drawBufs);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
+*/
 	Assimp::Importer importer;
 	auto cubeScene = importer.ReadFile("Assets/Models/Obj/box.obj", aiProcess_Triangulate);
 	cube = std::unique_ptr<GameObject>(new GameObject());
@@ -122,7 +126,7 @@ void FrameBufferDemo::Initialize()
 		cubeMesh->Initialize(cubeScene->mMeshes[0], fboProgram, {
 			{"world", UniformType::MAT4, &cube->GetWorld()[0][0]},
 		});
-		cubeMesh->AddTexture({ renderTargetTexture,GL_TEXTURE_2D, renderer->GetSampler(SamplerType::Linear).sampler });
+		cubeMesh->AddTexture(renderPass->GetColorAttachment(0));
 	}
 
 	auto monkeyScene = importer.ReadFile("Assets/Models/Obj/monkey.obj", aiProcess_Triangulate);

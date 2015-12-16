@@ -147,6 +147,9 @@
     <ClCompile Include="Demos\Texture\FrameBufferDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Demos\ImageProcessing\EdgeDetection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -314,6 +317,12 @@
     <ClInclude Include="Rendering\VertexLayout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Demos\ImageProcessing\EdgeDetection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Renderpass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Fragment\triangleShader.frag" />
@@ -367,6 +376,10 @@
     <None Include="Assets\Shaders\Fragment\projectedTexture.frag" />
     <None Include="Assets\Shaders\Fragment\fbo.frag" />
     <None Include="Assets\Shaders\Vertex\fbo.vert" />
+    <None Include="Assets\Shaders\Vertex\edgeDetect.vert" />
+    <None Include="Assets\Shaders\Fragment\edgeDetect.frag" />
+    <None Include="Assets\Shaders\Fragment\screenQuad.frag" />
+    <None Include="Assets\Shaders\Vertex\screenQuad.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\brick.jpg">
