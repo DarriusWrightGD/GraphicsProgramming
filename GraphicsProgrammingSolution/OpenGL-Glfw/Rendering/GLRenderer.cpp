@@ -3,6 +3,7 @@
 #include <Rendering\GuiRenderable.h>
 #include <Exceptions\FileNotFoundException.h>
 #include <Rendering\RenderUtil.h>
+#include <Rendering\FullScreenRenderable.h>
 #include <SOIL.h>
 
 GLRenderer::GLRenderer() noexcept
@@ -23,13 +24,21 @@ GLRenderer::~GLRenderer() noexcept
 
 	for (auto pass : renderPasses)
 	{
+		glDeleteFramebuffers(1, &pass->GetFrameBuffer());
 		delete pass;
 		pass = nullptr;
+	}
+
+	if (fullScreenRenderable != nullptr)
+	{
+		delete fullScreenRenderable;
+		fullScreenRenderable = nullptr;
 	}
 }
 
 void GLRenderer::Render()
 {
+
 	RenderObjects();
 	RenderUi();
 }
@@ -60,6 +69,15 @@ void GLRenderer::RenderUi()
 			guiRenderable.Update();
 			glDrawArrays(GL_TRIANGLES, 0, 6);
 		}
+	}
+}
+
+void GLRenderer::RenderFullScreen()
+{
+	if (fullScreenRenderable != nullptr)
+	{
+		fullScreenRenderable->Update();
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 	}
 }
 
@@ -120,6 +138,11 @@ void GLRenderer::Render(Renderable * renderable)
 		glDrawElements(renderable->GetDrawMode(), renderable->GetIndicesCount(), GL_UNSIGNED_INT, 0);
 	}
 
+}
+
+void GLRenderer::SetFullScreenRenderable(FullScreenRenderable * renderable)
+{
+	fullScreenRenderable = renderable;
 }
 
 Renderable * GLRenderer::AddRenderable(GLProgram & program, const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layouts, const std::vector<UniformUpdate> & instanceUniforms, GLint drawMode, DrawFunction function)

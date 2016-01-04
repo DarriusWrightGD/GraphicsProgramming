@@ -7,6 +7,7 @@
 #include <Components\TransformComponent.h>
 #include <Components\GuiComponent.h>
 #include <Data\Light.h>
+#include <Rendering\FullScreenRenderable.h>
 
 class EdgeDetection : public GlfwWindow
 {
@@ -23,12 +24,14 @@ public:
 
 private:
 	RenderPass * pass;
+	FullScreenRenderable * fullScreenRenderable;
 	GLProgram program;
 	GLProgram guiProgram;
+	GLProgram edgeProgram;
 	std::unique_ptr<GameObject> monkey;
 	std::unique_ptr<MeshComponent> mesh;
 	std::unique_ptr<GameObject> ui;
-	std::unique_ptr<GuiComponent> fullScreenQuad;
+	std::unique_ptr<GuiComponent> sampleRender;
 	PointLight light;
 };
 

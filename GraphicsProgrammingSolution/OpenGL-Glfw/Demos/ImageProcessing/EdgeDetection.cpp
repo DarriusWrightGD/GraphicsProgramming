@@ -3,8 +3,9 @@
 #include <assimp\scene.h>
 #include <assimp\postprocess.h>
 
-EdgeDetection::EdgeDetection()
+EdgeDetection::EdgeDetection() : GlfwWindow(1920,1001, "Edge Detection")
 {
+	
 }
 
 EdgeDetection::~EdgeDetection()
@@ -18,14 +19,18 @@ void EdgeDetection::Update()
 
 void EdgeDetection::Render()
 {
-	glClearColor(0.0, 0.0, 0.0, 1.0);
 	pass->Bind();
+	//glViewport(0, 0, width, height);
+	//camera->SetAspectRatio(width, height);
 	renderer->RenderObjects();
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glClearColor(0.2, 0.3, 0.5, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	renderer->Render();
+
+	glViewport(0, 0, width, height);
+	camera->SetAspectRatio(width, height);
+	//renderer->Render();
+	renderer->RenderFullScreen();
 }
 
 void EdgeDetection::OnResize(int w, int h)
@@ -46,15 +51,23 @@ void EdgeDetection::Initialize()
 	guiProgram.AddShaderFile(ShaderType::Fragment, "Assets/Shaders/Fragment/screenQuad.frag");
 	guiProgram.Build();
 
+	edgeProgram.AddShaderFile(ShaderType::Vertex, "Assets/Shaders/Vertex/screenQuad.vert");
+	edgeProgram.AddShaderFile(ShaderType::Fragment, "Assets/Shaders/Fragment/edgeDetect.frag");
+	edgeProgram.Build();
+
+
 	ui = std::unique_ptr<GameObject>(new GameObject());
-	fullScreenQuad = std::unique_ptr<GuiComponent>(new GuiComponent(ui.get(), glm::vec4(0, .2, 0, .2)));
-	fullScreenQuad->Initialize(guiProgram);
+	sampleRender = std::unique_ptr<GuiComponent>(new GuiComponent(ui.get(), glm::vec4(0, .5, 0, 1)));
+	sampleRender->Initialize(guiProgram);
 
-	pass = renderer->AddRenderPass({ width,height }, SamplerType::Nearest);
-
-	//fullScreenQuad->SetTexture(pass->GetDepthTexture());
-	fullScreenQuad->SetTexture(pass->GetColorAttachment(0));
-	//fullScreenQuad->SetTexture("Assets/Textures/add-sugar.png", SamplerType::Linear);
+	pass = renderer->AddRenderPass({ width,height }, SamplerType::Linear);
+	
+	fullScreenRenderable = new FullScreenRenderable(edgeProgram, {	});
+	fullScreenRenderable->SetTexture(pass->GetColorAttachment(0));
+	renderer->SetFullScreenRenderable(fullScreenRenderable);
+	//sampleRender->SetTexture(pass->GetDepthTexture());
+	sampleRender->SetTexture(pass->GetColorAttachment(0));
+	//sampleRender->SetTexture("Assets/Textures/add-sugar.png", SamplerType::Linear);
 	
 	light.color = glm::vec3(0.2f, 0.5f, 0.3f);
 	light.position = glm::vec3(0.0f, 0.0f, 3.0f);
@@ -82,7 +95,6 @@ void EdgeDetection::Initialize()
 			{ "material.ambient",UniformType::VEC3, &mesh->GetMaterial().ambient[0] },
 			{ "material.diffuse",UniformType::VEC3, &mesh->GetMaterial().diffuse[0] },
 			{ "material.specular",UniformType::VEC4, &mesh->GetMaterial().specular[0]},
-			//{"world",UniformType::MAT4, mesh->M()[0][0]}
 		});
 		monkey->AddComponent(mesh.get());
 	}

@@ -25,6 +25,11 @@ public:
 		glViewport(0, 0, width, height);
 	}
 
+	GLuint & GetFrameBuffer() noexcept
+	{
+		return frameBufferHandle;
+	}
+
 	TextureInfo GetColorAttachment(int index) const noexcept
 	{
 		TextureInfo texInfo;
@@ -54,11 +59,6 @@ public:
 private:
 
 	void Init(GLuint samplerId, int numberOfColorAttachments)
-	{
-		Bind4(samplerId, numberOfColorAttachments);
-	}
-
-	void Bind4(GLuint samplerId, int numberOfColorAttachments)
 	{
 		glGenFramebuffers(1, &frameBufferHandle);
 		glBindFramebuffer(GL_FRAMEBUFFER, frameBufferHandle);
@@ -92,10 +92,10 @@ private:
 			drawBuffers[i] = colorAttachment;
 		}
 
-		
+
 		glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthAttachment.id, 0);
 
-		
+
 		glDrawBuffers(numberOfColorAttachments, drawBuffers);
 
 		GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
@@ -105,6 +105,11 @@ private:
 		}
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
+
+	void Bind4(GLuint samplerId, int numberOfColorAttachments)
+	{
+		
 	}
 
 	int width;

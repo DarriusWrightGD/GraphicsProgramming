@@ -106,7 +106,7 @@ int GlfwWindow::InitGLFW()
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 #endif
 
-	window = glfwCreateWindow(640, 480, title.c_str(),NULL, NULL);
+	window = glfwCreateWindow(width, height, title.c_str(),NULL, NULL);
 
 	if (!window)
 	{
@@ -130,7 +130,6 @@ int GlfwWindow::InitGLFW()
 
 
 	glfwMakeContextCurrent(window);
-	//glfwSwapInterval(1);
 
 	if (ogl_LoadFunctions() == ogl_LOAD_FAILED)
 	{

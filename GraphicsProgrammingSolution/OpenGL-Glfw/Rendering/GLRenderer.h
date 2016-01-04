@@ -11,6 +11,7 @@
 
 class Renderable;
 class GuiRenderable;
+class FullScreenRenderable;
 class GLRenderer 
 {
 public:
@@ -20,7 +21,9 @@ public:
 	void Render();
 	void RenderObjects();
 	void RenderUi();
+	void RenderFullScreen();
 	void Render(Renderable * renderable);
+	void SetFullScreenRenderable(FullScreenRenderable * renderable);
 	Renderable * AddRenderable(GLProgram & program, const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layout, const std::vector<UniformUpdate> & instanceUniforms, GLint drawMode = GL_TRIANGLES, DrawFunction function = DrawFunction::ELEMENTS);
 	GuiRenderable * AddGuiRenderable(GLProgram & program, const std::vector<UniformUpdate> & instanceUniforms);
 	RenderPass * AddRenderPass(glm::vec2 size, SamplerType samplerType, int numberOfColorAttachments = 1);
@@ -33,6 +36,7 @@ private:
 	std::unordered_map<SamplerType, GLSampler> samplerMap;
 	void InitializeSamplers();
 	bool samplersInitialized;
+	FullScreenRenderable * fullScreenRenderable = nullptr;
 };
 
 
