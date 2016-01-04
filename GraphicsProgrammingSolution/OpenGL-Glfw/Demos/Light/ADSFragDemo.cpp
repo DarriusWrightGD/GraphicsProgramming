@@ -85,7 +85,7 @@ void ADSFragDemo::Initialize()
 		monkeyMesh = std::unique_ptr<MeshComponent>(new MeshComponent(monkeyObject.get()));
 		monkeyMesh->Initialize(scene->mMeshes[0], program, {
 			{ "world",  UniformType::MAT4, &monkeyObject->GetTransform()->GetWorld()[0][0] },
-			{ "normalMatrix", UniformType::MAT3, &monkeyObject->GetTransform()->GetNormal()[0][0] },
+			{ "normalMatrix", UniformType::MAT4, &monkeyObject->GetTransform()->GetNormal()[0][0] },
 			{ "material.diffuse", UniformType::VEC3, &monkeyMesh->GetMaterial().diffuse[0] },
 			{ "material.ambient", UniformType::VEC3, &monkeyMesh->GetMaterial().ambient[0] },
 			{ "material.specular", UniformType::VEC4, &monkeyMesh->GetMaterial().specular[0] }

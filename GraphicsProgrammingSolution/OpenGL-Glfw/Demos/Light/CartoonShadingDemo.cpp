@@ -35,8 +35,8 @@ void CartoonShadingDemo::OnResize(int width, int height)
 void CartoonShadingDemo::Initialize()
 {
 	glEnable(GL_DEPTH_TEST);
-	light.color = glm::vec3(0.8f, 0.8f, 0.8f);
-	light.position = glm::vec3(2.0f, 0.0f, -2.0f);
+	light.color = glm::vec3(0.6f, 0.7f, 0.7f);
+	light.position = glm::vec3(0.0f, 1.0f, 3.0f);
 
 	program.AddShaderFile(ShaderType::Vertex, "Assets/Shaders/Vertex/cartoonEffect.vert");
 	program.AddShaderFile(ShaderType::Fragment, "Assets/Shaders/Fragment/cartoonEffect.frag");
@@ -69,12 +69,34 @@ void CartoonShadingDemo::Initialize()
 		});
 		monkey->AddComponent(mesh.get());
 
-		mesh->GetMaterial().ambient = glm::vec3(0.4f, 0.7f, 0.1f);
-		mesh->GetMaterial().diffuse = glm::vec3(0.9f, 0.1f, 0.1f);
-		mesh->GetMaterial().specular = glm::vec4(0.1f, 0.4f, 0.5f,10.0f);
+		mesh->GetMaterial().ambient = glm::vec3(0.1f, 0.1f, 0.1f);
+		mesh->GetMaterial().diffuse = glm::vec3(0.9f, 0.4f, 0.4f);
+		//mesh->GetMaterial().specular = glm::vec4(0.1f, 0.4f, 0.5f,10.0f);
 	}
 	importer.FreeScene();
 
+
+
+	input->addBinding(GLFW_KEY_LEFT, [this](InputInfo info) {
+		camera->MoveLeft();
+		program.UpdateUniformBlock("TransformBlock");
+	});
+
+	input->addBinding(GLFW_KEY_RIGHT, [this](InputInfo info) {
+		camera->MoveRight();
+		program.UpdateUniformBlock("TransformBlock");
+	});
+
+
+	input->addBinding(GLFW_KEY_UP, [this](InputInfo info) {
+		camera->MoveForward();
+		program.UpdateUniformBlock("TransformBlock");
+	});
+
+	input->addBinding(GLFW_KEY_DOWN, [this](InputInfo info) {
+		camera->MoveBack();
+		program.UpdateUniformBlock("TransformBlock");
+	});
 }
 
 void CartoonShadingDemo::Shutdown()

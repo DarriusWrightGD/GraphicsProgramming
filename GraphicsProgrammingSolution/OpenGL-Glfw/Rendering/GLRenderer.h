@@ -5,10 +5,12 @@
 #include <Rendering\GLSampler.h>
 #include <Rendering\Uniforms.h>
 #include <Rendering\Renderpass.h>
+#include <Rendering\DrawFunction.h>
 #include <unordered_map>
 #include <vec2.hpp>
 
 class Renderable;
+class GuiRenderable;
 class GLRenderer 
 {
 public:
@@ -16,12 +18,17 @@ public:
 	GLRenderer() noexcept;
 	~GLRenderer() noexcept;
 	void Render();
+	void RenderObjects();
+	void RenderUi();
 	void Render(Renderable * renderable);
-	Renderable * AddRenderable(GLProgram & program,const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layout, const std::vector<UniformUpdate> & instanceUniforms);
+	Renderable * AddRenderable(GLProgram & program, const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layout, const std::vector<UniformUpdate> & instanceUniforms, GLint drawMode = GL_TRIANGLES, DrawFunction function = DrawFunction::ELEMENTS);
+	GuiRenderable * AddGuiRenderable(GLProgram & program, const std::vector<UniformUpdate> & instanceUniforms);
 	RenderPass * AddRenderPass(glm::vec2 size, SamplerType samplerType, int numberOfColorAttachments = 1);
+	TextureInfo CreateTexture(GLuint textureIndex, const char * filePath,  SamplerType sampler = SamplerType::Linear);
 	GLSampler GetSampler(SamplerType type);
 private:
 	std::vector<Renderable> renderables;
+	std::vector<GuiRenderable> guiRenderables;
 	std::vector<RenderPass*> renderPasses;
 	std::unordered_map<SamplerType, GLSampler> samplerMap;
 	void InitializeSamplers();

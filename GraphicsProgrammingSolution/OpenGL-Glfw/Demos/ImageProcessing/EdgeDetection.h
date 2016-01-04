@@ -5,6 +5,8 @@
 #include <GameObjects\GameObject.h>
 #include <Components\MeshComponent.h>
 #include <Components\TransformComponent.h>
+#include <Components\GuiComponent.h>
+#include <Data\Light.h>
 
 class EdgeDetection : public GlfwWindow
 {
@@ -25,5 +27,8 @@ private:
 	GLProgram guiProgram;
 	std::unique_ptr<GameObject> monkey;
 	std::unique_ptr<MeshComponent> mesh;
+	std::unique_ptr<GameObject> ui;
+	std::unique_ptr<GuiComponent> fullScreenQuad;
+	PointLight light;
 };
 

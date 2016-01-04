@@ -20,13 +20,13 @@ out VS_OUT
 }vs_out;
 
 uniform mat4 world;
-uniform mat3 normalMatrix;
+uniform mat4 normalMatrix;
 
 void main()
 {	
 	vec4 worldPosition =transform.view * world * vec4(position,1.0f);
 	vs_out.position = worldPosition.xyz;
-	vs_out.normal = normal * normalMatrix;
+	vs_out.normal = normalize(normalMatrix* vec4(normal,0.0f)).xyz;
 	vs_out.eyePosition = transform.eyePosition;
 	gl_Position = transform.projection * worldPosition;
 }

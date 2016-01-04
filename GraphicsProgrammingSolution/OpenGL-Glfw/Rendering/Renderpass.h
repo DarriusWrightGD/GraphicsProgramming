@@ -2,13 +2,18 @@
 #include <gl\gl_core_4_5.h>
 #include <vec2.hpp>
 #include <Rendering\TextureInfo.h>
+#include <Util\ServiceLocator.h>
+#include <Logging\Logger.h>
 #include <vector>
+#include <iostream>
+using std::cout;
+using std::endl;
 
 class RenderPass
 {
 public:
 	RenderPass(glm::vec2 size, GLuint samplerId, int numberOfColorAttachments = 1) :
-		width(size.x), height(size.y)
+		width(static_cast<int>(size.x)), height(static_cast<int>(size.y))
 	{
 		Init(samplerId, numberOfColorAttachments);
 	}
@@ -23,7 +28,7 @@ public:
 	TextureInfo GetColorAttachment(int index) const noexcept
 	{
 		TextureInfo texInfo;
-		if (index < colorAttachments.size())
+		if (static_cast<size_t>(index) < colorAttachments.size())
 		{
 			return colorAttachments[index];
 		}
@@ -50,40 +55,56 @@ private:
 
 	void Init(GLuint samplerId, int numberOfColorAttachments)
 	{
+		Bind4(samplerId, numberOfColorAttachments);
+	}
+
+	void Bind4(GLuint samplerId, int numberOfColorAttachments)
+	{
 		glGenFramebuffers(1, &frameBufferHandle);
 		glBindFramebuffer(GL_FRAMEBUFFER, frameBufferHandle);
 
-		colorAttachments.resize(numberOfColorAttachments);
-
-		for (auto index = 0u; index < colorAttachments.size(); index++)
+		for (auto i = 0u; i < numberOfColorAttachments; i++)
 		{
-			colorAttachments[index].type = GL_TEXTURE_2D;
-			glGenTextures(1, &colorAttachments[index].id);
-			glActiveTexture(GL_TEXTURE0 + 1);
-			glBindTexture(GL_TEXTURE_2D, colorAttachments[index].id);
-			glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, width, height);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorAttachments[index].id, 0);
+
+			TextureInfo colorTexture;
+
+			glGenTextures(1, &colorTexture.id);
+			colorTexture.sampler = samplerId;
+			colorTexture.type = GL_TEXTURE_2D;
+			glBindTexture(GL_TEXTURE_2D, colorTexture.id);
+			glTexStorage2D(GL_TEXTURE_2D, 9, GL_RGBA8, width, height);
+			colorAttachments.push_back(colorTexture);
+
 		}
 
+		glGenTextures(1, &depthAttachment.id);
+		glBindTexture(GL_TEXTURE_2D, depthAttachment.id);
+		glTexStorage2D(GL_TEXTURE_2D, 9, GL_DEPTH_COMPONENT32F, width, height);
+		depthAttachment.type = GL_TEXTURE_2D;
 		depthAttachment.sampler = samplerId;
-		glGenRenderbuffers(1, &depthAttachment.id);
-		glBindRenderbuffer(GL_RENDERBUFFER, depthAttachment.id);
-		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, 512, 512);
 
 
-
-		GLenum  * drawBufs = new GLenum[numberOfColorAttachments];
-		for (size_t i = 0; i < numberOfColorAttachments; i++)
+		GLenum * drawBuffers = new GLenum[colorAttachments.size()];
+		for (auto i = 0u; i < colorAttachments.size(); i++)
 		{
-			drawBufs[i] = GL_COLOR_ATTACHMENT0 + i;
+			auto colorAttachment = GL_COLOR_ATTACHMENT0 + i;
+			glFramebufferTexture(GL_FRAMEBUFFER, colorAttachment, colorAttachments[i].id, 0);
+			drawBuffers[i] = colorAttachment;
 		}
 
-		glDrawBuffers(1, drawBufs);
+		
+		glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthAttachment.id, 0);
+
+		
+		glDrawBuffers(numberOfColorAttachments, drawBuffers);
+
+		GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+		if (status != GL_FRAMEBUFFER_COMPLETE)
+		{
+			Services.Get<Logger>()->Log(LogLevel::Error, "Framebuffer is not complete");
+		}
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		delete [] drawBufs;
 	}
 
 	int width;

@@ -23,7 +23,7 @@ in VS_OUT
 	vec3 eyePosition;
 }fs_in;
 
-const int levels = 3;
+const int levels = 4;
 const float scaleFactor = 1.0f / levels;
 
 vec3 adsToon(vec3 position, vec3 normal)

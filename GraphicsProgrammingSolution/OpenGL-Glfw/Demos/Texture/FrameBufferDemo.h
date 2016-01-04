@@ -5,6 +5,7 @@
 #include <Components\Component.h>
 #include <Components\TransformComponent.h>
 #include <Components\MeshComponent.h>
+#include <Data\Light.h>
 
 class FrameBufferDemo : public GlfwWindow
 {
@@ -37,5 +38,6 @@ private:
 	GLuint fboHandle;
 	GLuint depthBufferTexture;
 	GLuint renderTargetTexture;
+	PointLight light;
 };
 

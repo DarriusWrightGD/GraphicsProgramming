@@ -1,11 +1,14 @@
 #include "GLRenderer.h"
 #include <Rendering\Renderable.h>
-
-
+#include <Rendering\GuiRenderable.h>
+#include <Exceptions\FileNotFoundException.h>
+#include <Rendering\RenderUtil.h>
+#include <SOIL.h>
 
 GLRenderer::GLRenderer() noexcept
 {
 	renderables.reserve(NUM_RENDERABLES);
+	guiRenderables.reserve(NUM_RENDERABLES);
 }
 
 
@@ -27,18 +30,36 @@ GLRenderer::~GLRenderer() noexcept
 
 void GLRenderer::Render()
 {
-	for (auto & renderable  : renderables)
+	RenderObjects();
+	RenderUi();
+}
+
+void GLRenderer::RenderObjects()
+{
+	for (auto & renderable : renderables)
 	{
 		if (renderable.visible)
 		{
-		
 			renderable.Update();
 			glBindVertexArray(renderable.GetVertexArrayObject());
 			glBindBuffer(GL_ARRAY_BUFFER, renderable.GetVertexBuffer());
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderable.GetIndexBuffer());
 			glDrawElements(renderable.GetDrawMode(), renderable.GetIndicesCount(), GL_UNSIGNED_INT, 0);
 		}
-		
+	}
+}
+
+void GLRenderer::RenderUi()
+{
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	for (auto & guiRenderable : guiRenderables)
+	{
+		if (guiRenderable.visible)
+		{
+			guiRenderable.Update();
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+		}
 	}
 }
 
@@ -48,7 +69,7 @@ GLSampler GLRenderer::GetSampler(SamplerType samplerType)
 	{
 		InitializeSamplers();
 	}
-	
+
 	return samplerMap[samplerType];
 }
 
@@ -91,15 +112,17 @@ void GLRenderer::Render(Renderable * renderable)
 {
 	if (renderable->visible)
 	{
+
 		renderable->Update();
 		glBindVertexArray(renderable->GetVertexArrayObject());
 		glBindBuffer(GL_ARRAY_BUFFER, renderable->GetVertexBuffer());
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderable->GetIndexBuffer());
 		glDrawElements(renderable->GetDrawMode(), renderable->GetIndicesCount(), GL_UNSIGNED_INT, 0);
 	}
+
 }
 
-Renderable * GLRenderer::AddRenderable(GLProgram & program, const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layouts, const std::vector<UniformUpdate> & instanceUniforms)
+Renderable * GLRenderer::AddRenderable(GLProgram & program, const VertexBufferLayout & bufferLayout, const std::vector<VertexLayout> & layouts, const std::vector<UniformUpdate> & instanceUniforms, GLint drawMode, DrawFunction function)
 {
 	GLuint vertexBuffer;
 	GLuint indexBuffer;
@@ -124,9 +147,16 @@ Renderable * GLRenderer::AddRenderable(GLProgram & program, const VertexBufferLa
 		index++;
 	}
 
-	Renderable renderable(program, vertexArrayObject, vertexBuffer, indexBuffer, bufferLayout.GetIndexCount(),instanceUniforms);
+	Renderable renderable(program, vertexArrayObject, vertexBuffer, indexBuffer, bufferLayout.GetIndexCount(), instanceUniforms, drawMode, function);
 	renderables.push_back(renderable);
 	return &renderables[renderables.size() - 1];
+}
+
+GuiRenderable * GLRenderer::AddGuiRenderable(GLProgram & program, const std::vector<UniformUpdate>& instanceUniforms)
+{
+	GuiRenderable guiRenderable(program, instanceUniforms);
+	guiRenderables.push_back(guiRenderable);
+	return &guiRenderables[guiRenderables.size()-1];
 }
 
 RenderPass * GLRenderer::AddRenderPass(glm::vec2 size, SamplerType samplerType, int numberOfColorAttachments)
@@ -134,4 +164,50 @@ RenderPass * GLRenderer::AddRenderPass(glm::vec2 size, SamplerType samplerType, 
 	RenderPass * pass = new RenderPass(size, this->GetSampler(samplerType).sampler, numberOfColorAttachments);
 	renderPasses.push_back(pass);
 	return pass;
+}
+
+TextureInfo GLRenderer::CreateTexture(GLuint textureIndex, const char * filePath, SamplerType sampler)
+{
+	auto width = 0, height = 0, channels = 0;
+	auto imageBytes = SOIL_load_image(filePath, &width, &height, &channels, SOIL_LOAD_AUTO);
+
+	if (imageBytes != nullptr)
+	{
+		RenderUtil::FlipY(imageBytes, width, height, channels);
+		GLuint textureId;
+
+		int colorComponents = GL_RGBA8;
+		int colorChannels = GL_RGBA;
+
+		switch (channels)
+		{
+		case 1:
+			colorComponents = GL_R8;
+			colorChannels = GL_RED;
+			break;
+		case 2:
+			colorComponents = GL_RG8;
+			colorChannels = GL_RG;
+			break;
+		case 3:
+			colorComponents = GL_RGB8;
+			colorChannels = GL_RGB;
+			break;
+		case 4:
+			colorComponents = GL_RGBA8;
+			colorChannels = GL_RGBA;
+			break;
+		}
+
+		glActiveTexture(GL_TEXTURE0 + textureIndex);
+		glGenTextures(1, &textureId);
+		glBindTexture(GL_TEXTURE_2D, textureId);
+		glTexStorage2D(GL_TEXTURE_2D, 1, colorComponents, width, height);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, colorChannels, GL_UNSIGNED_BYTE, imageBytes);
+		return{ textureId ,GL_TEXTURE_2D, GetSampler(sampler).sampler };
+	}
+	else
+	{
+		throw FileNotFoundException(filePath);
+	}
 }

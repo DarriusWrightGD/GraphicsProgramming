@@ -169,6 +169,7 @@
     <ClCompile Include="Demos\ImageProcessing\EdgeDetection.cpp" />
     <ClCompile Include="Exceptions\FileNotFoundException.cpp" />
     <ClCompile Include="Demos\Texture\FrameBufferDemo.cpp" />
+    <ClCompile Include="Components\GuiComponent.cpp" />
     <ClCompile Include="Logging\ConsoleLogger.cpp" />
     <ClCompile Include="Demos\Intro\BufferDemo.cpp" />
     <ClCompile Include="Demos\Intro\FragCoordDemo.cpp" />
@@ -180,6 +181,8 @@
     <ClCompile Include="Demos\Texture\NormalMapDemo.cpp" />
     <ClCompile Include="Demos\Texture\RefractionDemo.cpp" />
     <ClCompile Include="Demos\Texture\ProjectedTextureDemo.cpp" />
+    <ClCompile Include="Rendering\FullScreenRenderable.cpp" />
+    <ClCompile Include="Rendering\GuiRenderable.cpp" />
     <ClCompile Include="Rendering\Renderable.cpp" />
     <ClCompile Include="Rendering\GLRenderer.cpp" />
     <ClCompile Include="GL\gl_core_4_5.c" />
@@ -219,6 +222,7 @@
     <ClInclude Include="Demos\ImageProcessing\EdgeDetection.h" />
     <ClInclude Include="Exceptions\FileNotFoundException.h" />
     <ClInclude Include="Demos\Texture\FrameBufferDemo.h" />
+    <ClInclude Include="Components\GuiComponent.h" />
     <ClInclude Include="Logging\ConsoleLogger.h" />
     <ClInclude Include="Demos\Intro\BufferDemo.h" />
     <ClInclude Include="Demos\Intro\FragCoordDemo.h" />
@@ -230,7 +234,10 @@
     <ClInclude Include="Demos\Texture\NormalMapDemo.h" />
     <ClInclude Include="Demos\Texture\RefractionDemo.h" />
     <ClInclude Include="Demos\Texture\ProjectedTextureDemo.h" />
+    <ClInclude Include="Rendering\DrawFunction.h" />
+    <ClInclude Include="Rendering\FullScreenRenderable.h" />
     <ClInclude Include="Rendering\GLSampler.h" />
+    <ClInclude Include="Rendering\GuiRenderable.h" />
     <ClInclude Include="Rendering\Renderable.h" />
     <ClInclude Include="Rendering\GLRenderer.h" />
     <ClInclude Include="GL\gl_core_4_5.h" />
@@ -245,6 +252,7 @@
     <ClInclude Include="Demos\Texture\Texture2DDemo.h" />
     <ClInclude Include="Demos\Light\SpotLightDemo.h" />
     <ClInclude Include="Rendering\Renderpass.h" />
+    <ClInclude Include="Rendering\RenderUtil.h" />
     <ClInclude Include="Rendering\SamplerType.h" />
     <ClInclude Include="Rendering\TextureInfo.h" />
     <ClInclude Include="Rendering\Uniforms.h" />

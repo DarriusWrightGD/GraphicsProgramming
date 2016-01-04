@@ -46,17 +46,26 @@ void FrameBufferDemo::OnResize(int width, int height)
 
 void FrameBufferDemo::Initialize()
 {
+	glEnable(GL_DEPTH_TEST);
 	fboProgram.AddShaderFile(ShaderType::Vertex,"Assets/Shaders/Vertex/fbo.vert");
 	fboProgram.AddShaderFile(ShaderType::Fragment,"Assets/Shaders/Fragment/fbo.frag");
 	fboProgram.Build();
 
-	textureProgram.AddShaderFile(ShaderType::Vertex, "Assets/Shaders/Vertex/texture.vert");
-	textureProgram.AddShaderFile(ShaderType::Fragment, "Assets/Shaders/Fragment/texture.frag");
+	textureProgram.AddShaderFile(ShaderType::Vertex, "Assets/Shaders/Vertex/adsFrag.vert");
+	textureProgram.AddShaderFile(ShaderType::Fragment, "Assets/Shaders/Fragment/adsFrag.frag");
 	textureProgram.Build();
 	
 	textureProgram.AddUniformBlock({ "TransformBlock", {
 		{ "TransformBlock.view", &camera->GetView()[0][0], sizeof(camera->GetView()) },
 		{ "TransformBlock.projection", &camera->GetProjection()[0][0], sizeof(camera->GetProjection()) },
+	} });
+
+	light.color = glm::vec3(0.2f, 0.5f, 0.3f);
+	light.position = glm::vec3(0.0f, 0.0f, 3.0f);
+
+	textureProgram.AddUniformBlock({ "LightBlock",{
+		{ "LightBlock.color", &light.color[0], sizeof(light.color) },
+		{ "LightBlock.position", &light.position[0], sizeof(light.position) }
 	} });
 
 	fboProgram.AddUniformBlock({ "TransformBlock",{
@@ -91,29 +100,7 @@ void FrameBufferDemo::Initialize()
 	});
 
 	renderPass = renderer->AddRenderPass({512,512},SamplerType::Linear);
-/*
-	glGenFramebuffers(1, &fboHandle);
-	glBindFramebuffer(GL_FRAMEBUFFER, fboHandle);
 
-	glGenTextures(1, &renderTargetTexture);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, renderTargetTexture);
-	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 512, 512);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, renderTargetTexture,0);
-
-	glGenRenderbuffers(1, &depthBufferTexture);
-	glBindRenderbuffer(GL_RENDERBUFFER, depthBufferTexture);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, 512, 512);
-
-	
-
-	GLenum drawBufs[] = { GL_COLOR_ATTACHMENT0 };
-	glDrawBuffers(1, drawBufs);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-*/
 	Assimp::Importer importer;
 	auto cubeScene = importer.ReadFile("Assets/Models/Obj/box.obj", aiProcess_Triangulate);
 	cube = std::unique_ptr<GameObject>(new GameObject());
@@ -137,9 +124,15 @@ void FrameBufferDemo::Initialize()
 	{
 		monkeyMesh = std::unique_ptr<MeshComponent>(new MeshComponent(monkey.get()));
 		monkeyMesh->Initialize(monkeyScene->mMeshes[0], textureProgram, {
-			{"world", UniformType::MAT4, &monkey->GetWorld()[0][0]}
+			{"world", UniformType::MAT4, &monkey->GetWorld()[0][0]},
+			{ "normalMatrix",UniformType::MAT4, &monkey->GetTransform()->GetNormal()[0][0] },
+
+		{ "material.ambient",UniformType::VEC3, &monkeyMesh->GetMaterial().ambient[0] },
+		{ "material.diffuse",UniformType::VEC3, &monkeyMesh->GetMaterial().diffuse[0] },
+		{ "material.specular",UniformType::VEC4, &monkeyMesh->GetMaterial().specular[0] },
+
 		});
-		monkeyMesh->AddTexture("Assets/Textures/brick.jpg");
+		//monkeyMesh->AddTexture("Assets/Textures/brick.jpg");
 	}
 
 	importer.FreeScene();
